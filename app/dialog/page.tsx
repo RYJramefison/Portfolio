@@ -14,7 +14,7 @@ export default function DialogPage(){
                 <DialogHeader>
                     <DialogTitle>title</DialogTitle>
                 </DialogHeader>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus eum repudiandae eveniet excepturi velit obcaecati facilis illo adipisci provident, voluptates molestiae, laborum optio? Reprehenderit alias hic labore autem sed animi?</p>
+                <p className="text-blue">Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus eum repudiandae eveniet excepturi velit obcaecati facilis illo adipisci provident, voluptates molestiae, laborum optio? Reprehenderit alias hic labore autem sed animi?</p>
                 <DialogFooter>
                 <Button variant={"destructive"}>Delete</Button>
                 <Button variant={"outline"}>Cancel</Button>

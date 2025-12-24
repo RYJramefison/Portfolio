@@ -97,32 +97,13 @@ const HeroSection = () => {
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full opacity-20 animate-pulse delay-1000"></div>
               
               {/* Profile Image Placeholder */}
-              <div className="relative z-10 w-full aspect-square bg-gradient-to-br from-blue-100 to-purple-100 rounded-full flex items-center justify-center">
+              <div className="relative z-10 w-full aspect-square rounded-full flex items-center justify-center">
                 <img 
                   src="photo_pro-removebg-preview.png"
                   alt="Profile"
                   className=" rounded-full border-8 border-white shadow-2xl"
                 />
               </div>
-
-              {/* Floating Cards */}
-              <motion.div 
-                className="absolute -left-8 top-1/4 bg-white p-4 rounded-lg shadow-lg border"
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity }}
-              >
-                <div className="text-sm font-semibold text-gray-800">React Expert</div>
-                <div className="text-xs text-gray-600">2+ ans</div>
-              </motion.div>
-
-              <motion.div 
-                className="absolute -right-8 top-1/3 bg-white p-4 rounded-lg shadow-lg border"
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, delay: 1.5 }}
-              >
-                <div className="text-sm font-semibold text-gray-800">Next.js</div>
-                <div className="text-xs text-gray-600">Avancé</div>
-              </motion.div>
             </div>
           </motion.div>
         </div>
