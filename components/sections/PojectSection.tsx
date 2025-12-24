@@ -58,15 +58,17 @@ const ProjectSection = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-blue-600 font-semibold text-lg mb-2">Portfolio</p>
+          <p className="text-blue-600 font-semibold text-lg mb-2">Projet Personnel</p>
           <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            Mes réalisations exceptionnelles
+            Mes projets réalisés
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
-            Découvrez une selection de mes projets les plus récents, alliant innovation 
-            technologique et excellence en design.
+            Explorez une sélection de projets personnels que j'ai concrétisés, 
+            démontrant ma créativité, mes compétences techniques et ma passion pour 
+            le développement innovant.
           </p>
-        </motion.div>
+      </motion.div>
+
 
 
 
