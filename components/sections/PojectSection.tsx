@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge'
 import { ExternalLink, Github } from 'lucide-react'
 import { motion } from 'framer-motion'
 
-const PortfolioSection = () => {
+const ProjectSection = () => {
   const projects = [
     {
       title: 'J-CRAM',
@@ -150,4 +150,4 @@ const PortfolioSection = () => {
   )
 }
 
-export default PortfolioSection
+export default ProjectSection

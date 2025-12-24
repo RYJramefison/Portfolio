@@ -6,6 +6,8 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Mail, Phone, MapPin, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
+import Link from 'next/link'
 
 const ContactSection = () => {
   const contactInfo = [
@@ -110,17 +112,39 @@ const ContactSection = () => {
             >
               <h4 className="font-semibold text-gray-900 mb-4">Suivez-moi</h4>
               <div className="flex space-x-4">
-                {['LinkedIn', 'GitHub', 'Facebook'].map((social) => (
-                  <Button 
-                    key={social}
-                    variant="outline" 
-                    size="sm"
-                    className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
-                  >
-                    {social}
-                  </Button>
-                ))}
-              </div>
+      <Link href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/" target="_blank">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 hover:scale-105 transition"
+        >
+          <SiLinkedin className="text-blue-600" size={18} />
+          LinkedIn
+        </Button>
+      </Link>
+
+      <Link href="https://github.com/RYJramefison" target="_blank">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 hover:scale-105 transition"
+        >
+          <SiGithub size={18} />
+          GitHub
+        </Button>
+      </Link>
+
+      <Link href="https://www.facebook.com/ryj.rafson" target="_blank">
+        <Button
+          variant="outline"
+          size="sm"
+          className="flex items-center gap-2 hover:scale-105 transition"
+        >
+          <SiFacebook className="text-blue-500" size={18} />
+          Facebook
+        </Button>
+      </Link>
+    </div>
             </motion.div>
           </motion.div>
 

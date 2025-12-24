@@ -4,135 +4,123 @@ import { motion } from 'framer-motion'
 
 type Skill = {
   name: string
-  icon: string
   primary?: boolean
 }
 
-const skills = {
-  design: [
-    { name: 'Figma', icon: '🎨', primary: true },
-    { name: 'Material UI', icon: '🧩' },
-    { name: 'Styled Components', icon: '💅' },
-  ],
-  frontend: [
-    { name: 'TypeScript', icon: 'TS', primary: true },
-    { name: 'React', icon: '⚛️' },
-    { name: 'Next.js', icon: '▲' },
-    { name: 'Three.js', icon: '🔺' },
-    { name: 'CSS / Tailwind', icon: '🎨' },
-  ],
-  backend: [
-    { name: 'Java', icon: '☕', primary: true },
-    { name: 'PostgreSQL', icon: '🐘', primary: true },
-    { name: 'Node.js', icon: '🟢' },
-    { name: 'Docker', icon: '🐳' },
-  ],
+type Category = {
+  title: string
+  icon: string
+  description: string
+  skills: Skill[]
 }
 
-const container = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.15 },
+const categories: Category[] = [
+  {
+    title: 'Design',
+    icon: '🎨',
+    description: 'Création d’interfaces modernes et intuitives.',
+    skills: [
+      { name: 'Figma', primary: true },
+      { name: 'Material UI' },
+      { name: 'Styled Components' },
+    ],
   },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-}
+  {
+    title: 'Front-end',
+    icon: '💻',
+    description: 'Développement d’interfaces performantes et dynamiques.',
+    skills: [
+      { name: 'TypeScript', primary: true },
+      { name: 'React' },
+      { name: 'Next.js' },
+      { name: 'Three.js' },
+      { name: 'Tailwind CSS' },
+    ],
+  },
+  {
+    title: 'Back-end',
+    icon: '⚙️',
+    description: 'Conception d’APIs robustes et scalables.',
+    skills: [
+      { name: 'Java', primary: true },
+      { name: 'PostgreSQL', primary: true },
+      { name: 'Node.js' },
+      { name: 'Docker' },
+    ],
+  },
+]
 
 export default function SkillsSection() {
   return (
     <section id="skills" className="py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6">
         {/* Title */}
-        <motion.h2
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center text-4xl font-bold text-gray-900 mb-20"
+          className="text-center mb-16"
         >
-          Skills
-        </motion.h2>
+          <p className="text-sm uppercase tracking-widest text-blue-600 mb-2">
+            Skills
+          </p>
+          <h2 className="text-4xl font-bold text-gray-900">
+            What I Do
+          </h2>
+        </motion.div>
 
         {/* Cards */}
-        <motion.div
-          variants={container}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-10"
-        >
-          {/* Design */}
-          <SkillCard title="Design" color="blue" skills={skills.design} />
+        <div className="grid md:grid-cols-3 gap-8">
+          {categories.map((cat, i) => (
+            <motion.div
+              key={cat.title}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.15, duration: 0.6 }}
+              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition"
+            >
+              {/* Icon */}
+              <div className="text-3xl mb-4">{cat.icon}</div>
 
-          {/* Frontend */}
-          <SkillCard title="Front-end" color="cyan" skills={skills.frontend} />
+              {/* Title */}
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                {cat.title}
+              </h3>
 
-          {/* Backend */}
-          <SkillCard title="Back-end" color="purple" skills={skills.backend} />
-        </motion.div>
+              {/* Description */}
+              <p className="text-gray-600 text-sm mb-6">
+                {cat.description}
+              </p>
+
+              {/* Skills list */}
+              <ul className="space-y-3">
+                {cat.skills.map((skill) => (
+                  <li
+                  key={skill.name}
+                  className={`flex items-center justify-between px-4 py-2 rounded-lg
+                    transition-transform duration-200 ease-out
+                    hover:scale-105 hover:shadow-md
+                    ${
+                      skill.primary
+                        ? 'bg-blue-50 text-blue-700 font-semibold'
+                        : 'bg-gray-100 text-gray-700'
+                    }`}
+                >
+                    {skill.name}
+                    {skill.primary && (
+                      <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+                        Main
+                      </span>
+                    )}
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
-  )
-}
-
-function SkillCard({
-  title,
-  color,
-  skills,
-}: {
-  title: string
-  color: 'blue' | 'cyan' | 'purple'
-  skills: Skill[]
-}) {
-  return (
-    <motion.div
-      variants={item}
-      className="rounded-2xl bg-white shadow-md p-8 hover:shadow-xl transition"
-    >
-      <h3
-        className={`text-xl font-semibold mb-6 text-${color}-600`}
-      >
-        {title}
-      </h3>
-
-      <ul className="space-y-4">
-        {skills.map((skill) => (
-          <li
-            key={skill.name}
-            className={`flex items-center justify-between rounded-lg px-4 py-3
-              ${
-                skill.primary
-                  ? `bg-${color}-50 border border-${color}-200`
-                  : 'bg-gray-50'
-              }`}
-          >
-            <div className="flex items-center gap-3">
-              <span>{skill.icon}</span>
-              <span
-                className={`${
-                  skill.primary
-                    ? 'font-semibold text-gray-900'
-                    : 'text-gray-700'
-                }`}
-              >
-                {skill.name}
-              </span>
-            </div>
-
-            {skill.primary && (
-              <span
-                className={`text-xs font-semibold px-2 py-1 rounded-full bg-${color}-600 text-white`}
-              >
-                Main
-              </span>
-            )}
-          </li>
-        ))}
-      </ul>
-    </motion.div>
   )
 }
