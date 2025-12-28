@@ -32,7 +32,7 @@ const ContactSection = () => {
   ]
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white">
+    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
@@ -43,7 +43,7 @@ const ContactSection = () => {
           viewport={{ once: true }}
         >
           <p className="text-blue-600 font-semibold text-lg mb-2">Contact</p>
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-200 mb-6">
             Démarrons votre projet ensemble
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
@@ -62,7 +62,7 @@ const ContactSection = () => {
             viewport={{ once: true }}
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-6">
                 Restons en contact
               </h3>
               <p className="text-gray-600 leading-relaxed mb-8">
@@ -80,17 +80,17 @@ const ContactSection = () => {
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   viewport={{ once: true }}
                 >
-                  <Card className="border-0 shadow-md hover:shadow-lg transition-shadow">
+                  <Card className="border-0 shadow-md hover:shadow-lg transition-shadow dark:bg-gray-900 ">
                     <CardContent className="p-6">
                       <div className="flex items-center space-x-4">
                         <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center">
                           <info.icon className="h-6 w-6 text-white" />
                         </div>
                         <div>
-                          <h4 className="font-semibold text-gray-900">{info.title}</h4>
+                          <h4 className="font-semibold text-gray-900 dark:text-gray-200">{info.title}</h4>
                           <a 
                             href={info.href}
-                            className="text-gray-600 hover:text-blue-600 transition-colors"
+                            className="text-gray-600 text-gray-400 hover:text-blue-600 transition-colors"
                           >
                             {info.value}
                           </a>
@@ -110,7 +110,7 @@ const ContactSection = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <h4 className="font-semibold text-gray-900 mb-4">Suivez-moi</h4>
+              <h4 className="font-semibold text-gray-900 dark:text-gray-200 mb-4">Suivez-moi</h4>
               <div className="flex space-x-4">
       <Link href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/" target="_blank">
         <Button
@@ -155,36 +155,36 @@ const ContactSection = () => {
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
           >
-            <Card className="border-0 shadow-xl">
+            <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
               <CardContent className="p-8">
                 <form className="space-y-6">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-900">Prénom</label>
-                      <Input placeholder="Votre prénom" className="border-gray-300" />
+                      <label className="text-sm font-medium text-gray-900 dark:text-gray-200">Prénom</label>
+                      <Input placeholder="Votre prénom" className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" />
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-900">Nom</label>
-                      <Input placeholder="Votre nom" className="border-gray-300" />
+                      <label className="text-sm font-medium text-gray-900 dark:text-gray-200">Nom</label>
+                      <Input placeholder="Votre nom" className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" />
                     </div>
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Email</label>
-                    <Input type="email" placeholder="votre@email.com" className="border-gray-300" />
+                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">Email</label>
+                    <Input type="email" placeholder="votre@email.com" className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" />
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Sujet</label>
-                    <Input placeholder="Sujet de votre message" className="border-gray-300" />
+                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">Sujet</label>
+                    <Input placeholder="Sujet de votre message" className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400" />
                   </div>
                   
                   <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900">Message</label>
+                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">Message</label>
                     <Textarea 
                       placeholder="Décrivez votre projet..." 
                       rows={6}
-                      className="border-gray-300 resize-none"
+                      className="bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 placeholder:text-gray-400 resize-none"
                     />
                   </div>
                   

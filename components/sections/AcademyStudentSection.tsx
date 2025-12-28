@@ -136,7 +136,7 @@ export default function AcademyStudentSection() {
               {/* Card */}
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-white dark:bg-gray-900/70  border rounded-xl p-6 shadow-md hover:shadow-xl transition"
+                className="bg-white dark:bg-gray-900/70 border rounded-xl p-6 shadow-md hover:shadow-xl transition"
               >
                 <div className="flex items-start gap-4">
                   {/* Icon */}

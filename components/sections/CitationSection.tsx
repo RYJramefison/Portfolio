@@ -6,7 +6,8 @@ import { Star, Quote } from 'lucide-react';
 
 const CitationSection = () => {
   return (
-    <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white">
+    <section className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white 
+    dark:from-gray-950 dark:to-gray-900">
       <div className="max-w-6xl mx-auto">
         <motion.div
           className="text-center mb-16"
@@ -23,18 +24,19 @@ const CitationSection = () => {
             <div className="w-6 h-0.5 bg-blue-500"></div>
           </div>
           
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-200 mb-6">
             Ma vision de la réussite
           </h2>
           
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
             Une philosophie qui guide chaque projet et décision
           </p>
         </motion.div>
 
         <div className="flex justify-center">
           <motion.div
-            className="max-w-3xl w-full bg-white rounded-2xl shadow-lg shadow-blue-50 border border-gray-100 overflow-hidden"
+            className="max-w-3xl w-full bg-white  rounded-2xl shadow-lg shadow-blue-50 border border-gray-100 overflow-hidden
+            dark:bg-gray-900 dark:border-gray-800  dark:shadow-black/40"
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.1 }}
@@ -48,10 +50,11 @@ const CitationSection = () => {
               </div>
 
               <blockquote className="mb-10">
-                <p className="text-2xl md:text-3xl font-light text-gray-800 leading-relaxed mb-6">
+                <p className="text-2xl md:text-3xl font-light text-gray-800 leading-relaxed mb-6
+                dark:text-gray-200">
                   Let the moon be your mark.<br />
-                  <span className="text-gray-600">A failure there is no true descent,</span><br />
-                  <span className="text-gray-700">but a silent promotion to the starry court.</span>
+                  <span className="text-gray-600 dark:text-gray-400">A failure there is no true descent,</span><br />
+                  <span className="text-gray-700 dark:text-gray-300">but a silent promotion to the starry court.</span>
                 </p>
                 
                 <div className="flex items-center gap-4 mb-8">
@@ -67,10 +70,10 @@ const CitationSection = () => {
 
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 mb-1">
+                  <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">
                     Juninho RAMEFISON
                   </h4>
-                  <p className="text-gray-600">
+                  <p className="text-gray-600 dark:text-gray-400">
                     Software developer
                   </p>
                 </div>
