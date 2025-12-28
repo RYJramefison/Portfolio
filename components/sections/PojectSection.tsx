@@ -48,7 +48,7 @@ const ProjectSection = () => {
 
 
   return (
-    <section id="portfolio" className="py-20 bg-white">
+    <section id="portfolio" className="py-20 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div 
@@ -59,10 +59,10 @@ const ProjectSection = () => {
           viewport={{ once: true }}
         >
           <p className="text-blue-600 font-semibold text-lg mb-2">Projet Personnel</p>
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Mes projets réalisés
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Explorez une sélection de projets personnels que j'ai concrétisés, 
             démontrant ma créativité, mes compétences techniques et ma passion pour 
             le développement innovant.
@@ -82,7 +82,7 @@ const ProjectSection = () => {
               transition={{ delay: index * 0.1, duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden">
+              <Card className="h-full border-0 shadow-lg hover:shadow-xl transition-all duration-300 group overflow-hidden bg-white dark:bg-gray-900 dark:shadow-black/40">
                 <div className="relative overflow-hidden">
                   <img 
                     src={project.image}
@@ -107,12 +107,12 @@ const ProjectSection = () => {
                   <div className="space-y-4">
                     <div>
                       <div className="flex items-center justify-between mb-2">
-                        <h3 className="font-bold text-lg text-gray-900">{project.title}</h3>
+                        <h3 className="font-bold text-lg text-gray-900 dark:text-gray-100">{project.title}</h3>
                         <Badge variant="secondary" className="text-xs">
                           {project.category}
                         </Badge>
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
                         {project.description}
                       </p>
                     </div>
@@ -122,7 +122,7 @@ const ProjectSection = () => {
                         <Badge 
                           key={tag} 
                           variant="outline" 
-                          className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50"
+                          className="text-xs border-blue-200 text-blue-700 hover:bg-blue-50 dark:border-blue-800 dark:text-blue-300 dark:bg-blue-950"
                         >
                           {tag}
                         </Badge>

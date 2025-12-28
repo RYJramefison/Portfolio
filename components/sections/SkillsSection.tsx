@@ -52,7 +52,7 @@ const categories: Category[] = [
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-24 bg-gray-50">
+    <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-6">
         {/* Title */}
         <motion.div
@@ -65,13 +65,13 @@ export default function SkillsSection() {
           <p className="text-sm uppercase tracking-widest text-blue-600 mb-2">
             Skills
           </p>
-          <h2 className="text-4xl font-bold text-gray-900">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-200">
             What I Do
           </h2>
         </motion.div>
 
         {/* Cards */}
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 ">
           {categories.map((cat, i) => (
             <motion.div
               key={cat.title}
@@ -79,13 +79,13 @@ export default function SkillsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition"
+              className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition dark:bg-gray-900 dark:shadow-black/40"
             >
               {/* Icon */}
               <div className="text-3xl mb-4">{cat.icon}</div>
 
               {/* Title */}
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-2">
                 {cat.title}
               </h3>
 
@@ -104,8 +104,8 @@ export default function SkillsSection() {
                     hover:scale-105 hover:shadow-md
                     ${
                       skill.primary
-                        ? 'bg-blue-50 text-blue-700 font-semibold'
-                        : 'bg-gray-100 text-gray-700'
+                        ? 'bg-blue-50 text-blue-700 font-semibold dark:bg-blue-950 dark:text-blue-300'
+                        : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
                     }`}
                 >
                     {skill.name}
