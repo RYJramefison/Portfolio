@@ -3,27 +3,15 @@
 import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Sun, Moon } from 'lucide-react'
-
-type Lang = 'fr' | 'en'
-
-const translations = {
-  fr: {
-    nav: ['Accueil', 'À propos', 'Compétences', 'Services', 'Portfolio', 'Contact'],
-    cv: 'Télécharger mon CV',
-    hire: 'Embauchez-moi',
-  },
-  en: {
-    nav: ['Home', 'About', 'Skills', 'Services', 'Portfolio', 'Contact'],
-    cv: 'Download CV',
-    hire: 'Hire me',
-  },
-}
+import { useLang } from '@/app/providers/lang-provider'
 
 const Header = () => {
+  const { lang, setLang, t } = useLang()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
-  const [lang, setLang] = useState<Lang>('fr')
+
+  const navLinks = ['hero', 'about', 'skills', 'services', 'portfolio', 'contact']
 
   /* Scroll effect */
   useEffect(() => {
@@ -32,17 +20,13 @@ const Header = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  /* Load theme & lang */
+  /* Load theme */
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark'
-    const savedLang = localStorage.getItem('lang') as Lang
-
     if (savedTheme) {
       setTheme(savedTheme)
       document.documentElement.classList.toggle('dark', savedTheme === 'dark')
     }
-
-    if (savedLang) setLang(savedLang)
   }, [])
 
   const toggleTheme = () => {
@@ -58,16 +42,11 @@ const Header = () => {
     localStorage.setItem('lang', newLang)
   }
 
-  const navItems = translations[lang].nav.map((label, i) => ({
-    label,
-    href: ['#hero', '#about', '#skills', '#services', '#portfolio', '#contact'][i],
-  }))
-
   return (
     <header
       className={`fixed w-full top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg border-b border-gray-200 dark:border-gray-800'
+          ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
       }`}
     >
@@ -80,35 +59,33 @@ const Header = () => {
 
           {/* Desktop nav */}
           <nav className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+            {(t?.nav || []).map((label, i) => (
               <a
-                key={item.label}
-                href={item.href}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition"
+                key={label}
+                href={`#${navLinks[i]}`}
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600"
               >
-                {item.label}
+                {label}
               </a>
             ))}
           </nav>
 
           {/* Actions */}
           <div className="hidden md:flex items-center gap-3">
-            {/* Language */}
             <Button variant="ghost" onClick={toggleLang}>
               {lang.toUpperCase()}
             </Button>
 
-            {/* Theme */}
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
 
             <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
-              {translations[lang].cv}
+              {t?.common?.cv}
             </Button>
           </div>
 
-          {/* Mobile button */}
+          {/* Mobile menu button */}
           <div className="md:hidden">
             <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
               {isMenuOpen ? <X /> : <Menu />}
@@ -118,19 +95,19 @@ const Header = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900 border-t dark:border-gray-800">
-            {navItems.map((item) => (
+          <div className="md:hidden bg-white dark:bg-gray-900">
+            {(t?.nav || []).map((label, i) => (
               <a
-                key={item.label}
-                href={item.href}
-                className="block px-4 py-2 text-gray-700 dark:text-gray-300"
+                key={label}
+                href={`#${navLinks[i]}`}
+                className="block px-4 py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
-                {item.label}
+                {label}
               </a>
             ))}
 
-            <div className="flex justify-between items-center px-4 py-3 gap-2">
+            <div className="flex gap-2 px-4 py-3">
               <Button variant="ghost" onClick={toggleLang}>
                 {lang.toUpperCase()}
               </Button>
@@ -140,7 +117,7 @@ const Header = () => {
               </Button>
 
               <Button className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600">
-                {translations[lang].hire}
+                {t?.common?.hire}
               </Button>
             </div>
           </div>

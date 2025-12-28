@@ -3,14 +3,21 @@
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useLang } from '@/app/providers/lang-provider'
 
 const HeroSection = () => {
+  const { t } = useLang()
+
   return (
-    <section id="hero" className="pt-16 pb-20 overflow-hidden bg-white dark:bg-gray-950">
+    <section
+      id="hero"
+      className="pt-16 pb-20 overflow-hidden bg-white dark:bg-gray-950"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
+
           {/* Left Content */}
-          <motion.div 
+          <motion.div
             className="space-y-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
@@ -23,82 +30,82 @@ const HeroSection = () => {
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="flex items-center space-x-2"
               >
-                <span className="text-gray-600 dark:text-gray-400">Bonjour, je suis 👋</span>
+                <span className="text-gray-600 dark:text-gray-400">
+                  {t.hero.greeting} 👋
+                </span>
               </motion.div>
-              
-              <motion.h1 
+
+              <motion.h1
                 className="text-5xl lg:text-6xl font-bold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <span className="text-gray-900 dark:text-gray-300">Juninho</span>{' '}
+                <span className="text-gray-900 dark:text-gray-300">
+                  Juninho
+                </span>{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Ramefison
                 </span>
               </motion.h1>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-2xl text-blue-600 font-semibold"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                Développeur Web Full Stack
+                {t.hero.job}
               </motion.p>
-              
-              <motion.p 
+
+              <motion.p
                 className="text-lg text-gray-600 max-w-lg leading-relaxed dark:text-gray-200"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
-                Je crée des expériences web exceptionnelles qui allient design moderne 
-                et fonctionnalités robustes. Spécialisé en React, Next.js et en Java.
+                {t.hero.description}
               </motion.p>
             </div>
 
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
             >
-              <Button size="lg" className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 group">
-                Voir mes projets
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 group"
+              >
+                {t.hero.projectsBtn}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <Button size="lg" variant="outline" className="border-gray-300 hover:border-blue-600 hover:text-blue-600">
-                <Download className="mr-2 h-5 w-5" />
-                Télécharger CV
-              </Button>
-            </motion.div>
 
-            {/* Trust Indicators */}
-            <motion.div 
-              className="flex items-center space-x-8 pt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.2, duration: 0.6 }}
-            >
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
+              >
+                <Download className="mr-2 h-5 w-5" />
+                {t.hero.downloadCv}
+              </Button>
             </motion.div>
           </motion.div>
 
-          {/* Right Content - Hero Image */}
-          <motion.div 
+          {/* Right Content */}
+          <motion.div
             className="relative"
             initial={{ opacity: 0, x: 50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
           >
             <div className="relative mx-auto w-full max-w-lg">
-              {/* Decorative elements */}
               <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-pulse"></div>
               <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full opacity-20 animate-pulse delay-1000"></div>
-              
-              {/* Profile Image Placeholder */}
+
               <div className="relative z-10 w-full aspect-square rounded-full flex items-center justify-center">
-                <img 
+                <img
                   src="photo_pro-removebg-preview.png"
                   alt="Profile"
                   className="rounded-full border-8 border-white dark:border-gray-800 shadow-2xl"
@@ -106,6 +113,7 @@ const HeroSection = () => {
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
