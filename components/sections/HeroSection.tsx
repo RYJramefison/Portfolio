@@ -6,7 +6,7 @@ import { motion } from 'framer-motion'
 
 const HeroSection = () => {
   return (
-    <section id="hero" className="pt-16 pb-20 overflow-hidden">
+    <section id="hero" className="pt-16 pb-20 overflow-hidden bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
           {/* Left Content */}
@@ -23,7 +23,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.2, duration: 0.6 }}
                 className="flex items-center space-x-2"
               >
-                <span className="text-lg text-gray-600">Bonjour, je suis 👋</span>
+                <span className="text-gray-600 dark:text-gray-400">Bonjour, je suis 👋</span>
               </motion.div>
               
               <motion.h1 
@@ -32,7 +32,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <span className="text-gray-900">Juninho</span>{' '}
+                <span className="text-gray-900 dark:text-gray-300">Juninho</span>{' '}
                 <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   Ramefison
                 </span>
@@ -48,7 +48,7 @@ const HeroSection = () => {
               </motion.p>
               
               <motion.p 
-                className="text-lg text-gray-600 max-w-lg leading-relaxed"
+                className="text-lg text-gray-600 max-w-lg leading-relaxed dark:text-gray-200"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
@@ -101,7 +101,7 @@ const HeroSection = () => {
                 <img 
                   src="photo_pro-removebg-preview.png"
                   alt="Profile"
-                  className=" rounded-full border-8 border-white shadow-2xl"
+                  className="rounded-full border-8 border-white dark:border-gray-800 shadow-2xl"
                 />
               </div>
             </div>

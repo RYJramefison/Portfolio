@@ -30,7 +30,7 @@ const steps = [
 
 export default function AcademyStudentSection() {
   return (
-    <section className="py-28 bg-white relative overflow-hidden">
+    <section className="py-28 bg-white relative overflow-hidden dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -42,10 +42,10 @@ export default function AcademyStudentSection() {
           viewport={{ once: true }}
         >
           <p className="text-blue-600 font-semibold text-lg mb-2">Mon Parcours</p>
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             Mes parcours académiques
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             Une vision claire et structurée de mon évolution académique et personnelle
           </p>
       </motion.div>
@@ -60,9 +60,10 @@ export default function AcademyStudentSection() {
           transition={{ duration: 0.7, ease: 'easeOut' }}
           viewport={{ once: true }}
           className="relative z-10 w-[22rem] h-[22rem] rounded-3xl 
-                    bg-white/70 backdrop-blur-xl border border-white/40 
+                    bg-white/70 dark:bg-gray-900/70 
+                    backdrop-blur-xl backdrop-blur-xl border border-white/40  dark:border-gray-800
                     shadow-[0_20px_60px_-15px_rgba(99,102,241,0.35)]
-                    flex items-center justify-center text-center px-10"
+                    flex items-center justify-center text-center px-10 "
         >
           {/* Animated halo */}
           <div className="absolute inset-0 rounded-3xl 
@@ -89,7 +90,7 @@ export default function AcademyStudentSection() {
                             bg-gradient-to-r from-blue-500 to-violet-500" />
 
             {/* Description */}
-            <p className="text-gray-600 text-sm leading-relaxed max-w-xs mx-auto">
+            <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
               Développeur en formation, orienté solutions modernes,
               performantes et sécurisées.
             </p>
@@ -135,7 +136,7 @@ export default function AcademyStudentSection() {
               {/* Card */}
               <motion.div
                 whileHover={{ y: -6, scale: 1.02 }}
-                className="bg-white border rounded-xl p-6 shadow-md hover:shadow-xl transition"
+                className="bg-white dark:bg-gray-900/70  border rounded-xl p-6 shadow-md hover:shadow-xl transition"
               >
                 <div className="flex items-start gap-4">
                   {/* Icon */}
@@ -145,7 +146,7 @@ export default function AcademyStudentSection() {
 
                   {/* Content */}
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">
+                    <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 dark:text-gray-100 mb-1">
                       {step.title}
                     </h4>
                     <p className="text-gray-500 text-sm leading-relaxed">
