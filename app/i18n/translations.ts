@@ -14,6 +14,8 @@ export const translations = {
     common: {
       cv: 'Télécharger mon CV',
       hire: 'Embauchez-moi',
+      demo: 'Démo',
+      code: 'Code',
     },
 
     hero: {
@@ -65,6 +67,39 @@ export const translations = {
       ],
     },
 
+    portfolio: {
+      label: 'Projet personnel',
+      title: 'Mes projets réalisés',
+      description:
+        "Explorez une sélection de projets personnels démontrant ma créativité et mes compétences techniques.",
+      cta: 'Voir tous les projets',
+      projects: [
+        {
+          title: 'J-CRAM',
+          description: 'Site de réservation de voyages.',
+          image: 'J CRAM.png',
+          tags: ['HTML', 'CSS', 'JavaScript'],
+          category: 'Site E-commerce',
+        },
+        {
+          title: 'TAPAKILA',
+          description:
+            'Plateforme de découverte et réservation de billets pour des événements.',
+          image: 'Patrimoine economique.png',
+          tags: ['React', 'Next.js', 'Tailwind', 'PostgreSQL'],
+          category: 'Plateforme',
+        },
+        {
+          title: 'Restaurant API',
+          description:
+            'API de gestion des commandes, stocks et prix des plats.',
+          image: 'climat et tourisme.png',
+          tags: ['Java', 'PostgreSQL', 'JDBC'],
+          category: 'API Backend',
+        },
+      ],
+    },
+
     contact: {
       title: 'Contact',
       subtitle: 'Démarrons votre projet ensemble',
@@ -73,18 +108,13 @@ export const translations = {
   },
 
   en: {
-    nav: [
-      'Home',
-      'About',
-      'Skills',
-      'Services',
-      'Portfolio',
-      'Contact',
-    ],
+    nav: ['Home', 'About', 'Skills', 'Services', 'Portfolio', 'Contact'],
 
     common: {
       cv: 'Download CV',
       hire: 'Hire me',
+      demo: 'Demo',
+      code: 'Code',
     },
 
     hero: {
@@ -132,6 +162,39 @@ export const translations = {
             { name: 'Node.js' },
             { name: 'Docker' },
           ],
+        },
+      ],
+    },
+
+    portfolio: {
+      label: 'Personal Project',
+      title: 'My completed projects',
+      description:
+        'Explore a selection of personal projects showcasing my creativity and technical skills.',
+      cta: 'View all projects',
+      projects: [
+        {
+          title: 'J-CRAM',
+          description: 'Travel booking website.',
+          image: 'J CRAM.png',
+          tags: ['HTML', 'CSS', 'JavaScript'],
+          category: 'E-commerce Website',
+        },
+        {
+          title: 'TAPAKILA',
+          description:
+            'Event discovery and ticket booking platform.',
+          image: 'Patrimoine economique.png',
+          tags: ['React', 'Next.js', 'Tailwind', 'PostgreSQL'],
+          category: 'Platform',
+        },
+        {
+          title: 'Restaurant API',
+          description:
+            'API managing orders, stock and pricing.',
+          image: 'climat et tourisme.png',
+          tags: ['Java', 'PostgreSQL', 'JDBC'],
+          category: 'Backend API',
         },
       ],
     },
