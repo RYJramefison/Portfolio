@@ -99,12 +99,6 @@ export const translations = {
         },
       ],
     },
-
-    contact: {
-      title: 'Contact',
-      subtitle: 'Démarrons votre projet ensemble',
-      send: 'Envoyer le message',
-    },
     academy: {
       badge: 'Mon Parcours',
       title: 'Mes parcours académiques',
@@ -134,6 +128,64 @@ export const translations = {
         },
       ],
     },
+    citation: {
+      badge: 'Inspiration',
+      title: 'Ma vision de la réussite',
+      subtitle: 'Une philosophie qui guide chaque projet et décision',
+      quote: {
+        lines: [
+          'Let the moon be your mark.',
+          'A failure there is no true descent,',
+          'but a silent promotion to the starry court.',
+        ],
+      },
+      author: {
+        name: 'Juninho RAMEFISON',
+        role: 'Développeur logiciel',
+      },
+      tag: 'Philosophie personnelle',
+      footer:
+        "Cette citation guide mon approche de chaque défi, transformant chaque obstacle en opportunité d’ascension vers des objectifs plus élevés.",
+    },
+    contact: {
+      badge: 'Contact',
+      title: 'Démarrons votre projet ensemble',
+      description:
+        'Prêt à concrétiser vos idées ? Contactez-moi pour discuter de votre projet et découvrir comment je peux vous aider.',
+    
+      stayInTouch: {
+        title: 'Restons en contact',
+        description:
+          'N’hésitez pas à me contacter pour toute question ou demande de devis. Je réponds généralement sous 24 heures.',
+      },
+    
+      infos: {
+        email: 'Email',
+        phone: 'Téléphone',
+        location: 'Localisation',
+      },
+    
+      social: {
+        title: 'Suivez-moi',
+      },
+    
+      form: {
+        firstName: 'Prénom',
+        lastName: 'Nom',
+        email: 'Email',
+        subject: 'Sujet',
+        message: 'Message',
+    
+        firstNamePlaceholder: 'Votre prénom',
+        lastNamePlaceholder: 'Votre nom',
+        emailPlaceholder: 'votre@email.com',
+        subjectPlaceholder: 'Sujet de votre message',
+        messagePlaceholder: 'Décrivez votre projet...',
+    
+        send: 'Envoyer le message',
+      },
+    }
+    
   },
 
   en: {
@@ -228,11 +280,6 @@ export const translations = {
       ],
     },
 
-    contact: {
-      title: 'Contact',
-      subtitle: 'Let’s build your project together',
-      send: 'Send message',
-    },
     academy: {
       badge: 'My Journey',
       title: 'My academic background',
@@ -262,6 +309,65 @@ export const translations = {
         },
       ],
     },
+
+    citation: {
+      badge: 'Inspiration',
+      title: 'My vision of success',
+      subtitle: 'A philosophy that guides every project and decision',
+      quote: {
+        lines: [
+          'Let the moon be your mark.',
+          'Failure there is no true descent,',
+          'but a silent promotion to the starry court.',
+        ],
+      },
+      author: {
+        name: 'Juninho RAMEFISON',
+        role: 'Software Developer',
+      },
+      tag: 'Personal philosophy',
+      footer:
+        'This quote guides my approach to every challenge, turning obstacles into opportunities for higher achievement.',
+    },
+    contact: {
+      badge: 'Contact',
+      title: 'Let’s build your project together',
+      description:
+        'Ready to bring your ideas to life? Contact me to discuss your project and see how I can help.',
+    
+      stayInTouch: {
+        title: 'Let’s stay in touch',
+        description:
+          'Feel free to reach out for any questions or project inquiries. I usually reply within 24 hours.',
+      },
+    
+      infos: {
+        email: 'Email',
+        phone: 'Phone',
+        location: 'Location',
+      },
+    
+      social: {
+        title: 'Follow me',
+      },
+    
+      form: {
+        firstName: 'First name',
+        lastName: 'Last name',
+        email: 'Email',
+        subject: 'Subject',
+        message: 'Message',
+    
+        firstNamePlaceholder: 'Your first name',
+        lastNamePlaceholder: 'Your last name',
+        emailPlaceholder: 'your@email.com',
+        subjectPlaceholder: 'Message subject',
+        messagePlaceholder: 'Describe your project...',
+    
+        send: 'Send message',
+      },
+    }
+    
     
   },
   

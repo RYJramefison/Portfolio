@@ -13,16 +13,21 @@ type LangContextType = {
 
 const LangContext = createContext<LangContextType | undefined>(undefined)
 
+const isValidLang = (value: string): value is Lang =>
+  value === 'fr' || value === 'en'
+
 export const LangProvider = ({ children }: { children: ReactNode }) => {
   const [lang, setLang] = useState<Lang>('fr')
 
-  /* Load saved language */
   useEffect(() => {
-    const savedLang = localStorage.getItem('lang') as Lang | null
-    if (savedLang) setLang(savedLang)
+    const savedLang = localStorage.getItem('lang')
+
+    if (savedLang && isValidLang(savedLang)) {
+      setLang(savedLang)
+      document.documentElement.lang = savedLang
+    }
   }, [])
 
-  /* Persist language */
   const changeLang = (newLang: Lang) => {
     setLang(newLang)
     localStorage.setItem('lang', newLang)
@@ -34,7 +39,7 @@ export const LangProvider = ({ children }: { children: ReactNode }) => {
       value={{
         lang,
         setLang: changeLang,
-        t: translations[lang], // ✅ TYPE SAFE
+        t: translations[lang] ?? translations.fr,
       }}
     >
       {children}
