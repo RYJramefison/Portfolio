@@ -105,6 +105,35 @@ export const translations = {
       subtitle: 'Démarrons votre projet ensemble',
       send: 'Envoyer le message',
     },
+    academy: {
+      badge: 'Mon Parcours',
+      title: 'Mes parcours académiques',
+      description:
+        'Une vision claire et structurée de mon évolution académique et personnelle',
+      profile: {
+        badge: 'Profil',
+        title: 'Academy Student',
+        description:
+          'Développeur en formation, orienté solutions modernes, performantes et sécurisées.',
+      },
+      steps: [
+        {
+          title: 'Baccalauréat',
+          description:
+            'Obtention du Baccalauréat Scientifique – Série D au Lycée MIRVA Amboniloha en 2023.',
+        },
+        {
+          title: 'Formation universitaire',
+          description:
+            'Étudiant en informatique à HEI, avec une base solide en développement et systèmes informatiques.',
+        },
+        {
+          title: 'Centres d’intérêt',
+          description:
+            'Cybersécurité, échecs, voyages, musique et sport automobile.',
+        },
+      ],
+    },
   },
 
   en: {
@@ -204,5 +233,36 @@ export const translations = {
       subtitle: 'Let’s build your project together',
       send: 'Send message',
     },
+    academy: {
+      badge: 'My Journey',
+      title: 'My academic background',
+      description:
+        'A clear and structured overview of my academic and personal growth',
+      profile: {
+        badge: 'Profile',
+        title: 'Academy Student',
+        description:
+          'Developer in training, focused on modern, performant and secure solutions.',
+      },
+      steps: [
+        {
+          title: 'High School Diploma',
+          description:
+            'Obtained a Scientific High School Diploma – Series D at Lycée MIRVA Amboniloha in 2023.',
+        },
+        {
+          title: 'University Education',
+          description:
+            'Computer science student at HEI with a strong foundation in development and systems.',
+        },
+        {
+          title: 'Interests',
+          description:
+            'Cybersecurity, chess, travel, music and motorsport.',
+        },
+      ],
+    },
+    
   },
+  
 } as const
