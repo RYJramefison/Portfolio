@@ -42,96 +42,98 @@ const ProjectSection = () => {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-            <Card className="group relative h-full bg-transparent border-none shadow-none">
+            <Card className="group relative h-full border-none bg-transparent shadow-none">
 
-{/* IMAGE HEADER */}
-<div className="relative h-60 overflow-hidden rounded-t-2xl">
-  <img
-    src={project.image}
-    alt={project.title}
-    className="
-      absolute inset-0
-      w-full h-full
-      object-cover
-      transition-transform duration-700 ease-out
-      group-hover:scale-110
-    "
-  />
-
-  {/* Overlay hover */}
-  <div
-    className="
-      absolute inset-0
-      bg-gradient-to-t
-      from-black/60
-      via-black/30
-      to-transparent
-      opacity-0
-      group-hover:opacity-100
-      transition-opacity duration-500
-    "
-  />
-
-  {/* Hover actions */}
-  <div
-    className="
-      absolute bottom-4 right-4
-      flex gap-2
-      opacity-0 translate-y-4
-      group-hover:opacity-100 group-hover:translate-y-0
-      transition-all duration-500
-    "
-  >
-    <Button
-      size="icon"
-      className="rounded-full bg-white/90 backdrop-blur text-gray-900 shadow-lg hover:bg-white"
-    >
-      <ExternalLink className="h-4 w-4" />
-    </Button>
-
-    <Button
-      size="icon"
-      className="rounded-full bg-white/90 backdrop-blur text-gray-900 shadow-lg hover:bg-white"
-    >
-      <GithubIcon className="h-4 w-4" />
-    </Button>
-  </div>
-</div>
-
-{/* BODY COLLÉ À L'IMAGE */}
+{/* WRAPPER UNIQUE */}
 <div
   className="
-    relative
-    -mt-px
-    rounded-b-2xl
-    bg-[#0b1220]
+    overflow-hidden
+    rounded-2xl
     border border-white/10
-    p-6
-    space-y-4
+    bg-[#0b1220]
     shadow-xl
   "
 >
-  <h3 className="text-xl font-bold text-white">
-    TAPAKILA
-  </h3>
 
-  <p className="text-sm text-gray-400 leading-relaxed">
-    Event discovery and ticket booking platform.
-  </p>
+  {/* IMAGE */}
+  <div className="relative h-60">
+    <img
+      src={project.image}
+      alt={project.title}
+      className="
+        absolute inset-0
+        w-full h-full
+        object-cover
+        transition-transform duration-700 ease-out
+        group-hover:scale-110
+      "
+    />
 
-  <div className="flex flex-wrap gap-2">
-    {['React', 'Next.js', 'Tailwind', 'PostgreSQL'].map(tag => (
-      <Badge
-        key={tag}
-        className="bg-white/10 text-white border border-white/20"
+    {/* Overlay */}
+    <div
+      className="
+        absolute inset-0
+        bg-gradient-to-t
+        from-black/60
+        via-black/30
+        to-transparent
+        opacity-0
+        group-hover:opacity-100
+        transition-opacity duration-500
+      "
+    />
+
+    {/* Hover actions */}
+    <div
+      className="
+        absolute bottom-4 right-4
+        flex gap-2
+        opacity-0 translate-y-4
+        group-hover:opacity-100 group-hover:translate-y-0
+        transition-all duration-500
+      "
+    >
+      <Button
+        size="icon"
+        className="rounded-full bg-white/90 backdrop-blur text-gray-900 shadow-lg hover:bg-white"
       >
-        {tag}
-      </Badge>
-    ))}
-  </div>
-</div>
+        <ExternalLink className="h-4 w-4" />
+      </Button>
 
+      <Button
+        size="icon"
+        className="rounded-full bg-white/90 backdrop-blur text-gray-900 shadow-lg hover:bg-white"
+      >
+        <GithubIcon className="h-4 w-4" />
+      </Button>
+    </div>
+  </div>
+
+  {/* BODY (DIRECTEMENT SOUS L’IMAGE) */}
+  <div className="p-6 space-y-4">
+    <h3 className="text-xl font-bold text-white">
+      TAPAKILA
+    </h3>
+
+    <p className="text-sm text-gray-400 leading-relaxed">
+      Event discovery and ticket booking platform.
+    </p>
+
+    <div className="flex flex-wrap gap-2">
+      {['React', 'Next.js', 'Tailwind', 'PostgreSQL'].map(tag => (
+        <Badge
+          key={tag}
+          className="bg-white/10 text-white border border-white/20"
+        >
+          {tag}
+        </Badge>
+      ))}
+    </div>
+  </div>
+
+</div>
 </Card>
+
 
 
 
