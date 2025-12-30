@@ -59,24 +59,24 @@ export default function AcademyStudentSection() {
                        flex items-center justify-center text-center px-10"
           >
             <div className="absolute inset-0 rounded-3xl
-                            bg-gradient-to-r from-blue-500/10 to-violet-500/10
+                            bg-gradient-to-r from-blue-500/10 to-teal-500/10
                             blur-3xl opacity-20 -z-10" />
 
             <div className="space-y-4">
               <span className="inline-block px-4 py-1 text-xs font-semibold
-                               rounded-full bg-gradient-to-r from-blue-500 to-violet-500
+                               rounded-full bg-gradient-to-r from-blue-800 to-blue-500
                                text-white shadow">
                 {t.academy.profile.badge}
               </span>
 
               <h3 className="text-3xl font-extrabold tracking-tight
-                             bg-gradient-to-r from-blue-600 to-violet-600
+                             bg-gradient-to-r from-blue-600 to-blue-600
                              bg-clip-text text-transparent">
                 {t.academy.profile.title}
               </h3>
 
               <div className="mx-auto w-14 h-1 rounded-full
-                              bg-gradient-to-r from-blue-500 to-violet-500" />
+                              bg-gradient-to-r from-blue-500 to-blue-900" />
 
               <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
                 {t.academy.profile.description}
@@ -87,7 +87,7 @@ export default function AcademyStudentSection() {
                   <span
                     key={i}
                     className="w-2.5 h-2.5 rounded-full
-                               bg-gradient-to-r from-blue-500 to-violet-500
+                               bg-gradient-to-r from-blue-500 to-teal-500
                                animate-pulse"
                     style={{ animationDelay: `${i * 0.3}s` }}
                   />
@@ -99,7 +99,7 @@ export default function AcademyStudentSection() {
           {/* Timeline */}
           <div className="relative max-w-md pl-12">
             <div className="absolute left-5 top-0 h-full w-px
-                            bg-gradient-to-b from-blue-500 via-violet-500 to-transparent" />
+                            bg-gradient-to-b from-blue-700 via-white-600 to-transparent" />
 
             <div className="space-y-10">
               {steps.map((step, index) => (
@@ -112,7 +112,7 @@ export default function AcademyStudentSection() {
                   className="relative"
                 >
                   <div className="absolute -left-1.5 top-6 w-4 h-4 rounded-full
-                                  bg-gradient-to-r from-blue-500 to-violet-500 shadow-lg" />
+                                  bg-blue-800 shadow-lg" />
 
                   <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
@@ -121,7 +121,7 @@ export default function AcademyStudentSection() {
                   >
                     <div className="flex items-start gap-4">
                       <div className="w-12 h-12 rounded-xl
-                                      bg-gradient-to-r from-blue-500 to-violet-500
+                                      bg-blue-700
                                       text-white flex items-center justify-center shadow-md">
                         <step.icon className="w-5 h-5" />
                       </div>

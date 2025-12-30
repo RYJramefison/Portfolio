@@ -53,7 +53,7 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-700 to-teal-500 bg-clip-text text-transparent">
             Juninho
           </span>
 
@@ -80,7 +80,7 @@ const Header = () => {
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
 
-            <Button className="bg-gradient-to-r from-blue-600 to-purple-600">
+            <Button className="bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
               {t?.common?.cv}
             </Button>
           </div>
@@ -116,7 +116,7 @@ const Header = () => {
                 {theme === 'light' ? <Moon /> : <Sun />}
               </Button>
 
-              <Button className="flex-1 bg-gradient-to-r from-blue-600 to-purple-600">
+              <Button className="flex-1 bg-gradient-to-r from-blue-700 to-teal-700">
                 {t?.common?.hire}
               </Button>
             </div>

@@ -44,7 +44,7 @@ const HeroSection = () => {
                 <span className="text-gray-900 dark:text-gray-300">
                   Juninho
                 </span>{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-700 to-teal-500 bg-clip-text text-transparent">
                   Ramefison
                 </span>
               </motion.h1>
@@ -76,7 +76,7 @@ const HeroSection = () => {
             >
               <Button
                 size="lg"
-                className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 group"
+                className="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-700 hover:to-blue-800 group"
               >
                 {t.hero.projectsBtn}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
