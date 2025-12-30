@@ -42,7 +42,7 @@ const ProjectSection = () => {
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <Card className="group relative h-full overflow-hidden rounded-2xl border border-gray-200/60 dark:border-white/10 bg-white dark:bg-zinc-900 shadow-md hover:shadow-2xl transition-all duration-500">
+              <Card className="group relative h-full overflow-hidden rounded-2xl border border-gray-200/60 dark:border-white/10 bg-white dark:bg-gray-900 shadow-md hover:shadow-2xl transition-all duration-500">
   {/* Image */}
   <div className="relative overflow-hidden">
     <img
