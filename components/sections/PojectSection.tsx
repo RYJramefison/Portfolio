@@ -109,26 +109,27 @@ const ProjectSection = () => {
   </div>
 
   {/* BODY (PROTÉGÉ, JAMAIS TOUCHÉ PAR LE ZOOM) */}
-  <div className="p-6 space-y-4 rounded-b-2xl">
-    <h3 className="text-xl font-bold text-white">
-      TAPAKILA
-    </h3>
+  {/* BODY */}
+<div className="p-6 space-y-4 rounded-b-2xl">
+  <h3 className="text-xl font-bold text-white">
+    {project.title}
+  </h3>
 
-    <p className="text-sm text-gray-400 leading-relaxed">
-      Event discovery and ticket booking platform.
-    </p>
+  <p className="text-sm text-gray-400 leading-relaxed">
+    {project.description}
+  </p>
 
-    <div className="flex flex-wrap gap-2">
-      {['React', 'Next.js', 'Tailwind', 'PostgreSQL'].map(tag => (
-        <Badge
-          key={tag}
-          className="bg-white/10 text-white border border-white/20"
-        >
-          {tag}
-        </Badge>
-      ))}
-    </div>
+  <div className="flex flex-wrap gap-2">
+    {project.tags.map((tag) => (
+      <Badge
+        key={tag}
+        className="bg-white/10 text-white border border-white/20"
+      >
+        {tag}
+      </Badge>
+    ))}
   </div>
+</div>
 
 </div>
 </Card>
