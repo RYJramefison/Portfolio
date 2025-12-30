@@ -44,10 +44,9 @@ const ProjectSection = () => {
             >
             <Card className="group relative h-full border-none bg-transparent shadow-none">
 
-{/* WRAPPER UNIQUE */}
+{/* WRAPPER VISUEL */}
 <div
   className="
-    overflow-hidden
     rounded-2xl
     border border-white/10
     bg-[#0b1220]
@@ -55,8 +54,8 @@ const ProjectSection = () => {
   "
 >
 
-  {/* IMAGE */}
-  <div className="relative h-60">
+  {/* IMAGE (ZONE ISOLÉE) */}
+  <div className="relative h-60 overflow-hidden rounded-t-2xl">
     <img
       src={project.image}
       alt={project.title}
@@ -109,8 +108,8 @@ const ProjectSection = () => {
     </div>
   </div>
 
-  {/* BODY (DIRECTEMENT SOUS L’IMAGE) */}
-  <div className="p-6 space-y-4">
+  {/* BODY (PROTÉGÉ, JAMAIS TOUCHÉ PAR LE ZOOM) */}
+  <div className="p-6 space-y-4 rounded-b-2xl">
     <h3 className="text-xl font-bold text-white">
       TAPAKILA
     </h3>
@@ -133,6 +132,7 @@ const ProjectSection = () => {
 
 </div>
 </Card>
+
 
 
 
