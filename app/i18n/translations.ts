@@ -115,16 +115,19 @@ export const translations = {
           title: 'Baccalauréat',
           description:
             'Obtention du Baccalauréat Scientifique – Série D au Lycée MIRVA Amboniloha en 2023.',
+          image: 'mirva.jpg', 
         },
         {
           title: 'Formation universitaire',
           description:
             'Étudiant en informatique à HEI, avec une base solide en développement et systèmes informatiques.',
+          image: 'HEI.png', 
         },
         {
           title: 'Centres d’intérêt',
           description:
             'Cybersécurité, échecs, voyages, musique et sport automobile.',
+          image: 'Hobbies.jpeg', 
         },
       ],
     },
@@ -296,16 +299,19 @@ export const translations = {
           title: 'High School Diploma',
           description:
             'Obtained a Scientific High School Diploma – Series D at Lycée MIRVA Amboniloha in 2023.',
+          image: 'mirva.jpg', 
         },
         {
           title: 'University Education',
           description:
             'Computer science student at HEI with a strong foundation in development and systems.',
+          image: 'HEI.png', 
         },
         {
           title: 'Interests',
           description:
             'Cybersecurity, chess, travel, music and motorsport.',
+          image: 'Hobbies.jpeg', 
         },
       ],
     },

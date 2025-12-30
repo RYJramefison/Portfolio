@@ -11,10 +11,18 @@ export default function AcademyStudentSection() {
   const { lang } = useLang()
   const t = translations[lang] ?? translations.fr
 
+  // const steps = t.academy.steps.map((step, index) => ({
+  //   id: index + 1,
+  //   title: step.title,
+  //   description: step.description,
+  //   icon: icons[index],
+  // }))
+
   const steps = t.academy.steps.map((step, index) => ({
     id: index + 1,
     title: step.title,
     description: step.description,
+    image: step.image, 
     icon: icons[index],
   }))
 
@@ -120,16 +128,23 @@ export default function AcademyStudentSection() {
                                shadow-md hover:shadow-xl transition"
                   >
                     <div className="flex items-start gap-4">
-                      <div className="w-12 h-12 rounded-xl
-                                      bg-blue-700
-                                      text-white flex items-center justify-center shadow-md">
-                        <step.icon className="w-5 h-5" />
+                      {/* Image */}
+                      <div className="w-14 h-14 rounded-xl overflow-hidden
+                                      bg-white dark:bg-gray-800
+                                      shadow-md flex-shrink-0">
+                        <img
+                          src={step.image}
+                          alt={step.title}
+                          className="w-full h-full object-cover"
+                        />
                       </div>
 
-                      <div>
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-1">
+                      {/* Content */}
+                      <div className="space-y-1">
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                           {step.title}
                         </h4>
+
                         <p className="text-gray-500 text-sm leading-relaxed">
                           {step.description}
                         </p>
