@@ -95,9 +95,16 @@ const Header = () => {
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
 
-            <Button className="bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
-              {t?.common?.cv}
-            </Button>
+            <a
+              href="/cv/Juninho_RAMEFISON_CV.pdf"
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Button className="bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
+                {t?.common?.cv}
+              </Button>
+          </a>
           </div>
 
           {/* Mobile menu button */}
@@ -136,10 +143,16 @@ const Header = () => {
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {theme === 'light' ? <Moon /> : <Sun />}
               </Button>
-
-              <Button className="flex-1 bg-gradient-to-r from-blue-700 to-teal-700">
-                {t?.common?.hire}
-              </Button>
+              <a
+                href="/cv/Juninho_RAMEFISON_CV.pdf"
+                download
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="flex-1 bg-gradient-to-r from-blue-700 to-teal-700">
+                  {t?.common?.cv}
+                </Button>
+              </a>
             </div>
           </div>
         )}

@@ -13,7 +13,7 @@ export const translations = {
 
     common: {
       cv: 'Télécharger mon CV',
-      hire: 'Embauchez-moi',
+      miniCV: 'mon CV',
       demo: 'Démo',
       code: 'Code',
     },
@@ -197,7 +197,6 @@ export const translations = {
 
     common: {
       cv: 'Download CV',
-      hire: 'Hire me',
       demo: 'Demo',
       code: 'Code',
     },
