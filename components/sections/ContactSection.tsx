@@ -305,18 +305,30 @@ const ContactSection = () => {
                         placeholder={t.contact.form.firstNamePlaceholder}
                       />
                       {errors.firstName && (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
-      !
-    </span>
-    {errors.firstName}
-  </motion.p>
-)}
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="
+                          mt-1 flex items-center gap-2 rounded-lg
+                          bg-gray-100 px-3 py-2
+                          text-sm text-gray-700
+                          dark:bg-gray-800/80 dark:text-gray-300
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex h-5 w-5 items-center justify-center
+                            rounded-full bg-gray-300
+                            text-xs font-bold text-gray-800
+                            dark:bg-gray-700 dark:text-gray-200
+                          "
+                        >
+                          !
+                        </span>
+                        {errors.firstName}
+                      </motion.p>
+                    )}
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
@@ -328,19 +340,31 @@ const ContactSection = () => {
                         onChange={handleChange}
                         placeholder={t.contact.form.lastNamePlaceholder}
                        />
-                      {errors.lastName && (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
-      !
-    </span>
-    {errors.lastName}
-  </motion.p>
-)}
+                    {errors.lastName && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="
+                          mt-1 flex items-center gap-2 rounded-lg
+                          bg-gray-100 px-3 py-2
+                          text-sm text-gray-700
+                          dark:bg-gray-800/80 dark:text-gray-300
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex h-5 w-5 items-center justify-center
+                            rounded-full bg-gray-300
+                            text-xs font-bold text-gray-800
+                            dark:bg-gray-700 dark:text-gray-200
+                          "
+                        >
+                          !
+                        </span>
+                        {errors.lastName}
+                      </motion.p>
+                    )}
                     </div>
                   </div>
 
@@ -354,19 +378,32 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t.contact.form.emailPlaceholder} />
-                      {errors.email && (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
-      !
-    </span>
-    {errors.email}
-  </motion.p>
-)}
+                      
+                    {errors.email && (
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="
+                          mt-1 flex items-center gap-2 rounded-lg
+                          bg-gray-100 px-3 py-2
+                          text-sm text-gray-700
+                          dark:bg-gray-800/80 dark:text-gray-300
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex h-5 w-5 items-center justify-center
+                            rounded-full bg-gray-300
+                            text-xs font-bold text-gray-800
+                            dark:bg-gray-700 dark:text-gray-200
+                          "
+                        >
+                          !
+                        </span>
+                        {errors.email}
+                      </motion.p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -379,18 +416,30 @@ const ContactSection = () => {
                       onChange={handleChange}
                       placeholder={t.contact.form.subjectPlaceholder} />
                       {errors.subject && (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
-      !
-    </span>
-    {errors.subject}
-  </motion.p>
-)}
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="
+                          mt-1 flex items-center gap-2 rounded-lg
+                          bg-gray-100 px-3 py-2
+                          text-sm text-gray-700
+                          dark:bg-gray-800/80 dark:text-gray-300
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex h-5 w-5 items-center justify-center
+                            rounded-full bg-gray-300
+                            text-xs font-bold text-gray-800
+                            dark:bg-gray-700 dark:text-gray-200
+                          "
+                        >
+                          !
+                        </span>
+                        {errors.subject}
+                      </motion.p>
+                    )}
                   </div>
 
                   <div className="space-y-2">
@@ -406,18 +455,30 @@ const ContactSection = () => {
                       className="resize-none"
                     />
                     {errors.message && (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
-  >
-    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
-      !
-    </span>
-    {errors.message}
-  </motion.p>
-)}
+                      <motion.p
+                        initial={{ opacity: 0, y: -4 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="
+                          mt-1 flex items-center gap-2 rounded-lg
+                          bg-gray-100 px-3 py-2
+                          text-sm text-gray-700
+                          dark:bg-gray-800/80 dark:text-gray-300
+                        "
+                      >
+                        <span
+                          className="
+                            inline-flex h-5 w-5 items-center justify-center
+                            rounded-full bg-gray-300
+                            text-xs font-bold text-gray-800
+                            dark:bg-gray-700 dark:text-gray-200
+                          "
+                        >
+                          !
+                        </span>
+                        {errors.message}
+                      </motion.p>
+                    )}
                   </div>
 
                   <Button
