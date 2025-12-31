@@ -16,7 +16,6 @@ const HeroSection = () => {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
-
           {/* Left Content */}
           <motion.div
             className="space-y-8"
@@ -75,30 +74,30 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
             >
-            <Button
-              size="lg"
-              onClick={() => scrollToSection('projects')}
-              className="bg-gradient-to-r from-blue-700 to-blue-600 group"
-            >
-              {t.home.projectsBtn}
-              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-            </Button>
+              <Button
+                size="lg"
+                onClick={() => scrollToSection('projects')}
+                className="bg-gradient-to-r from-blue-700 to-blue-600 group"
+              >
+                {t.home.projectsBtn}
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
 
-            <a
+              <a
                 href="/cv/Juninho_RAMEFISON_CV.pdf"
                 download
                 target="_blank"
                 rel="noopener noreferrer"
               >
-              <Button
-                size="lg"
-                variant="outline"
-                className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
-              >
-                <Download className="mr-2 h-5 w-5" />
-                {t.home.downloadCv}
-              </Button>
-            </a>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
+                >
+                  <Download className="mr-2 h-5 w-5" />
+                  {t.home.downloadCv}
+                </Button>
+              </a>
             </motion.div>
           </motion.div>
 
@@ -122,7 +121,6 @@ const HeroSection = () => {
               </div>
             </div>
           </motion.div>
-
         </div>
       </div>
     </section>

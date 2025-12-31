@@ -11,7 +11,7 @@ export default function CitationSection() {
 
   return (
     <section
-      id='citation'
+      id="citation"
       className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white 
                  dark:from-gray-950 dark:to-gray-900"
     >

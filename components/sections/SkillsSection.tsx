@@ -46,24 +46,24 @@ export default function SkillsSection() {
 
               <ul className="space-y-3">
                 {cat.skills.map((skill) => (
-                  <li
+                    <li
                     key={skill.name}
                     className={`flex items-center justify-between px-4 py-2 rounded-lg
-                    transition-transform duration-200 ease-out
-                    hover:scale-105 hover:shadow-md
-                    ${
+                      transition-transform duration-200 ease-out
+                      hover:scale-105 hover:shadow-md
+                      ${
                       skill.primary
                         ? 'bg-blue-50 text-blue-700 font-semibold dark:bg-blue-950 dark:text-blue-300'
                         : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                    }`}
-                  >
+                      }`}
+                    >
                     {skill.name}
                     {skill.primary && (
                       <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                        Main
+                      Main
                       </span>
                     )}
-                  </li>
+                    </li>
                 ))}
               </ul>
             </motion.div>

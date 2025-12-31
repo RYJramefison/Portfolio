@@ -104,7 +104,7 @@ const Header = () => {
               <Button className="bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
                 {t?.common?.cv}
               </Button>
-          </a>
+            </a>
           </div>
 
           {/* Mobile menu button */}
