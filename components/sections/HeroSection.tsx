@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
+import { scrollToSection } from '@/components/lib/scrollToSection'
 
 const HeroSection = () => {
   const { t } = useLang()
@@ -74,13 +75,14 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1, duration: 0.6 }}
             >
-              <Button
-                size="lg"
-                className="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-700 hover:to-blue-800 group"
-              >
-                {t.home.projectsBtn}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
+            <Button
+              size="lg"
+              onClick={() => scrollToSection('projects')}
+              className="bg-gradient-to-r from-blue-700 to-blue-600 group"
+            >
+              {t.home.projectsBtn}
+              <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
 
               <Button
                 size="lg"
