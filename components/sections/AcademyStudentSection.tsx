@@ -55,66 +55,80 @@ export default function AcademyStudentSection() {
         <div className="relative flex flex-col lg:flex-row items-center justify-center gap-20">
 
           {/* Center Profile Card */}
-          <motion.div
-            initial={{ scale: 0.85, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.7, ease: 'easeOut' }}
-            viewport={{ once: true }}
-            className="relative z-10 w-[22rem] h-[22rem] rounded-3xl
-                      bg-white/80 dark:bg-slate-900/80
-                      backdrop-blur-xl border border-slate-200/60 dark:border-slate-800
-                      shadow-[0_20px_40px_-20px_rgba(13,148,136,0.35)]
-                      flex items-center justify-center text-center px-10"
-          >
-            <div className="absolute inset-0 rounded-3xl
-                bg-gradient-to-r from-blue-500/10 to-emerald-500/10
-                blur-3xl opacity-30 -z-10" />
+          <div className="relative w-[22rem] h-[22rem]">
+  {/* SHADOW BLEU — EN DEHORS DU MOTION */}
+  <div
+    className="
+      pointer-events-none
+      absolute inset-0
+      rounded-3xl
+      bg-blue-500/35
+      blur-[1rem]
+      opacity-25 dark:opacity-50
+    "
+  />
 
-            <div className="space-y-4">
-            
+  {/* MOTION CARD */}
+  <motion.div
+    initial={{ scale: 0.85, opacity: 0 }}
+    whileInView={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.7, ease: 'easeOut' }}
+    viewport={{ once: true }}
+    className="
+      relative z-10
+      w-full h-full
+    "
+  >
+    <div
+      className="
+        w-full h-full
+        rounded-3xl
+        bg-white dark:bg-slate-900
+        backdrop-blur-xl
+        border border-slate-200/60 dark:border-slate-800
+        shadow-xl dark:shadow-2xl
+        flex items-center justify-center text-center px-10
+      "
+    >
+      <div className="space-y-4">
+        <h3
+          className="
+            text-[2.08rem]
+            font-semibold
+            tracking-wide
+            font-[Poppins]
+            bg-gradient-to-r
+            from-gray-900 to-gray-600
+            dark:from-white dark:to-gray-300
+            bg-clip-text text-transparent
+          "
+        >
+          {t.academy.profile.title}
+        </h3>
+
+        <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100 shadow-sm">
+          {t.academy.profile.badge}
+        </span>
+
+        <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
+          {t.academy.profile.description}
+        </p>
+
+        <div className="flex justify-center gap-3 pt-2">
+          {[...Array(3)].map((_, i) => (
+            <span
+              key={i}
+              className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 animate-pulse"
+              style={{ animationDelay: `${i * 0.3}s` }}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  </motion.div>
+</div>
 
 
-            <h3
-  className="
-    text-[2.08rem]
-    font-semibold
-    tracking-wide
-    font-[Poppins]
-    bg-gradient-to-r from-gray-900 to-gray-600
-    dark:from-white dark:to-gray-300
-    bg-clip-text text-transparent
-  "
->
-  {t.academy.profile.title}
-</h3>
-
-            <span className="inline-block px-4 py-1 text-xs font-semibold
-                 rounded-full
-                 shadow-md bg-gray-100
-                 text-black shadow-sm">
-              {t.academy.profile.badge}
-            </span>
-
-            {/* <div className="mx-auto w-16 h-1 rounded-full
-                bg-gradient-to-r from-blue-500 to-blue-500" /> */}
-
-              <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
-                {t.academy.profile.description}
-              </p>
-
-              <div className="flex justify-center gap-3 pt-2">
-                {[...Array(3)].map((_, i) => (
-                  <span
-                    key={i}
-                    className="w-2.5 h-2.5 rounded-full
-                               bg-gradient-to-r from-blue-500 to-teal-500
-                               animate-pulse"
-                    style={{ animationDelay: `${i * 0.3}s` }}
-                  />
-                ))}
-              </div>
-            </div>
-          </motion.div>
 
           {/* Timeline */}
           <div className="relative max-w-md pl-12">
