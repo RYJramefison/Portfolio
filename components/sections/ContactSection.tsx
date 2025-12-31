@@ -14,6 +14,7 @@ import emailjs from '@emailjs/browser'
 
 const ContactSection = () => {
   const { t } = useLang()
+  const [status, setStatus] = useState<'success' | 'error' | null>(null)
 
   const contactInfo = [
     {
@@ -52,6 +53,7 @@ const ContactSection = () => {
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+    setStatus(null)
   
     emailjs
       .send(
@@ -61,7 +63,7 @@ const ContactSection = () => {
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       .then(() => {
-        alert('Message envoyé avec succès ✅')
+        setStatus('success')
         setFormData({
           firstName: '',
           lastName: '',
@@ -69,9 +71,12 @@ const ContactSection = () => {
           subject: '',
           message: '',
         })
+  
+        setTimeout(() => setStatus(null), 4000)
       })
       .catch(() => {
-        alert('Erreur lors de l’envoi ❌')
+        setStatus('error')
+        setTimeout(() => setStatus(null), 4000)
       })
   }
 
@@ -196,6 +201,37 @@ const ContactSection = () => {
           >
             <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
               <CardContent className="p-8">
+                {status && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className={`mb-6 rounded-xl border px-4 py-3 flex items-start gap-3
+                        ${
+                          status === 'success'
+                            ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
+                            : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
+                        }
+                      `}
+                    >
+                      <div className="mt-0.5">
+                        {status === 'success' ? '✅' : '❌'}
+                      </div>
+
+                      <div>
+                        <p className="font-semibold">
+                          {status === 'success'
+                            ? 'Message envoyé avec succès'
+                            : 'Erreur lors de l’envoi'}
+                        </p>
+                        <p className="text-sm opacity-90">
+                          {status === 'success'
+                            ? 'Merci pour votre message. Je vous répondrai très prochainement.'
+                            : 'Une erreur est survenue. Veuillez réessayer plus tard.'}
+                        </p>
+                      </div>
+                    </motion.div>
+                  )}
                 <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
