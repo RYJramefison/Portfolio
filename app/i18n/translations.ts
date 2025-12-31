@@ -22,7 +22,7 @@ export const translations = {
       greeting: 'Bonjour, je suis',
       job: 'Développeur Web Full Stack',
       description:
-        'Je crée des expériences web modernes, performantes et sécurisées.',
+        'Développeur web en formation (L3), je crée des applications web modernes, sécurisées et performantes. Je participe aux différentes étapes du projet, notamment la conception et le développement. Orienté qualité et simplicité, mon objectif est de proposer des solutions fiables et intuitives.',
       projectsBtn: 'Voir mes projets',
       downloadCv: 'Télécharger CV',
     },
@@ -75,26 +75,26 @@ export const translations = {
       cta: 'Voir tous les projets',
       projects: [
         {
-          title: 'J-CRAM',
-          description: 'Site de réservation de voyages.',
-          image: 'J CRAM.png',
-          tags: ['HTML', 'CSS', 'JavaScript'],
-          category: 'Site E-commerce',
+          title: 'Restaurant API',
+          description: 'API backend pour la gestion des commandes et des stocks en restauration, avec vérification automatique des ingrédients.',
+          image: 'climat et tourisme.png',
+          tags: ['Spring Boot', 'PostgreSQL', 'JDBC', 'Java 21'],
+          category: 'API Backend',
         },
         {
-          title: 'TAPAKILA',
+          title: 'Prévision météo',
           description:
-            'Plateforme de découverte et réservation de billets pour des événements.',
-          image: 'Patrimoine economique.png',
-          tags: ['React', 'Next.js', 'Tailwind', 'PostgreSQL'],
+            'Analyse de données climatiques pour recommander les meilleures périodes de voyage, avec pipeline ETL et visualisation via Power BI.',
+          image: 'climat et tourisme.png',
+          tags: ['Python', 'Apache Airflow', 'Jupyter', 'PowerBI'],
           category: 'Plateforme',
         },
         {
-          title: 'Restaurant API',
+          title: 'Gestion de patrimoine',
           description:
-            'API de gestion des commandes, stocks et prix des plats.',
-          image: 'climat et tourisme.png',
-          tags: ['Java', 'PostgreSQL', 'JDBC'],
+            'Système CRUD de gestion de patrimoine personnel avec calcul des amortissements et visualisation graphique de l’évolution dans le temps.',
+          image: 'Patrimoine economique.png',
+          tags: ['React.js', 'Express.js', 'Bootstrap'],
           category: 'API Backend',
         },
       ],
@@ -205,7 +205,7 @@ export const translations = {
       greeting: 'Hello, I am',
       job: 'Full Stack Web Developer',
       description:
-        'I build modern, performant and secure web experiences.',
+        'Web developer in training (Bachelor’s degree – Year 3), I build modern, secure, and high-performance web applications. I contribute to different stages of a project, particularly design and development. Focused on quality and simplicity, my goal is to deliver reliable and intuitive solutions.',
       projectsBtn: 'View my projects',
       downloadCv: 'Download CV',
     },
@@ -252,32 +252,33 @@ export const translations = {
 
     projects: {
       label: 'Personal Project',
-      title: 'My completed projects',
+      title: 'My Completed Projects',
       description:
         'Explore a selection of personal projects showcasing my creativity and technical skills.',
       cta: 'View all projects',
       projects: [
         {
-          title: 'J-CRAM',
-          description: 'Travel booking website.',
-          image: 'J CRAM.png',
-          tags: ['HTML', 'CSS', 'JavaScript'],
-          category: 'E-commerce Website',
+          title: 'Restaurant API',
+          description:
+            'Backend API for managing restaurant orders and inventory, with automatic ingredient availability checks.',
+          image: 'climat et tourisme.png',
+          tags: ['Spring Boot', 'PostgreSQL', 'JDBC', 'Java 21'],
+          category: 'Backend API',
         },
         {
-          title: 'TAPAKILA',
+          title: 'Weather Forecast',
           description:
-            'Event discovery and ticket booking platform.',
-          image: 'Patrimoine economique.png',
-          tags: ['React', 'Next.js', 'Tailwind', 'PostgreSQL'],
+            'Climate data analysis to recommend the best travel periods, with an automated ETL pipeline and data visualization using Power BI.',
+          image: 'climat et tourisme.png',
+          tags: ['Python', 'Apache Airflow', 'Jupyter', 'Power BI'],
           category: 'Platform',
         },
         {
-          title: 'Restaurant API',
+          title: 'Asset Management',
           description:
-            'API managing orders, stock and pricing.',
-          image: 'climat et tourisme.png',
-          tags: ['Java', 'PostgreSQL', 'JDBC'],
+            'CRUD system for personal asset management, including depreciation calculations and graphical visualization of asset evolution over time.',
+          image: 'Patrimoine economique.png',
+          tags: ['React.js', 'Express.js', 'Bootstrap'],
           category: 'Backend API',
         },
       ],
