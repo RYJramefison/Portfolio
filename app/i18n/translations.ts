@@ -46,22 +46,32 @@ export const translations = {
           icon: '💻',
           description: 'Développement d’interfaces performantes et dynamiques.',
           skills: [
-            { name: 'TypeScript', primary: true },
+            { name: 'Next.js', primary: true},
             { name: 'React' },
-            { name: 'Next.js' },
-            { name: 'Three.js' },
+            { name: 'TypeScript' },
             { name: 'Tailwind CSS' },
+            { name: 'Bootstrap' },
           ],
         },
         {
           title: 'Back-end',
-          icon: '⚙️',
-          description: 'Conception d’APIs robustes et scalables.',
+          icon: '🛠️',
+          description: 'Architecture et développement d’APIs backend fiables, scalables et maintenables.',
           skills: [
             { name: 'Java', primary: true },
             { name: 'PostgreSQL', primary: true },
             { name: 'Node.js' },
+            { name: 'Express.js' },
+          ],
+        },
+        {
+          title: 'Outils & Autres',
+          icon: '⚙️',
+          description: 'Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.',
+          skills: [
             { name: 'Docker' },
+            { name: 'Power BI' },
+            { name: 'GIT' },
           ],
         },
       ],
@@ -108,26 +118,26 @@ export const translations = {
         badge: 'Profil',
         title: 'Academy Student',
         description:
-          'Développeur en formation, orienté solutions modernes, performantes et sécurisées.',
+          'Développeur en formation, focalisé sur des solutions modernes et performantes.',
       },
       steps: [
         {
           title: 'Formation universitaire',
           description:
-            'Étudiant en informatique à HEI, avec une base solide en développement et systèmes informatiques.',
+            'Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), disposant de solides bases en développement et en systèmes informatiques.',
           image: 'HEI.png', 
         },
         {
           title: 'Baccalauréat',
           description:
-            'Obtention du Baccalauréat Scientifique – Série D au Lycée MIRVA Amboniloha en 2023.',
+            'Obtention du baccalauréat scientifique (Série D) en 2023 au lycée MIRVA Alarobia Amboniloha.',
           image: 'mirva.jpg', 
         },
         
         {
           title: 'Centres d’intérêt',
           description:
-            'Cybersécurité, échecs, voyages, musique et sport automobile.',
+            'Je m’intéresse au football, à la natation, à la musique, au beatbox et aux échecs.',
           image: 'Hobbies.jpeg', 
         },
       ],
@@ -153,14 +163,14 @@ export const translations = {
     },
     contact: {
       badge: 'Contact',
-      title: 'Démarrons votre projet ensemble',
+      title: 'Entrons en contact',
       description:
-        'Prêt à concrétiser vos idées ? Contactez-moi pour discuter de votre projet et découvrir comment je peux vous aider.',
-    
+        'Un premier échange pour partager des idées, collaborer ou simplement faire connaissance.',
+
       stayInTouch: {
         title: 'Restons en contact',
         description:
-          'N’hésitez pas à me contacter pour toute question ou demande de devis. Je réponds généralement sous 24 heures.',
+          'Pour toute question, proposition ou opportunité future, vous pouvez me joindre à tout moment. Je réponds généralement sous 24 heures.',
       },
     
       infos: {
@@ -212,12 +222,12 @@ export const translations = {
 
     skills: {
       title: 'Skills',
-      subtitle: 'What I do',
+      subtitle: 'What I Do',
       categories: [
         {
           title: 'Design',
           icon: '🎨',
-          description: 'Creating modern and intuitive interfaces.',
+          description: 'Designing modern and intuitive user interfaces.',
           skills: [
             { name: 'Figma', primary: true },
             { name: 'Material UI' },
@@ -227,24 +237,36 @@ export const translations = {
         {
           title: 'Front-end',
           icon: '💻',
-          description: 'Developing performant and dynamic interfaces.',
+          description: 'Developing high-performance and dynamic user interfaces.',
           skills: [
-            { name: 'TypeScript', primary: true },
+            { name: 'Next.js', primary: true },
             { name: 'React' },
-            { name: 'Next.js' },
-            { name: 'Three.js' },
+            { name: 'TypeScript' },
             { name: 'Tailwind CSS' },
+            { name: 'Bootstrap' },
           ],
         },
         {
           title: 'Back-end',
-          icon: '⚙️',
-          description: 'Designing robust and scalable APIs.',
+          icon: '🛠️',
+          description:
+            'Designing and developing reliable, scalable, and maintainable backend APIs.',
           skills: [
             { name: 'Java', primary: true },
             { name: 'PostgreSQL', primary: true },
             { name: 'Node.js' },
+            { name: 'Express.js' },
+          ],
+        },
+        {
+          title: 'Tools & Others',
+          icon: '⚙️',
+          description:
+            'Using modern tools for development, data analysis, and collaboration.',
+          skills: [
             { name: 'Docker' },
+            { name: 'Power BI' },
+            { name: 'Git' },
           ],
         },
       ],
@@ -286,34 +308,33 @@ export const translations = {
 
     background: {
       badge: 'My Journey',
-      title: 'My academic background',
+      title: 'My Academic Background',
       description:
-        'A clear and structured overview of my academic and personal growth',
+        'A clear and structured overview of my academic and personal journey.',
       profile: {
         badge: 'Profile',
-        title: 'Academy Student',
+        title: 'Academic Student',
         description:
-          'Developer in training, focused on modern, performant and secure solutions.',
+          'Developer in training, focused on building modern and high-performance solutions.',
       },
       steps: [
         {
           title: 'University Education',
           description:
-            'Computer science student at HEI with a strong foundation in development and systems.',
-          image: 'HEI.png', 
+            'Computer science student (Bachelor’s degree – Year 3) at HEI (Haute École d’Informatique), with solid foundations in development and computer systems.',
+          image: 'HEI.png',
         },
         {
           title: 'High School Diploma',
           description:
-            'Obtained a Scientific High School Diploma – Series D at Lycée MIRVA Amboniloha in 2023.',
-          image: 'mirva.jpg', 
+            'Scientific high school diploma (Series D) obtained in 2023 at MIRVA Alarobia Amboniloha High School.',
+          image: 'mirva.jpg',
         },
-        
         {
           title: 'Interests',
           description:
-            'Cybersecurity, chess, travel, music and motorsport.',
-          image: 'Hobbies.jpeg', 
+            'I am interested in football, swimming, music, beatboxing, and chess.',
+          image: 'Hobbies.jpeg',
         },
       ],
     },
@@ -325,7 +346,7 @@ export const translations = {
       quote: {
         lines: [
           'Let the moon be your mark.',
-          'Failure there is no true descent,',
+          'A failure there is no true descent,',
           'but a silent promotion to the starry court.',
         ],
       },
@@ -339,14 +360,14 @@ export const translations = {
     },
     contact: {
       badge: 'Contact',
-      title: 'Let’s build your project together',
+      title: 'Get in Touch',
       description:
-        'Ready to bring your ideas to life? Contact me to discuss your project and see how I can help.',
-    
+        'A first conversation to share ideas, collaborate, or simply get to know each other.',
+
       stayInTouch: {
-        title: 'Let’s stay in touch',
+        title: 'Stay in Touch',
         description:
-          'Feel free to reach out for any questions or project inquiries. I usually reply within 24 hours.',
+          'For any questions, proposals, or future opportunities, feel free to reach out at any time. I usually respond within 24 hours.',
       },
     
       infos: {
