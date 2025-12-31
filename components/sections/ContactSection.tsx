@@ -9,6 +9,8 @@ import { motion } from 'framer-motion'
 import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 import Link from 'next/link'
 import { useLang } from '@/app/providers/lang-provider'
+import { useState } from 'react'
+import emailjs from '@emailjs/browser'
 
 const ContactSection = () => {
   const { t } = useLang()
@@ -33,6 +35,45 @@ const ContactSection = () => {
       href: '#'
     }
   ]
+
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
+  
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value })
+  }
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+  
+    emailjs
+      .send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formData,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      .then(() => {
+        alert('Message envoyé avec succès ✅')
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          subject: '',
+          message: '',
+        })
+      })
+      .catch(() => {
+        alert('Erreur lors de l’envoi ❌')
+      })
+  }
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
@@ -155,19 +196,29 @@ const ContactSection = () => {
           >
             <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
               <CardContent className="p-8">
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                         {t.contact.form.firstName}
                       </label>
-                      <Input placeholder={t.contact.form.firstNamePlaceholder} />
+                      <Input
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        placeholder={t.contact.form.firstNamePlaceholder}
+                      />
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                         {t.contact.form.lastName}
                       </label>
-                      <Input placeholder={t.contact.form.lastNamePlaceholder} />
+                      <Input 
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        placeholder={t.contact.form.lastNamePlaceholder}
+                       />
                     </div>
                   </div>
 
@@ -175,14 +226,23 @@ const ContactSection = () => {
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.email}
                     </label>
-                    <Input type="email" placeholder={t.contact.form.emailPlaceholder} />
+                    <Input 
+                      name="email"
+                      type="email" 
+                      value={formData.email}
+                      onChange={handleChange}
+                      placeholder={t.contact.form.emailPlaceholder} />
                   </div>
 
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.subject}
                     </label>
-                    <Input placeholder={t.contact.form.subjectPlaceholder} />
+                    <Input 
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder={t.contact.form.subjectPlaceholder} />
                   </div>
 
                   <div className="space-y-2">
@@ -190,6 +250,9 @@ const ContactSection = () => {
                       {t.contact.form.message}
                     </label>
                     <Textarea
+                      name="message"
+                      value={formData.message}
+                      onChange={handleChange}
                       rows={6}
                       placeholder={t.contact.form.messagePlaceholder}
                       className="resize-none"
