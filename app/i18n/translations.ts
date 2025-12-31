@@ -37,8 +37,8 @@ export const translations = {
           description: "Création d’interfaces modernes et intuitives.",
           skills: [
             { name: "Figma", primary: true },
-            { name: "Material UI" },
-            { name: "Styled Components" },
+            { name: "Material UI", primary: false },
+            { name: "Styled Components", primary: false },
           ],
         },
         {
@@ -47,10 +47,10 @@ export const translations = {
           description: "Développement d’interfaces performantes et dynamiques.",
           skills: [
             { name: "Next.js", primary: true },
-            { name: "React" },
-            { name: "TypeScript" },
-            { name: "Tailwind CSS" },
-            { name: "Bootstrap" },
+            { name: "React", primary: false },
+            { name: "TypeScript", primary: false },
+            { name: "Tailwind CSS", primary: false },
+            { name: "Bootstrap", primary: false },
           ],
         },
         {
@@ -61,8 +61,8 @@ export const translations = {
           skills: [
             { name: "Java", primary: true },
             { name: "PostgreSQL", primary: true },
-            { name: "Node.js" },
-            { name: "Express.js" },
+            { name: "Node.js", primary: false },
+            { name: "Express.js", primary: false },
           ],
         },
         {
@@ -70,7 +70,11 @@ export const translations = {
           icon: "⚙️",
           description:
             "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
-          skills: [{ name: "Docker" }, { name: "Power BI" }, { name: "GIT" }],
+          skills: [
+            { name: "Docker", primary: false },
+            { name: "Power BI", primary: false },
+            { name: "GIT", primary: false },
+          ],
         },
       ],
     },
@@ -230,8 +234,8 @@ export const translations = {
           description: "Designing modern and intuitive user interfaces.",
           skills: [
             { name: "Figma", primary: true },
-            { name: "Material UI" },
-            { name: "Styled Components" },
+            { name: "Material UI", primary: false },
+            { name: "Styled Components", primary: false },
           ],
         },
         {
@@ -241,10 +245,10 @@ export const translations = {
             "Developing high-performance and dynamic user interfaces.",
           skills: [
             { name: "Next.js", primary: true },
-            { name: "React" },
-            { name: "TypeScript" },
-            { name: "Tailwind CSS" },
-            { name: "Bootstrap" },
+            { name: "React", primary: false },
+            { name: "TypeScript", primary: false },
+            { name: "Tailwind CSS", primary: false },
+            { name: "Bootstrap", primary: false },
           ],
         },
         {
@@ -255,8 +259,8 @@ export const translations = {
           skills: [
             { name: "Java", primary: true },
             { name: "PostgreSQL", primary: true },
-            { name: "Node.js" },
-            { name: "Express.js" },
+            { name: "Node.js", primary: false },
+            { name: "Express.js", primary: false },
           ],
         },
         {
@@ -264,7 +268,11 @@ export const translations = {
           icon: "⚙️",
           description:
             "Using modern tools for development, data analysis, and collaboration.",
-          skills: [{ name: "Docker" }, { name: "Power BI" }, { name: "Git" }],
+          skills: [
+            { name: "Docker", primary: false },
+            { name: "Power BI", primary: false },
+            { name: "Git", primary: false },
+          ],
         },
       ],
     },
