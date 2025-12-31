@@ -63,7 +63,7 @@ export default function AcademyStudentSection() {
             className="relative z-10 w-[22rem] h-[22rem] rounded-3xl
                       bg-white/80 dark:bg-slate-900/80
                       backdrop-blur-xl border border-slate-200/60 dark:border-slate-800
-                      shadow-[0_20px_40px_-15px_rgba(13,148,136,0.35)]
+                      shadow-[0_20px_40px_-20px_rgba(13,148,136,0.35)]
                       flex items-center justify-center text-center px-10"
           >
             <div className="absolute inset-0 rounded-3xl
@@ -75,17 +75,23 @@ export default function AcademyStudentSection() {
 
 
             <h3
-              className="text-3xl tracking-wide
-                        bg-gradient-to-r from-blue-600 to-blue-500
-                        bg-clip-text text-transparent"
-            >
-              {t.academy.profile.title}
-            </h3>
+  className="
+    text-[2.08rem]
+    font-semibold
+    tracking-wide
+    font-[Poppins]
+    bg-gradient-to-r from-gray-900 to-gray-600
+    dark:from-white dark:to-gray-300
+    bg-clip-text text-transparent
+  "
+>
+  {t.academy.profile.title}
+</h3>
 
             <span className="inline-block px-4 py-1 text-xs font-semibold
                  rounded-full
-                 shadow-md bg-blue-600
-                 text-white shadow-sm">
+                 shadow-md bg-gray-100
+                 text-black shadow-sm">
               {t.academy.profile.badge}
             </span>
 
