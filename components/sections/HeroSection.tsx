@@ -10,7 +10,7 @@ const HeroSection = () => {
 
   return (
     <section
-      id="hero"
+      id="home"
       className="pt-16 pb-20 overflow-hidden bg-white dark:bg-gray-950"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -31,7 +31,7 @@ const HeroSection = () => {
                 className="flex items-center space-x-2"
               >
                 <span className="text-gray-600 dark:text-gray-400">
-                  {t.hero.greeting} 👋
+                  {t.home.greeting} 👋
                 </span>
               </motion.div>
 
@@ -55,7 +55,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6, duration: 0.6 }}
               >
-                {t.hero.job}
+                {t.home.job}
               </motion.p>
 
               <motion.p
@@ -64,7 +64,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
-                {t.hero.description}
+                {t.home.description}
               </motion.p>
             </div>
 
@@ -78,7 +78,7 @@ const HeroSection = () => {
                 size="lg"
                 className="bg-gradient-to-r from-blue-700 to-blue-600 hover:from-blue-700 hover:to-blue-800 group"
               >
-                {t.hero.projectsBtn}
+                {t.home.projectsBtn}
                 <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
               </Button>
 
@@ -88,7 +88,7 @@ const HeroSection = () => {
                 className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
               >
                 <Download className="mr-2 h-5 w-5" />
-                {t.hero.downloadCv}
+                {t.home.downloadCv}
               </Button>
             </motion.div>
           </motion.div>

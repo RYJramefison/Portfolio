@@ -9,10 +9,10 @@ import { useLang } from '@/app/providers/lang-provider'
 
 const ProjectSection = () => {
   const { t } = useLang()
-  const portfolio = t.portfolio
+  const projects = t.projects
 
   return (
-    <section id="portfolio" className="py-20 bg-white dark:bg-gray-950">
+    <section id="projects" className="py-20 bg-white dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4">
         {/* Header */}
         <motion.div
@@ -22,19 +22,19 @@ const ProjectSection = () => {
           viewport={{ once: true }}
         >
           <p className="text-blue-600 font-semibold text-lg mb-2">
-            {portfolio.label}
+            {projects.label}
           </p>
           <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            {portfolio.title}
+            {projects.title}
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {portfolio.description}
+            {projects.description}
           </p>
         </motion.div>
 
         {/* Projects */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-  {portfolio.projects.map((project, index) => (
+  {projects.projects.map((project, index) => (
     <motion.div
     key={project.title}
     initial={{ opacity: 0, y: 30 }}
@@ -196,7 +196,7 @@ const ProjectSection = () => {
         {/* CTA */}
         <div className="text-center mt-12">
           <Button size="lg" variant="outline">
-            {portfolio.cta}
+            {projects.cta}
           </Button>
         </div>
       </div>

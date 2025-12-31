@@ -18,7 +18,7 @@ export default function AcademyStudentSection() {
   //   icon: icons[index],
   // }))
 
-  const steps = t.academy.steps.map((step, index) => ({
+  const steps = t.background.steps.map((step, index) => ({
     id: index + 1,
     title: step.title,
     description: step.description,
@@ -27,7 +27,7 @@ export default function AcademyStudentSection() {
   }))
 
   return (
-    <section className="py-28 bg-white relative overflow-hidden dark:bg-gray-950">
+    <section id="background" className="py-28 bg-white relative overflow-hidden dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4">
 
         {/* Header */}
@@ -39,15 +39,15 @@ export default function AcademyStudentSection() {
           viewport={{ once: true }}
         >
           <p className="text-blue-600 font-semibold text-lg mb-2">
-            {t.academy.badge}
+            {t.background.badge}
           </p>
 
           <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            {t.academy.title}
+            {t.background.title}
           </h2>
 
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
-            {t.academy.description}
+            {t.background.description}
           </p>
         </motion.div>
 
@@ -103,15 +103,15 @@ export default function AcademyStudentSection() {
             bg-clip-text text-transparent
           "
         >
-          {t.academy.profile.title}
+          {t.background.profile.title}
         </h3>
 
         <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100 shadow-sm">
-          {t.academy.profile.badge}
+          {t.background.profile.badge}
         </span>
 
         <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
-          {t.academy.profile.description}
+          {t.background.profile.description}
         </p>
 
         <div className="flex justify-center gap-3 pt-2">

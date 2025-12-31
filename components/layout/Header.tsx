@@ -11,9 +11,9 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
-  const navLinks = ['hero', 'about', 'skills', 'services', 'portfolio', 'contact']
+  const navLinks = ['home', 'projects', 'background', 'skills', 'citation', 'contact']
 
-  /* Scroll effect */
+  /* Scroll navbar background */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
@@ -42,9 +42,24 @@ const Header = () => {
     localStorage.setItem('lang', newLang)
   }
 
+  /* ✅ Smooth scroll with offset */
+  const handleScrollTo = (id: string) => {
+    const element = document.getElementById(id)
+    if (!element) return
+
+    const headerOffset = 80
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    })
+  }
+
   return (
     <header
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-lg'
           : 'bg-transparent'
@@ -60,13 +75,13 @@ const Header = () => {
           {/* Desktop nav */}
           <nav className="hidden md:flex space-x-8">
             {(t?.nav || []).map((label, i) => (
-              <a
+              <button
                 key={label}
-                href={`#${navLinks[i]}`}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600"
+                onClick={() => handleScrollTo(navLinks[i])}
+                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition"
               >
                 {label}
-              </a>
+              </button>
             ))}
           </nav>
 
@@ -87,7 +102,11 @@ const Header = () => {
 
           {/* Mobile menu button */}
           <div className="md:hidden">
-            <Button variant="ghost" size="icon" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
               {isMenuOpen ? <X /> : <Menu />}
             </Button>
           </div>
@@ -95,16 +114,18 @@ const Header = () => {
 
         {/* Mobile menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white dark:bg-gray-900">
+          <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
             {(t?.nav || []).map((label, i) => (
-              <a
+              <button
                 key={label}
-                href={`#${navLinks[i]}`}
-                className="block px-4 py-2"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  handleScrollTo(navLinks[i])
+                  setIsMenuOpen(false)
+                }}
+                className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 transition"
               >
                 {label}
-              </a>
+              </button>
             ))}
 
             <div className="flex gap-2 px-4 py-3">

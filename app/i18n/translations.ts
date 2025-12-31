@@ -4,10 +4,10 @@ export const translations = {
   fr: {
     nav: [
       'Accueil',
-      'À propos',
+      'Projets',
+      'Parcours',
       'Compétences',
-      'Services',
-      'Portfolio',
+      'Citation',
       'Contact',
     ],
 
@@ -18,7 +18,7 @@ export const translations = {
       code: 'Code',
     },
 
-    hero: {
+    home: {
       greeting: 'Bonjour, je suis',
       job: 'Développeur Web Full Stack',
       description:
@@ -67,7 +67,7 @@ export const translations = {
       ],
     },
 
-    portfolio: {
+    projects: {
       label: 'Projet personnel',
       title: 'Mes projets réalisés',
       description:
@@ -99,7 +99,7 @@ export const translations = {
         },
       ],
     },
-    academy: {
+    background: {
       badge: 'Mon Parcours',
       title: 'Mes parcours académiques',
       description:
@@ -193,7 +193,7 @@ export const translations = {
   },
 
   en: {
-    nav: ['Home', 'About', 'Skills', 'Services', 'Portfolio', 'Contact'],
+    nav: ['Home','projects', 'Background', 'Skills', 'Citation', 'Contact'],
 
     common: {
       cv: 'Download CV',
@@ -202,7 +202,7 @@ export const translations = {
       code: 'Code',
     },
 
-    hero: {
+    home: {
       greeting: 'Hello, I am',
       job: 'Full Stack Web Developer',
       description:
@@ -251,7 +251,7 @@ export const translations = {
       ],
     },
 
-    portfolio: {
+    projects: {
       label: 'Personal Project',
       title: 'My completed projects',
       description:
@@ -284,7 +284,7 @@ export const translations = {
       ],
     },
 
-    academy: {
+    background: {
       badge: 'My Journey',
       title: 'My academic background',
       description:
