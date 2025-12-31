@@ -9,12 +9,14 @@ import { motion } from 'framer-motion'
 import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 import Link from 'next/link'
 import { useLang } from '@/app/providers/lang-provider'
-import { useState } from 'react'
+import { useState, useEffect  } from 'react'
 import emailjs from '@emailjs/browser'
 
 const ContactSection = () => {
   const { t } = useLang()
   const [status, setStatus] = useState<'success' | 'error' | null>(null)
+  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isLoading, setIsLoading] = useState(false)
 
   const contactInfo = [
     {
@@ -37,6 +39,28 @@ const ContactSection = () => {
     }
   ]
 
+  useEffect(() => {
+    if (!status) return
+  
+    const duration = status === 'success' ? 1500 : 3000
+  
+    const timer = setTimeout(() => {
+      setStatus(null)
+    }, duration)
+  
+    return () => clearTimeout(timer)
+  }, [status])
+
+  useEffect(() => {
+    if (Object.keys(errors).length === 0) return
+  
+    const timer = setTimeout(() => {
+      setErrors({})
+    }, 1500)
+  
+    return () => clearTimeout(timer)
+  }, [errors])
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -48,12 +72,28 @@ const ContactSection = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+  
+    setFormData(prev => ({ ...prev, [name]: value }))
+  
+    // 🔥 supprimer l’erreur du champ en cours
+    if (errors[name]) {
+      setErrors(prev => {
+        const newErrors = { ...prev }
+        delete newErrors[name]
+        return newErrors
+      })
+    }
   }
+  
   
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setStatus(null)
+  
+    if (!validateForm()) return
+  
+    setIsLoading(true)
   
     emailjs
       .send(
@@ -71,13 +111,33 @@ const ContactSection = () => {
           subject: '',
           message: '',
         })
-  
-        setTimeout(() => setStatus(null), 4000)
+        setErrors({})
       })
       .catch(() => {
         setStatus('error')
-        setTimeout(() => setStatus(null), 4000)
       })
+      .finally(() => {
+        setIsLoading(false)
+        // setTimeout(() => setStatus(null), 1500)
+      })
+  }
+
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {}
+  
+    if (!formData.firstName.trim()) newErrors.firstName = 'Champ requis'
+    if (!formData.lastName.trim()) newErrors.lastName = 'Champ requis'
+    if (!formData.email.trim()) {
+      newErrors.email = 'Email requis'
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      newErrors.email = 'Email invalide'
+    }
+    if (!formData.subject.trim()) newErrors.subject = 'Sujet requis'
+    if (!formData.message.trim()) newErrors.message = 'Message requis'
+  
+    setErrors(newErrors)
+  
+    return Object.keys(newErrors).length === 0
   }
 
   return (
@@ -244,6 +304,19 @@ const ContactSection = () => {
                         onChange={handleChange}
                         placeholder={t.contact.form.firstNamePlaceholder}
                       />
+                      {errors.firstName && (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
+  >
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
+      !
+    </span>
+    {errors.firstName}
+  </motion.p>
+)}
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
@@ -255,6 +328,19 @@ const ContactSection = () => {
                         onChange={handleChange}
                         placeholder={t.contact.form.lastNamePlaceholder}
                        />
+                      {errors.lastName && (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
+  >
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
+      !
+    </span>
+    {errors.lastName}
+  </motion.p>
+)}
                     </div>
                   </div>
 
@@ -268,6 +354,19 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t.contact.form.emailPlaceholder} />
+                      {errors.email && (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
+  >
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
+      !
+    </span>
+    {errors.email}
+  </motion.p>
+)}
                   </div>
 
                   <div className="space-y-2">
@@ -279,6 +378,19 @@ const ContactSection = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder={t.contact.form.subjectPlaceholder} />
+                      {errors.subject && (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
+  >
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
+      !
+    </span>
+    {errors.subject}
+  </motion.p>
+)}
                   </div>
 
                   <div className="space-y-2">
@@ -293,12 +405,57 @@ const ContactSection = () => {
                       placeholder={t.contact.form.messagePlaceholder}
                       className="resize-none"
                     />
+                    {errors.message && (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="flex items-center gap-2 text-sm text-red-600 dark:text-red-400"
+  >
+    <span className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-red-100 text-xs font-bold text-red-600 dark:bg-red-900/40 dark:text-red-300">
+      !
+    </span>
+    {errors.message}
+  </motion.p>
+)}
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-gradient-to-r from-blue-700 to-teal-500">
-                    <Send className="mr-2 h-5 w-5" />
-                    {t.contact.form.send}
-                  </Button>
+                  <Button
+  type="submit"
+  size="lg"
+  disabled={isLoading}
+  className="w-full bg-gradient-to-r from-blue-700 to-teal-500 disabled:opacity-70 disabled:cursor-not-allowed"
+>
+  {isLoading ? (
+    <>
+      <svg
+        className="mr-2 h-5 w-5 animate-spin"
+        viewBox="0 0 24 24"
+        fill="none"
+      >
+        <circle
+          className="opacity-25"
+          cx="12"
+          cy="12"
+          r="10"
+          stroke="currentColor"
+          strokeWidth="4"
+        />
+        <path
+          className="opacity-75"
+          fill="currentColor"
+          d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+        />
+      </svg>
+      Envoi en cours...
+    </>
+  ) : (
+    <>
+      <Send className="mr-2 h-5 w-5" />
+      {t.contact.form.send}
+    </>
+  )}
+</Button>
                 </form>
               </CardContent>
             </Card>
