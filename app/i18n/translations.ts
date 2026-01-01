@@ -32,16 +32,6 @@ export const translations = {
       subtitle: "Ce que je fais",
       categories: [
         {
-          title: "Design",
-          icon: "🎨",
-          description: "Création d’interfaces modernes et intuitives.",
-          skills: [
-            { name: "Figma", primary: true },
-            { name: "Material UI", primary: false },
-            { name: "Styled Components", primary: false },
-          ],
-        },
-        {
           title: "Front-end",
           icon: "💻",
           description: "Développement d’interfaces performantes et dynamiques.",
@@ -71,9 +61,10 @@ export const translations = {
           description:
             "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
           skills: [
+            { name: "GIT", primary: true },
+            { name: "Figma", primary: false },
             { name: "Docker", primary: false },
             { name: "Power BI", primary: false },
-            { name: "GIT", primary: false },
           ],
         },
       ],
@@ -229,16 +220,6 @@ export const translations = {
       subtitle: "What I Do",
       categories: [
         {
-          title: "Design",
-          icon: "🎨",
-          description: "Designing modern and intuitive user interfaces.",
-          skills: [
-            { name: "Figma", primary: true },
-            { name: "Material UI", primary: false },
-            { name: "Styled Components", primary: false },
-          ],
-        },
-        {
           title: "Front-end",
           icon: "💻",
           description:
@@ -269,9 +250,10 @@ export const translations = {
           description:
             "Using modern tools for development, data analysis, and collaboration.",
           skills: [
+            { name: "Git", primary: true },
+            { name: "Figma", primary: false },
             { name: "Docker", primary: false },
             { name: "Power BI", primary: false },
-            { name: "Git", primary: false },
           ],
         },
       ],
