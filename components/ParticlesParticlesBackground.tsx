@@ -22,11 +22,16 @@ export default function ParticlesBackground() {
 
         particles: {
           number: {
-            value: 35,
+            value: 20,
             density: { enable: true, area: 800 },
           },
           color: {
-            value: "#e5e7eb",
+            value: [
+              "#60a5fa", // blue-400
+              "#a78bfa", // purple-400
+              "#f4f4f4", // orange-400
+              "#f472b6", // pink-400
+            ],
           },
           shape: { type: "circle" },
           opacity: {
