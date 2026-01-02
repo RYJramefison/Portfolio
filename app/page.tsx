@@ -1,4 +1,5 @@
 import Header from "@/components/layout/Header";
+import Hero from "@/components/layout/Hero";
 import AcademyStudentSection from "@/components/sections/AcademyStudentSection";
 import CitationSection from "@/components/sections/CitationSection";
 import ContactSection from "@/components/sections/ContactSection";
@@ -9,6 +10,7 @@ export default function Home() {
   return (
     <div>
       <Header/>
+      {/* <Hero/> */}
       <HeroSection/>
       <ProjectSection/>
       <AcademyStudentSection/>

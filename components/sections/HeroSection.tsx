@@ -5,17 +5,24 @@ import { ArrowRight, Download } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/lib/scrollToSection'
+import ParticlesBackground from '../ParticlesParticlesBackground'
 
 const HeroSection = () => {
   const { t } = useLang()
 
   return (
     <section
-      id="home"
-      className="pt-16 pb-20 overflow-hidden bg-white dark:bg-gray-950"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  id="home"
+  className="relative pt-16 pb-20 overflow-hidden"
+>
+<div className="absolute inset-0 z-0 bg-white dark:bg-gray-950" />
+      {/* ❄️ Snow Background */}
+      <ParticlesBackground />
+
+      {/* Content */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
+          
           {/* Left Content */}
           <motion.div
             className="space-y-8"
@@ -121,6 +128,7 @@ const HeroSection = () => {
               </div>
             </div>
           </motion.div>
+
         </div>
       </div>
     </section>
