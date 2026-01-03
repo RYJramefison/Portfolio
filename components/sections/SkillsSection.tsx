@@ -50,7 +50,6 @@ export default function SkillsSection() {
     <li
       key={skill.name}
       style={{
-        // couleur dynamique au hover
         ['--skill-color' as any]: skill.color,
       }}
       className={`
@@ -60,8 +59,17 @@ export default function SkillsSection() {
         transition-all duration-300 ease-out
         hover:scale-105 hover:shadow-md
 
-        bg-gray-100 dark:bg-gray-800
-        text-gray-700 dark:text-gray-300
+        ${
+          skill.primary
+            ? `
+              bg-blue-50 text-blue-700
+              dark:bg-blue-950 dark:text-blue-300
+            `
+            : `
+              bg-gray-100 text-gray-700
+              dark:bg-gray-800 dark:text-gray-300
+            `
+        }
 
         hover:bg-[rgba(var(--skill-color),0.12)]
         dark:hover:bg-[rgba(var(--skill-color),0.18)]
@@ -101,13 +109,22 @@ export default function SkillsSection() {
 
       {/* BADGE MAIN */}
       {skill.primary && (
-        <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+        <span
+          className="
+            text-xs px-2 py-0.5 rounded-full
+            bg-blue-600 text-white
+            transition-all duration-300
+
+            group-hover:bg-[rgba(var(--skill-color),0.95)]
+          "
+        >
           Main
         </span>
       )}
     </li>
   ))}
 </ul>
+
 
             </motion.div>
           ))}
