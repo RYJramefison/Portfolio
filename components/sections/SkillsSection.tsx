@@ -47,17 +47,25 @@ export default function SkillsSection() {
 
               <ul className="space-y-3">
   {cat.skills.map((skill) => (
-    <li
+    <motion.li
       key={skill.name}
       style={{
         ['--skill-color' as any]: skill.color,
       }}
+      initial={{ opacity: 0, y: 12 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      whileHover={{
+        scale: 1.06,
+      }}
+      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
       className={`
-        group relative
+        group relative overflow-hidden
         flex items-center justify-between
         px-4 py-2 rounded-lg
+
         transition-all duration-300 ease-out
-        hover:scale-105 hover:shadow-md
+        hover:shadow-lg
 
         ${
           skill.primary
@@ -75,9 +83,35 @@ export default function SkillsSection() {
         dark:hover:bg-[rgba(var(--skill-color),0.18)]
       `}
     >
-      {/* TEXT */}
+      {/* ===== PARTICLE GLOW BACKGROUND ===== */}
       <span
         className="
+          pointer-events-none absolute inset-0
+          opacity-0 group-hover:opacity-100
+          transition-opacity duration-500
+        "
+      >
+        <span
+          className="
+            absolute -top-6 -left-6 h-16 w-16 rounded-full
+            bg-[rgba(var(--skill-color),0.35)]
+            blur-2xl
+            animate-pulse
+          "
+        />
+        <span
+          className="
+            absolute bottom-0 right-4 h-10 w-10 rounded-full
+            bg-[rgba(var(--skill-color),0.25)]
+            blur-xl
+          "
+        />
+      </span>
+
+      {/* ===== TEXT ===== */}
+      <span
+        className="
+          relative z-10
           transition-all duration-300
           group-hover:opacity-0 group-hover:-translate-y-1
         "
@@ -85,13 +119,14 @@ export default function SkillsSection() {
         {skill.name}
       </span>
 
-      {/* ICON */}
+      {/* ===== ICON ===== */}
       <span
         className="
           absolute left-1/2 -translate-x-1/2
           opacity-0 scale-75
           transition-all duration-300
           group-hover:opacity-100 group-hover:scale-110
+          z-10
           flex items-center justify-center
         "
       >
@@ -102,26 +137,28 @@ export default function SkillsSection() {
           height={22}
           className="
             object-contain
-            drop-shadow-[0_0_6px_rgba(var(--skill-color),0.6)]
+            drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
           "
         />
       </span>
 
-      {/* BADGE MAIN */}
+      {/* ===== BADGE MAIN ===== */}
       {skill.primary && (
         <span
           className="
+            relative z-10
             text-xs px-2 py-0.5 rounded-full
             bg-blue-600 text-white
             transition-all duration-300
 
             group-hover:bg-[rgba(var(--skill-color),0.95)]
+            group-hover:shadow-[0_0_10px_rgba(var(--skill-color),0.6)]
           "
         >
           Main
         </span>
       )}
-    </li>
+    </motion.li>
   ))}
 </ul>
 
