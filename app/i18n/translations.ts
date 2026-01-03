@@ -36,11 +36,11 @@ export const translations = {
           icon: "💻",
           description: "Développement d’interfaces performantes et dynamiques.",
           skills: [
-            { name: "Next.js", primary: true },
-            { name: "React", primary: false },
-            { name: "TypeScript", primary: false },
-            { name: "Tailwind CSS", primary: false },
-            { name: "Bootstrap", primary: false },
+            { name: "Next.js", icon: "next-js.png", primary: true },
+            { name: "React", icon: "react-js.png", primary: false },
+            { name: "TypeScript", icon: "typescript.png", primary: false },
+            { name: "Tailwind CSS", icon: "tailwind.png", primary: false },
+            { name: "Bootstrap", icon: "bootstrap.png", primary: false },
           ],
         },
         {
@@ -49,10 +49,10 @@ export const translations = {
           description:
             "Architecture et développement d’APIs backend fiables, scalables et maintenables.",
           skills: [
-            { name: "Java", primary: true },
-            { name: "PostgreSQL", primary: true },
-            { name: "Node.js", primary: false },
-            { name: "Express.js", primary: false },
+            { name: "Java", icon: "java.png", primary: true },
+            { name: "PostgreSQL", icon: "postgresql.png", primary: true },
+            { name: "Node.js", icon: "node-js.png", primary: false },
+            { name: "Express.js", icon: "express.png", primary: false },
           ],
         },
         {
@@ -61,10 +61,10 @@ export const translations = {
           description:
             "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
           skills: [
-            { name: "GIT", primary: true },
-            { name: "Figma", primary: false },
-            { name: "Docker", primary: false },
-            { name: "Power BI", primary: false },
+            { name: "GIT", icon: "git.png", primary: true },
+            { name: "Figma", icon: "figma.png", primary: false },
+            { name: "Docker", icon: "docker.png", primary: false },
+            { name: "Power BI", icon: "powerbi.png", primary: false },
           ],
         },
       ],
@@ -225,11 +225,11 @@ export const translations = {
           description:
             "Developing high-performance and dynamic user interfaces.",
           skills: [
-            { name: "Next.js", primary: true },
-            { name: "React", primary: false },
-            { name: "TypeScript", primary: false },
-            { name: "Tailwind CSS", primary: false },
-            { name: "Bootstrap", primary: false },
+            { name: "Next.js", icon: "next-js.png", primary: true },
+            { name: "React", icon: "react-js.png", primary: false },
+            { name: "TypeScript", icon: "typescript.png", primary: false },
+            { name: "Tailwind CSS", icon: "tailwind.png", primary: false },
+            { name: "Bootstrap", icon: "bootstrap.png", primary: false },
           ],
         },
         {
@@ -238,10 +238,10 @@ export const translations = {
           description:
             "Designing and developing reliable, scalable, and maintainable backend APIs.",
           skills: [
-            { name: "Java", primary: true },
-            { name: "PostgreSQL", primary: true },
-            { name: "Node.js", primary: false },
-            { name: "Express.js", primary: false },
+            { name: "Java", icon: "java.png", primary: true },
+            { name: "PostgreSQL", icon: "postgresql.png", primary: true },
+            { name: "Node.js", icon: "node-js.png", primary: false },
+            { name: "Express.js", icon: "express.png", primary: false },
           ],
         },
         {
@@ -250,10 +250,10 @@ export const translations = {
           description:
             "Using modern tools for development, data analysis, and collaboration.",
           skills: [
-            { name: "Git", primary: true },
-            { name: "Figma", primary: false },
-            { name: "Docker", primary: false },
-            { name: "Power BI", primary: false },
+            { name: "GIT", icon: "git.png", primary: true },
+            { name: "Figma", icon: "figma.png", primary: false },
+            { name: "Docker", icon: "docker.png", primary: false },
+            { name: "Power BI", icon: "powerbi.png", primary: false },
           ],
         },
       ],
