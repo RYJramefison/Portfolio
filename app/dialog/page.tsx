@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Dialog,DialogContent, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-// import {  } from "@radix-ui/react-dialog";
 
 export default function DialogPage(){
     return <div className="h-screen w-screen flex items-center justify-center">

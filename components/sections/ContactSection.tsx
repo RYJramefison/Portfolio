@@ -41,23 +41,18 @@ const ContactSection = () => {
 
   useEffect(() => {
     if (!status) return
-
     const duration = status === 'success' ? 1500 : 3000
-
     const timer = setTimeout(() => {
       setStatus(null)
     }, duration)
-
     return () => clearTimeout(timer)
   }, [status])
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) return
-
     const timer = setTimeout(() => {
       setErrors({})
     }, 1500)
-
     return () => clearTimeout(timer)
   }, [errors])
 
@@ -73,10 +68,7 @@ const ContactSection = () => {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target
-
     setFormData((prev) => ({ ...prev, [name]: value }))
-
-    // 🔥 supprimer l’erreur du champ en cours
     if (errors[name]) {
       setErrors((prev) => {
         const newErrors = { ...prev }
@@ -89,11 +81,8 @@ const ContactSection = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setStatus(null)
-
     if (!validateForm()) return
-
     setIsLoading(true)
-
     emailjs
       .send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
@@ -122,7 +111,6 @@ const ContactSection = () => {
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
-
     if (!formData.firstName.trim()) newErrors.firstName = 'Champ requis'
     if (!formData.lastName.trim()) newErrors.lastName = 'Champ requis'
     if (!formData.email.trim()) {
@@ -132,16 +120,13 @@ const ContactSection = () => {
     }
     if (!formData.subject.trim()) newErrors.subject = 'Sujet requis'
     if (!formData.message.trim()) newErrors.message = 'Message requis'
-
     setErrors(newErrors)
-
     return Object.keys(newErrors).length === 0
   }
 
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -159,9 +144,7 @@ const ContactSection = () => {
             {t.contact.description}
           </p>
         </motion.div>
-
         <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
           <motion.div
             className="space-y-8"
             initial={{ opacity: 0, x: -50 }}
@@ -177,7 +160,6 @@ const ContactSection = () => {
                 {t.contact.stayInTouch.description}
               </p>
             </div>
-
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -210,8 +192,6 @@ const ContactSection = () => {
                 </motion.div>
               ))}
             </div>
-
-            {/* Social Links */}
             <motion.div
               className="pt-8"
               initial={{ opacity: 0, y: 20 }}
@@ -222,7 +202,6 @@ const ContactSection = () => {
               <h4 className="font-semibold text-gray-900 dark:text-gray-200 mb-4">
                 {t.contact.social.title}
               </h4>
-
               <div className="flex space-x-4">
                 <Link href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/" target="_blank">
                   <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
@@ -230,14 +209,12 @@ const ContactSection = () => {
                     LinkedIn
                   </Button>
                 </Link>
-
                 <Link href="https://github.com/RYJramefison" target="_blank">
                   <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
                     <SiGithub size={18} />
                     GitHub
                   </Button>
                 </Link>
-
                 <Link href="https://www.facebook.com/ryj.rafson" target="_blank">
                   <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
                     <SiFacebook className="text-blue-500" size={18} />
@@ -247,8 +224,6 @@ const ContactSection = () => {
               </div>
             </motion.div>
           </motion.div>
-
-          {/* Contact Form */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -273,7 +248,6 @@ const ContactSection = () => {
                     <div className="mt-0.5">
                       {status === 'success' ? '✅' : '❌'}
                     </div>
-
                     <div>
                       <p className="font-semibold">
                         {status === 'success'
@@ -363,7 +337,6 @@ const ContactSection = () => {
                       )}
                     </div>
                   </div>
-
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.email}
@@ -375,7 +348,6 @@ const ContactSection = () => {
                       onChange={handleChange}
                       placeholder={t.contact.form.emailPlaceholder}
                     />
-
                     {errors.email && (
                       <motion.p
                         initial={{ opacity: 0, y: -4 }}
@@ -402,7 +374,6 @@ const ContactSection = () => {
                       </motion.p>
                     )}
                   </div>
-
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.subject}
@@ -439,7 +410,6 @@ const ContactSection = () => {
                       </motion.p>
                     )}
                   </div>
-
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.message}
@@ -478,7 +448,6 @@ const ContactSection = () => {
                       </motion.p>
                     )}
                   </div>
-
                   <Button
                     type="submit"
                     size="lg"

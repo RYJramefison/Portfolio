@@ -7,10 +7,6 @@ import { ExternalLink, GithubIcon } from 'lucide-react'
 import { motion, type Variants } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 
-/* =========================
-   Framer Motion Variants
-========================= */
-
 const containerVariants: Variants = {
   hidden: {},
   show: {
@@ -38,21 +34,13 @@ const cardVariants: Variants = {
   },
 }
 
-/* =========================
-   Component
-========================= */
-
 const ProjectSection = () => {
   const { t, lang } = useLang()
   const projects = t.projects
 
   return (
-    <section
-      id="projects"
-      className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden"
-    >
+    <section id="projects" className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
       <div className="relative max-w-7xl mx-auto px-4">
-        {/* ================= HEADER ================= */}
         <motion.div
           className="text-center mb-20"
           initial={{ opacity: 0, y: 30 }}
@@ -63,19 +51,15 @@ const ProjectSection = () => {
           <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg mb-2">
             {projects.label}
           </p>
-
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             {projects.title}
           </h2>
-
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
             {projects.description}
           </p>
         </motion.div>
-
-        {/* ================= PROJECTS GRID ================= */}
         <motion.div
-        key={lang}
+          key={lang}
           variants={containerVariants}
           initial="hidden"
           whileInView="show"
@@ -84,20 +68,19 @@ const ProjectSection = () => {
         >
           {projects.projects.map((project, index) => (
             <motion.div
-            key={project.title}
-            variants={cardVariants}
-            whileHover={{
-              y: -12,
-              scale: index === 1 ? 1.08 : 1.04,
-            }}
-            transition={{
-              type: 'spring',
-              stiffness: 160,
-              damping: 18,
-            }}
-            className="relative"
-          >
-              {/* ================= GLOW ================= */}
+              key={project.title}
+              variants={cardVariants}
+              whileHover={{
+                y: -12,
+                scale: index === 1 ? 1.08 : 1.04,
+              }}
+              transition={{
+                type: 'spring',
+                stiffness: 160,
+                damping: 18,
+              }}
+              className="relative"
+            >
               <div
                 className={`
                   pointer-events-none absolute inset-0 rounded-2xl blur-2xl
@@ -107,7 +90,6 @@ const ProjectSection = () => {
                   from-blue-500/25 via-indigo-500/25 to-purple-500/25
                 `}
               />
-
               <Card className="group relative h-full border-none bg-transparent shadow-none">
                 <div
                   className={`
@@ -120,7 +102,6 @@ const ProjectSection = () => {
                     ${index === 1 ? 'ring-2 ring-blue-500/30' : ''}
                   `}
                 >
-                  {/* ================= IMAGE ================= */}
                   <div className="relative h-60 overflow-hidden">
                     <img
                       src={project.image}
@@ -131,8 +112,6 @@ const ProjectSection = () => {
                         group-hover:scale-110 group-hover:-translate-y-2
                       "
                     />
-
-                    {/* Overlay */}
                     <div
                       className="
                         absolute inset-0
@@ -143,8 +122,6 @@ const ProjectSection = () => {
                         transition-opacity duration-500
                       "
                     />
-
-                    {/* Actions */}
                     <div
                       className="
                         absolute bottom-4 right-4
@@ -167,7 +144,6 @@ const ProjectSection = () => {
                       >
                         <ExternalLink className="h-4 w-4" />
                       </Button>
-
                       <Button
                         size="icon"
                         className="
@@ -183,17 +159,13 @@ const ProjectSection = () => {
                       </Button>
                     </div>
                   </div>
-
-                  {/* ================= BODY ================= */}
                   <div className="p-6 space-y-4">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                       {project.title}
                     </h3>
-
                     <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
                       {project.description}
                     </p>
-
                     <div className="flex flex-wrap gap-2">
                       {project.tags.map((tag) => (
                         <Badge
@@ -216,8 +188,6 @@ const ProjectSection = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        {/* ================= CTA ================= */}
         <div className="text-center mt-16">
           <Button size="lg" variant="outline">
             {projects.cta}

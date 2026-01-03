@@ -12,7 +12,6 @@ export default function SkillsSection() {
   return (
     <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-6">
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -27,8 +26,6 @@ export default function SkillsSection() {
             {t.subtitle}
           </h2>
         </motion.div>
-
-        {/* Cards */}
         <div className="grid md:grid-cols-3 gap-8">
           {t.categories.map((cat, i) => (
             <motion.div
@@ -44,125 +41,111 @@ export default function SkillsSection() {
                 {cat.title}
               </h3>
               <p className="text-gray-600 text-sm mb-6">{cat.description}</p>
-
               <ul className="space-y-3">
-  {cat.skills.map((skill) => (
-    <motion.li
-      key={skill.name}
-      style={{
-        ['--skill-color' as any]: skill.color,
-      }}
-      initial={{ opacity: 0, y: 12 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      whileHover={{
-        scale: 1.06,
-      }}
-      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-      className={`
-        group relative overflow-hidden
-        flex items-center justify-between
-        px-4 py-2 rounded-lg
-
-        transition-all duration-300 ease-out
-        hover:shadow-lg
-
-        ${
-          skill.primary
-            ? `
-              bg-blue-50 text-blue-700
-              dark:bg-blue-950 dark:text-blue-300
-            `
-            : `
-              bg-gray-100 text-gray-700
-              dark:bg-gray-800 dark:text-gray-300
-            `
-        }
-
-        hover:bg-[rgba(var(--skill-color),0.12)]
-        dark:hover:bg-[rgba(var(--skill-color),0.18)]
-      `}
-    >
-      {/* ===== PARTICLE GLOW BACKGROUND ===== */}
-      <span
-        className="
-          pointer-events-none absolute inset-0
-          opacity-0 group-hover:opacity-100
-          transition-opacity duration-500
-        "
-      >
-        <span
-          className="
-            absolute -top-6 -left-6 h-16 w-16 rounded-full
-            bg-[rgba(var(--skill-color),0.35)]
-            blur-2xl
-            animate-pulse
-          "
-        />
-        <span
-          className="
-            absolute bottom-0 right-4 h-10 w-10 rounded-full
-            bg-[rgba(var(--skill-color),0.25)]
-            blur-xl
-          "
-        />
-      </span>
-
-      {/* ===== TEXT ===== */}
-      <span
-        className="
-          relative z-10
-          transition-all duration-300
-          group-hover:opacity-0 group-hover:-translate-y-1
-        "
-      >
-        {skill.name}
-      </span>
-
-      {/* ===== ICON ===== */}
-      <span
-        className="
-          absolute left-1/2 -translate-x-1/2
-          opacity-0 scale-75
-          transition-all duration-300
-          group-hover:opacity-100 group-hover:scale-110
-          z-10
-          flex items-center justify-center
-        "
-      >
-        <Image
-          src={skill.icon}
-          alt={skill.name}
-          width={22}
-          height={22}
-          className="
-            object-contain
-            drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
-          "
-        />
-      </span>
-
-      {/* ===== BADGE MAIN ===== */}
-      {skill.primary && (
-        <span
-          className="
-            relative z-10
-            text-xs px-2 py-0.5 rounded-full
-            bg-blue-600 text-white
-            transition-all duration-300
-
-            group-hover:bg-[rgba(var(--skill-color),0.95)]
-            group-hover:shadow-[0_0_10px_rgba(var(--skill-color),0.6)]
-          "
-        >
-          Main
-        </span>
-      )}
-    </motion.li>
-  ))}
-</ul>
-
-
+                {cat.skills.map((skill) => (
+                  <motion.li
+                    key={skill.name}
+                    style={{
+                      ['--skill-color' as any]: skill.color,
+                    }}
+                    initial={{ opacity: 0, y: 12 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    whileHover={{
+                      scale: 1.06,
+                    }}
+                    transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+                    className={`
+                      group relative overflow-hidden
+                      flex items-center justify-between
+                      px-4 py-2 rounded-lg
+                      transition-all duration-300 ease-out
+                      hover:shadow-lg
+                      ${
+                        skill.primary
+                          ? `
+                            bg-blue-50 text-blue-700
+                            dark:bg-blue-950 dark:text-blue-300
+                          `
+                          : `
+                            bg-gray-100 text-gray-700
+                            dark:bg-gray-800 dark:text-gray-300
+                          `
+                      }
+                      hover:bg-[rgba(var(--skill-color),0.12)]
+                      dark:hover:bg-[rgba(var(--skill-color),0.18)]
+                    `}
+                  >
+                    <span
+                      className="
+                        pointer-events-none absolute inset-0
+                        opacity-0 group-hover:opacity-100
+                        transition-opacity duration-500
+                      "
+                    >
+                      <span
+                        className="
+                          absolute -top-6 -left-6 h-16 w-16 rounded-full
+                          bg-[rgba(var(--skill-color),0.35)]
+                          blur-2xl
+                          animate-pulse
+                        "
+                      />
+                      <span
+                        className="
+                          absolute bottom-0 right-4 h-10 w-10 rounded-full
+                          bg-[rgba(var(--skill-color),0.25)]
+                          blur-xl
+                        "
+                      />
+                    </span>
+                    <span
+                      className="
+                        relative z-10
+                        transition-all duration-300
+                        group-hover:opacity-0 group-hover:-translate-y-1
+                      "
+                    >
+                      {skill.name}
+                    </span>
+                    <span
+                      className="
+                        absolute left-1/2 -translate-x-1/2
+                        opacity-0 scale-75
+                        transition-all duration-300
+                        group-hover:opacity-100 group-hover:scale-110
+                        z-10
+                        flex items-center justify-center
+                      "
+                    >
+                      <Image
+                        src={skill.icon}
+                        alt={skill.name}
+                        width={22}
+                        height={22}
+                        className="
+                          object-contain
+                          drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
+                        "
+                      />
+                    </span>
+                    {skill.primary && (
+                      <span
+                        className="
+                          relative z-10
+                          text-xs px-2 py-0.5 rounded-full
+                          bg-blue-600 text-white
+                          transition-all duration-300
+                          group-hover:bg-[rgba(var(--skill-color),0.95)]
+                          group-hover:shadow-[0_0_10px_rgba(var(--skill-color),0.6)]
+                        "
+                      >
+                        Main
+                      </span>
+                    )}
+                  </motion.li>
+                ))}
+              </ul>
             </motion.div>
           ))}
         </div>

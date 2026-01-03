@@ -19,17 +19,13 @@ export default function SnowParticles() {
         background: { color: 'transparent' },
         fpsLimit: 60,
         detectRetina: true,
-
         particles: {
           number: {
             value: 14,
             density: { enable: true, area: 900 },
           },
           color: {
-            value: ["#60a5fa", 
-              "#a78bfa", 
-              "#f4f4f4", 
-              "#f472b6", ],
+            value: ["#60a5fa", "#a78bfa", "#f4f4f4", "#f472b6"],
           },
           opacity: {
             value: { min: 0.25, max: 0.6 },
@@ -40,7 +36,7 @@ export default function SnowParticles() {
           move: {
             enable: true,
             direction: 'bottom',
-            speed: 0.5,
+            speed: 0.8,
             outModes: { default: 'out' },
           },
           links: { enable: false },

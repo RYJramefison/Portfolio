@@ -13,14 +13,12 @@ const Header = () => {
 
   const navLinks = ['home', 'projects', 'background', 'skills', 'citation', 'contact']
 
-  /* Scroll navbar background */
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  /* Load theme */
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme') as 'light' | 'dark'
     if (savedTheme) {
@@ -42,7 +40,6 @@ const Header = () => {
     localStorage.setItem('lang', newLang)
   }
 
-  /* ✅ Smooth scroll with offset */
   const handleScrollTo = (id: string) => {
     const element = document.getElementById(id)
     if (!element) return
@@ -67,12 +64,9 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
           <span className="text-2xl font-bold bg-gradient-to-r from-blue-700 to-teal-500 bg-clip-text text-transparent">
             Juninho
           </span>
-
-          {/* Desktop nav */}
           <nav className="hidden md:flex space-x-8">
             {(t?.nav || []).map((label, i) => (
               <button
@@ -84,17 +78,13 @@ const Header = () => {
               </button>
             ))}
           </nav>
-
-          {/* Actions */}
           <div className="hidden md:flex items-center gap-3">
             <Button variant="ghost" onClick={toggleLang}>
               {lang.toUpperCase()}
             </Button>
-
             <Button variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
-
             <a
               href="/cv/Juninho_RAMEFISON_CV.pdf"
               download
@@ -106,8 +96,6 @@ const Header = () => {
               </Button>
             </a>
           </div>
-
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <Button
               variant="ghost"
@@ -118,8 +106,6 @@ const Header = () => {
             </Button>
           </div>
         </div>
-
-        {/* Mobile menu */}
         {isMenuOpen && (
           <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
             {(t?.nav || []).map((label, i) => (
@@ -134,12 +120,10 @@ const Header = () => {
                 {label}
               </button>
             ))}
-
             <div className="flex gap-2 px-4 py-3">
               <Button variant="ghost" onClick={toggleLang}>
                 {lang.toUpperCase()}
               </Button>
-
               <Button variant="ghost" size="icon" onClick={toggleTheme}>
                 {theme === 'light' ? <Moon /> : <Sun />}
               </Button>

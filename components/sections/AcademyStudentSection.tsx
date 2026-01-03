@@ -22,8 +22,6 @@ export default function AcademyStudentSection() {
   return (
     <section id="background" className="py-28 bg-white relative overflow-hidden dark:bg-gray-950">
       <div className="max-w-7xl mx-auto px-4">
-
-        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -34,22 +32,15 @@ export default function AcademyStudentSection() {
           <p className="text-blue-600 font-semibold text-lg mb-2">
             {t.background.badge}
           </p>
-
           <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
             {t.background.title}
           </h2>
-
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
             {t.background.description}
           </p>
         </motion.div>
-
-        {/* Content */}
         <div className="relative flex flex-col lg:flex-row items-center justify-center gap-20">
-
-          {/* Center Profile Card */}
           <div className="relative w-[22rem] h-[22rem]">
-            {/* SHADOW BLEU — EN DEHORS DU MOTION */}
             <div
               className="
                 pointer-events-none
@@ -60,8 +51,6 @@ export default function AcademyStudentSection() {
                 opacity-25 dark:opacity-50
               "
             />
-
-            {/* MOTION CARD */}
             <motion.div
               initial={{ scale: 0.85, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
@@ -98,15 +87,12 @@ export default function AcademyStudentSection() {
                   >
                     {t.background.profile.title}
                   </h3>
-
                   <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100 shadow-sm">
                     {t.background.profile.badge}
                   </span>
-
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
                     {t.background.profile.description}
                   </p>
-
                   <div className="flex justify-center gap-3 pt-2">
                     {[...Array(3)].map((_, i) => (
                       <span
@@ -120,14 +106,11 @@ export default function AcademyStudentSection() {
               </div>
             </motion.div>
           </div>
-
-          {/* Timeline */}
           <div className="relative max-w-md pl-12">
             <div
               className="absolute left-5 top-0 h-full w-px
                 bg-gradient-to-b from-blue-600 via-gray-400/40 to-transparent"
             />
-
             <div className="space-y-10">
               {steps.map((step, index) => (
                 <motion.div
@@ -142,7 +125,6 @@ export default function AcademyStudentSection() {
                     className="absolute -left-1.5 top-6 w-4 h-4 rounded-full
                       bg-blue-600 shadow-md"
                   />
-
                   <motion.div
                     whileHover={{ y: -6, scale: 1.02 }}
                     className="bg-white dark:bg-slate-900/70
@@ -151,7 +133,6 @@ export default function AcademyStudentSection() {
                       shadow-md hover:shadow-lg transition"
                   >
                     <div className="flex items-start gap-4">
-                      {/* Image */}
                       <div
                         className="w-14 h-14 rounded-xl overflow-hidden
                           bg-white dark:bg-gray-800
@@ -163,13 +144,10 @@ export default function AcademyStudentSection() {
                           className="w-full h-full object-cover"
                         />
                       </div>
-
-                      {/* Content */}
                       <div className="space-y-1">
                         <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
                           {step.title}
                         </h4>
-
                         <p className="text-gray-500 text-sm leading-relaxed">
                           {step.description}
                         </p>
@@ -180,7 +158,6 @@ export default function AcademyStudentSection() {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </section>

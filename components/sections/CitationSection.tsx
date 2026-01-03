@@ -4,9 +4,7 @@ import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
-import Particles from 'react-tsparticles'
-import SnowParticles from '../SnowPartilcules'
-
+import SnowParticles from '../ui/SnowPartilcules'
 
 export default function CitationSection() {
   const { lang } = useLang()
@@ -20,8 +18,6 @@ export default function CitationSection() {
     >
       <SnowParticles />
       <div className="relative z-10 max-w-6xl mx-auto">
-
-        {/* Header */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 20 }}
@@ -36,17 +32,13 @@ export default function CitationSection() {
             </span>
             <div className="w-6 h-0.5 bg-blue-500" />
           </div>
-
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-200 mb-6">
             {t.citation.title}
           </h2>
-
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
             {t.citation.subtitle}
           </p>
         </motion.div>
-
-        {/* Card */}
         <div className="flex justify-center">
           <motion.div
             className="max-w-3xl w-full bg-white rounded-2xl shadow-lg shadow-blue-50 
@@ -64,8 +56,6 @@ export default function CitationSection() {
                   <Quote className="w-6 h-6 text-blue-600" />
                 </div>
               </div>
-
-              {/* Quote */}
               <blockquote className="mb-10">
                 <p className="text-2xl md:text-3xl font-light text-gray-800 
                               leading-relaxed mb-6 dark:text-gray-200">
@@ -75,7 +65,6 @@ export default function CitationSection() {
                     </span>
                   ))}
                 </p>
-
                 <div className="flex items-center gap-4 mb-8">
                   <div className="flex-1 h-px bg-gradient-to-r from-blue-100 to-gray-100" />
                   <div className="flex gap-1">
@@ -89,8 +78,6 @@ export default function CitationSection() {
                   <div className="flex-1 h-px bg-gradient-to-r from-gray-100 to-blue-100" />
                 </div>
               </blockquote>
-
-              {/* Author */}
               <div className="flex items-center justify-between">
                 <div>
                   <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">
@@ -100,7 +87,6 @@ export default function CitationSection() {
                     {t.citation.author.role}
                   </p>
                 </div>
-
                 <div className="px-4 py-2 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full">
                   <span className="text-sm font-medium text-blue-700">
                     {t.citation.tag}
@@ -108,12 +94,9 @@ export default function CitationSection() {
                 </div>
               </div>
             </div>
-
             <div className="h-1 bg-gradient-to-r from-blue-700 to-teal-500" />
           </motion.div>
         </div>
-
-        {/* Footer text */}
         <motion.div
           className="max-w-2xl mx-auto mt-12 text-center"
           initial={{ opacity: 0 }}
@@ -125,7 +108,6 @@ export default function CitationSection() {
             {t.citation.footer}
           </p>
         </motion.div>
-
       </div>
     </section>
   )
