@@ -4,6 +4,9 @@ import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
+import Particles from 'react-tsparticles'
+import SnowParticles from '../SnowPartilcules'
+
 
 export default function CitationSection() {
   const { lang } = useLang()
@@ -12,10 +15,11 @@ export default function CitationSection() {
   return (
     <section
       id="citation"
-      className="py-20 px-4 bg-gradient-to-b from-gray-50 to-white 
+      className="relative overflow-hidden py-20 px-4 bg-gradient-to-b from-gray-50 to-white 
                  dark:from-gray-950 dark:to-gray-900"
     >
-      <div className="max-w-6xl mx-auto">
+      <SnowParticles />
+      <div className="relative z-10 max-w-6xl mx-auto">
 
         {/* Header */}
         <motion.div

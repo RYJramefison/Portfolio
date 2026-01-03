@@ -27,10 +27,10 @@ export default function ParticlesBackground() {
           },
           color: {
             value: [
-              "#60a5fa", // blue-400
-              "#a78bfa", // purple-400
-              "#f4f4f4", // orange-400
-              "#f472b6", // pink-400
+              "#60a5fa", 
+              "#a78bfa", 
+              "#f4f4f4", 
+              "#f472b6", 
             ],
           },
           shape: { type: "circle" },
