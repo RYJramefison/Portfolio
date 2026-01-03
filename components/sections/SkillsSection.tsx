@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
+import Image from 'next/image'
 
 export default function SkillsSection() {
   const { lang } = useLang()
@@ -45,27 +46,69 @@ export default function SkillsSection() {
               <p className="text-gray-600 text-sm mb-6">{cat.description}</p>
 
               <ul className="space-y-3">
-                {cat.skills.map((skill) => (
-                    <li
-                    key={skill.name}
-                    className={`flex items-center justify-between px-4 py-2 rounded-lg
-                      transition-transform duration-200 ease-out
-                      hover:scale-105 hover:shadow-md
-                      ${
-                      skill.primary
-                        ? 'bg-blue-50 text-blue-700 font-semibold dark:bg-blue-950 dark:text-blue-300'
-                        : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-                      }`}
-                    >
-                    {skill.name}
-                    {skill.primary && (
-                      <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
-                      Main
-                      </span>
-                    )}
-                    </li>
-                ))}
-              </ul>
+  {cat.skills.map((skill) => (
+    <li
+      key={skill.name}
+      style={{
+        // couleur dynamique au hover
+        ['--skill-color' as any]: skill.color,
+      }}
+      className={`
+        group relative
+        flex items-center justify-between
+        px-4 py-2 rounded-lg
+        transition-all duration-300 ease-out
+        hover:scale-105 hover:shadow-md
+
+        bg-gray-100 dark:bg-gray-800
+        text-gray-700 dark:text-gray-300
+
+        hover:bg-[rgba(var(--skill-color),0.12)]
+        dark:hover:bg-[rgba(var(--skill-color),0.18)]
+      `}
+    >
+      {/* TEXT */}
+      <span
+        className="
+          transition-all duration-300
+          group-hover:opacity-0 group-hover:-translate-y-1
+        "
+      >
+        {skill.name}
+      </span>
+
+      {/* ICON */}
+      <span
+        className="
+          absolute left-1/2 -translate-x-1/2
+          opacity-0 scale-75
+          transition-all duration-300
+          group-hover:opacity-100 group-hover:scale-110
+          flex items-center justify-center
+        "
+      >
+        <Image
+          src={skill.icon}
+          alt={skill.name}
+          width={22}
+          height={22}
+          className="
+            object-contain
+            drop-shadow-[0_0_6px_rgba(var(--skill-color),0.6)]
+          "
+        />
+      </span>
+
+      {/* BADGE MAIN */}
+      {skill.primary && (
+        <span className="text-xs bg-blue-600 text-white px-2 py-0.5 rounded-full">
+          Main
+        </span>
+      )}
+    </li>
+  ))}
+</ul>
+
             </motion.div>
           ))}
         </div>

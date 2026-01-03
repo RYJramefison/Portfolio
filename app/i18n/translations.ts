@@ -36,11 +36,36 @@ export const translations = {
           icon: "💻",
           description: "Développement d’interfaces performantes et dynamiques.",
           skills: [
-            { name: "Next.js", icon: "next-js.png", primary: true },
-            { name: "React", icon: "react-js.png", primary: false },
-            { name: "TypeScript", icon: "typescript.png", primary: false },
-            { name: "Tailwind CSS", icon: "tailwind.png", primary: false },
-            { name: "Bootstrap", icon: "bootstrap.png", primary: false },
+            {
+              name: "Next.js",
+              icon: "/icons/next-js.png",
+              color: "17,24,39",
+              primary: true,
+            },
+            {
+              name: "React",
+              icon: "/icons/react-js.png",
+              color: "59,130,246",
+              primary: false,
+            },
+            {
+              name: "TypeScript",
+              icon: "/icons/typescript.png",
+              color: "37,99,235",
+              primary: false,
+            },
+            {
+              name: "Tailwind CSS",
+              icon: "/icons/tailwind.png",
+              color: "14,165,233",
+              primary: false,
+            },
+            {
+              name: "Bootstrap",
+              icon: "/icons/bootstrap.png",
+              color: "124,58,237",
+              primary: false,
+            },
           ],
         },
         {
@@ -49,10 +74,30 @@ export const translations = {
           description:
             "Architecture et développement d’APIs backend fiables, scalables et maintenables.",
           skills: [
-            { name: "Java", icon: "java.png", primary: true },
-            { name: "PostgreSQL", icon: "postgresql.png", primary: true },
-            { name: "Node.js", icon: "node-js.png", primary: false },
-            { name: "Express.js", icon: "express.png", primary: false },
+            {
+              name: "Java",
+              icon: "/icons/java.png",
+              color: "234,67,53",
+              primary: true,
+            },
+            {
+              name: "PostgreSQL",
+              icon: "/icons/postgresql.png",
+              color: "51,103,145",
+              primary: true,
+            },
+            {
+              name: "Node.js",
+              icon: "/icons/node-js.png",
+              color: "34,197,94",
+              primary: false,
+            },
+            {
+              name: "Express.js",
+              icon: "/icons/express.png",
+              color: "107,114,128",
+              primary: false,
+            },
           ],
         },
         {
@@ -61,10 +106,30 @@ export const translations = {
           description:
             "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
           skills: [
-            { name: "GIT", icon: "git.png", primary: true },
-            { name: "Figma", icon: "figma.png", primary: false },
-            { name: "Docker", icon: "docker.png", primary: false },
-            { name: "Power BI", icon: "powerbi.png", primary: false },
+            {
+              name: "GIT",
+              icon: "/icons/git.png",
+              color: "239,68,68",
+              primary: true,
+            },
+            {
+              name: "Figma",
+              icon: "/icons/figma.png",
+              color: "168,85,247",
+              primary: false,
+            },
+            {
+              name: "Docker",
+              icon: "/icons/docker.png",
+              color: "14,165,233",
+              primary: false,
+            },
+            {
+              name: "Power BI",
+              icon: "/icons/powerbi.png",
+              color: "234,179,8",
+              primary: false,
+            },
           ],
         },
       ],
@@ -225,11 +290,36 @@ export const translations = {
           description:
             "Developing high-performance and dynamic user interfaces.",
           skills: [
-            { name: "Next.js", icon: "next-js.png", primary: true },
-            { name: "React", icon: "react-js.png", primary: false },
-            { name: "TypeScript", icon: "typescript.png", primary: false },
-            { name: "Tailwind CSS", icon: "tailwind.png", primary: false },
-            { name: "Bootstrap", icon: "bootstrap.png", primary: false },
+            {
+              name: "Next.js",
+              icon: "/icons/next-js.png",
+              color: "17,24,39",
+              primary: true,
+            },
+            {
+              name: "React",
+              icon: "/icons/react-js.png",
+              color: "59,130,246",
+              primary: false,
+            },
+            {
+              name: "TypeScript",
+              icon: "/icons/typescript.png",
+              color: "37,99,235",
+              primary: false,
+            },
+            {
+              name: "Tailwind CSS",
+              icon: "/icons/tailwind.png",
+              color: "14,165,233",
+              primary: false,
+            },
+            {
+              name: "Bootstrap",
+              icon: "/icons/bootstrap.png",
+              color: "124,58,237",
+              primary: false,
+            },
           ],
         },
         {
@@ -238,10 +328,30 @@ export const translations = {
           description:
             "Designing and developing reliable, scalable, and maintainable backend APIs.",
           skills: [
-            { name: "Java", icon: "java.png", primary: true },
-            { name: "PostgreSQL", icon: "postgresql.png", primary: true },
-            { name: "Node.js", icon: "node-js.png", primary: false },
-            { name: "Express.js", icon: "express.png", primary: false },
+            {
+              name: "Java",
+              icon: "/icons/java.png",
+              color: "234,67,53",
+              primary: true,
+            },
+            {
+              name: "PostgreSQL",
+              icon: "/icons/postgresql.png",
+              color: "51,103,145",
+              primary: true,
+            },
+            {
+              name: "Node.js",
+              icon: "/icons/node-js.png",
+              color: "34,197,94",
+              primary: false,
+            },
+            {
+              name: "Express.js",
+              icon: "/icons/express.png",
+              color: "107,114,128",
+              primary: false,
+            },
           ],
         },
         {
@@ -250,10 +360,30 @@ export const translations = {
           description:
             "Using modern tools for development, data analysis, and collaboration.",
           skills: [
-            { name: "GIT", icon: "git.png", primary: true },
-            { name: "Figma", icon: "figma.png", primary: false },
-            { name: "Docker", icon: "docker.png", primary: false },
-            { name: "Power BI", icon: "powerbi.png", primary: false },
+            {
+              name: "GIT",
+              icon: "/icons/git.png",
+              color: "239,68,68",
+              primary: true,
+            },
+            {
+              name: "Figma",
+              icon: "/icons/figma.png",
+              color: "168,85,247",
+              primary: false,
+            },
+            {
+              name: "Docker",
+              icon: "/icons/docker.png",
+              color: "14,165,233",
+              primary: false,
+            },
+            {
+              name: "Power BI",
+              icon: "/icons/powerbi.png",
+              color: "234,179,8",
+              primary: false,
+            },
           ],
         },
       ],
