@@ -120,7 +120,7 @@ const ProjectSection = () => {
                         <Button
                           asChild
                           size="icon"
-                          className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-gray-900 dark:text-white shadow-lg hover:scale-110 transition"
+                          className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-gray-900 hover:text-white dark:text-white shadow-lg hover:scale-110 transition"
                         >
                           <a
                             href={project.githubUrl}
