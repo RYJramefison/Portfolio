@@ -64,7 +64,7 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-700 to-teal-500 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
             Juninho
           </span>
           <nav className="hidden md:flex space-x-8">
@@ -133,7 +133,7 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button className="flex-1 bg-gradient-to-r from-blue-700 to-teal-700">
+                <Button className="flex-1 bg-gradient-to-r from-blue-700 to-blue-500">
                   {t?.common?.cv}
                 </Button>
               </a>
