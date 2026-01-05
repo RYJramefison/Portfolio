@@ -146,9 +146,12 @@ export const translations = {
           title: "Restaurant API",
           description:
             "API backend pour la gestion des commandes et des stocks en restauration, avec vérification automatique des ingrédients.",
-          image: "climat et tourisme.png",
+          image: "api_restaurant.png",
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "API Backend",
+          githubUrl:
+            "https://github.com/RYJramefison/restaurant-management-25-backend.git",
+          previewUrl: null,
         },
         {
           title: "Prévision météo",
@@ -157,6 +160,9 @@ export const translations = {
           image: "climat et tourisme.png",
           tags: ["Python", "Apache Airflow", "Jupyter", "PowerBI"],
           category: "Plateforme",
+          githubUrl: "https://github.com/RYJramefison/climat_tourism",
+          previewUrl:
+            "https://drive.google.com/file/d/1yUBF26PoLAsq16Zywnt8iLfbYP-e2U90/view?usp=drive_link",
         },
         {
           title: "Gestion de patrimoine",
@@ -165,6 +171,9 @@ export const translations = {
           image: "Patrimoine economique.png",
           tags: ["React.js", "Express.js", "Bootstrap"],
           category: "API Backend",
+          githubUrl:
+            "https://github.com/RYJramefison/gestion_patrimoine_render",
+          previewUrl: "https://my-patrimoine-economique-frontend.onrender.com/",
         },
       ],
     },
@@ -400,9 +409,12 @@ export const translations = {
           title: "Restaurant API",
           description:
             "Backend API for managing restaurant orders and inventory, with automatic ingredient availability checks.",
-          image: "climat et tourisme.png",
+          image: "api_restaurant.png",
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "Backend API",
+          githubUrl:
+            "https://github.com/RYJramefison/restaurant-management-25-backend.git",
+          previewUrl: null,
         },
         {
           title: "Weather Forecast",
@@ -411,6 +423,9 @@ export const translations = {
           image: "climat et tourisme.png",
           tags: ["Python", "Apache Airflow", "Jupyter", "Power BI"],
           category: "Platform",
+          githubUrl: "https://github.com/RYJramefison/climat_tourism",
+          previewUrl:
+            "https://drive.google.com/file/d/1yUBF26PoLAsq16Zywnt8iLfbYP-e2U90/view?usp=drive_link",
         },
         {
           title: "Asset Management",
@@ -419,6 +434,9 @@ export const translations = {
           image: "Patrimoine economique.png",
           tags: ["React.js", "Express.js", "Bootstrap"],
           category: "Backend API",
+          githubUrl:
+            "https://github.com/RYJramefison/gestion_patrimoine_render",
+          previewUrl: "https://my-patrimoine-economique-frontend.onrender.com/",
         },
       ],
     },

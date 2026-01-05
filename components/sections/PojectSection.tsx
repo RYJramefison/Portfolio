@@ -123,41 +123,65 @@ const ProjectSection = () => {
                       "
                     />
                     <div
-                      className="
-                        absolute bottom-4 right-4
-                        flex gap-3
-                        opacity-0 translate-y-4
-                        group-hover:opacity-100 group-hover:translate-y-0
-                        transition-all duration-500
-                      "
-                    >
-                      <Button
-                        size="icon"
-                        className="
-                          rounded-full
-                          bg-white/90 dark:bg-black/70
-                          backdrop-blur
-                          text-blue-600
-                          shadow-lg
-                          hover:scale-110 transition
-                        "
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </Button>
-                      <Button
-                        size="icon"
-                        className="
-                          rounded-full
-                          bg-white/90 dark:bg-black/70
-                          backdrop-blur
-                          text-gray-900 dark:text-white
-                          shadow-lg
-                          hover:scale-110 transition
-                        "
-                      >
-                        <GithubIcon className="h-4 w-4" />
-                      </Button>
-                    </div>
+  className="
+    absolute bottom-4 right-4
+    flex gap-3
+    opacity-0 translate-y-4
+    group-hover:opacity-100 group-hover:translate-y-0
+    transition-all duration-500
+  "
+>
+  {/* Preview */}
+  {project.previewUrl && (
+    <Button
+      asChild
+      size="icon"
+      className="
+        rounded-full
+        bg-white/90 dark:bg-black/70
+        backdrop-blur
+        text-blue-600
+        shadow-lg
+        hover:scale-110 transition
+      "
+    >
+      <a
+        href={project.previewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Live preview"
+      >
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </Button>
+  )}
+
+  {/* GitHub */}
+  {project.githubUrl && (
+    <Button
+      asChild
+      size="icon"
+      className="
+        rounded-full
+        bg-white/90 dark:bg-black/70
+        backdrop-blur
+        text-gray-900 dark:text-white
+        shadow-lg
+        hover:scale-110 transition
+      "
+    >
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="GitHub repository"
+      >
+        <GithubIcon className="h-4 w-4" />
+      </a>
+    </Button>
+  )}
+</div>
+
                   </div>
                   <div className="p-6 space-y-4">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
