@@ -28,14 +28,14 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: t.contact.infos.phone,
-      value: '+33 6 12 34 56 78',
-      href: 'tel:+33612345678',
+      value: '+261 32 89522 79',
+      href: 'tel:+261328952279',
     },
     {
       icon: MapPin,
       title: t.contact.infos.location,
       value: 'Madagascar, Antananarivo',
-      href: '#',
+      href: 'https://www.google.com/maps/place/Madagascar,+Antananarivo',
     },
   ]
 
@@ -125,7 +125,10 @@ const ContactSection = () => {
   }
 
   return (
-    <section id="contact" className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900">
+    <section
+      id="contact"
+      className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 overflow-hidden"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           className="text-center mb-16"
@@ -175,13 +178,13 @@ const ContactSection = () => {
                         <div className="w-12 h-12 bg-gradient-to-r from-blue-700 to-blue-600 rounded-full flex items-center justify-center">
                           <info.icon className="h-6 w-6 text-white" />
                         </div>
-                        <div>
+                        <div className="max-w-full">
                           <h4 className="font-semibold text-gray-900 dark:text-gray-200">
                             {info.title}
                           </h4>
                           <a
                             href={info.href}
-                            className="text-gray-600 text-gray-400 hover:text-blue-600 transition-colors"
+                            className="text-gray-600 text-gray-400 hover:text-blue-600 transition-colors break-words"
                           >
                             {info.value}
                           </a>
@@ -202,7 +205,7 @@ const ContactSection = () => {
               <h4 className="font-semibold text-gray-900 dark:text-gray-200 mb-4">
                 {t.contact.social.title}
               </h4>
-              <div className="flex space-x-4">
+              <div className="flex flex-wrap gap-4">
                 <Link href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/" target="_blank">
                   <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
                     <SiLinkedin className="text-blue-600" size={18} />
@@ -435,63 +438,63 @@ const ContactSection = () => {
                         "
                       >
                         <span
-                          className="
-                            inline-flex h-5 w-5 items-center justify-center
-                            rounded-full bg-gray-300
-                            text-xs font-bold text-gray-800
-                            dark:bg-gray-700 dark:text-gray-200
-                          "
-                        >
-                          !
-                        </span>
-                        {errors.message}
-                      </motion.p>
-                    )}
-                  </div>
-                  <Button
-                    type="submit"
-                    size="lg"
-                    disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-blue-700 to-teal-500 disabled:opacity-70 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? (
-                      <>
-                        <svg
-                          className="mr-2 h-5 w-5 animate-spin"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
-                          <circle
-                            className="opacity-25"
-                            cx="12"
-                            cy="12"
-                            r="10"
-                            stroke="currentColor"
-                            strokeWidth="4"
-                          />
-                          <path
-                            className="opacity-75"
-                            fill="currentColor"
-                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                          />
-                        </svg>
-                        Envoi en cours...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="mr-2 h-5 w-5" />
-                        {t.contact.form.send}
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
-          </motion.div>
+                            className="
+                              inline-flex h-5 w-5 items-center justify-center
+                              rounded-full bg-gray-300
+                              text-xs font-bold text-gray-800
+                              dark:bg-gray-700 dark:text-gray-200
+                            "
+                          >
+                            !
+                          </span>
+                          {errors.message}
+                        </motion.p>
+                      )}
+                    </div>
+                    <Button
+                      type="submit"
+                      size="lg"
+                      disabled={isLoading}
+                      className="w-full bg-gradient-to-r from-blue-700 to-teal-500 disabled:opacity-70 disabled:cursor-not-allowed"
+                    >
+                      {isLoading ? (
+                        <>
+                          <svg
+                            className="mr-2 h-5 w-5 animate-spin"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                          >
+                            <circle
+                              className="opacity-25"
+                              cx="12"
+                              cy="12"
+                              r="10"
+                              stroke="currentColor"
+                              strokeWidth="4"
+                            />
+                            <path
+                              className="opacity-75"
+                              fill="currentColor"
+                              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
+                            />
+                          </svg>
+                          Envoi en cours...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="mr-2 h-5 w-5" />
+                          {t.contact.form.send}
+                        </>
+                      )}
+                    </Button>
+                  </form>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </div>
         </div>
-      </div>
-    </section>
-  )
-}
+      </section>
+    )
+  }
 
-export default ContactSection
+  export default ContactSection
