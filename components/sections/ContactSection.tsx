@@ -28,7 +28,7 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: t.contact.infos.phone,
-      value: '+261 32 89522 79',
+      value: '+261 32 89 522 79',
       href: 'tel:+261328952279',
     },
     {
