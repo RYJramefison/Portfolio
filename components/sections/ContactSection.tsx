@@ -4,19 +4,34 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Phone, MapPin, Send } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, Lock, User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 import Link from 'next/link'
 import { useLang } from '@/app/providers/lang-provider'
 import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
+import { useUser, SignInButton } from "@clerk/nextjs"
 
 const ContactSection = () => {
   const { t } = useLang()
   const [status, setStatus] = useState<'success' | 'error' | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
+  const { user, isSignedIn } = useUser()
+
+  useEffect(() => {
+    if (user) {
+      setFormData((prev) => ({
+        ...prev,
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        email: user.primaryEmailAddress?.emailAddress || "",
+      }))
+    }
+  }, [user])
+  
+
 
   const contactInfo = [
     {
@@ -78,8 +93,20 @@ const ContactSection = () => {
     }
   }
 
+  
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
+
+    if (!isSignedIn) {
+      setStatus('error')
+      setErrors({ global: "Veuillez vous connecter pour envoyer le message." })
+      return
+    }
+  
+    setStatus(null)
+    if (!validateForm()) return
+    setIsLoading(true)
+
     setStatus(null)
     if (!validateForm()) return
     setIsLoading(true)
@@ -451,11 +478,35 @@ const ContactSection = () => {
                         </motion.p>
                       )}
                     </div>
+                    {!isSignedIn && (
+  <div className="space-y-3">
+    <div className="flex items-center gap-2 text-sm text-gray-500">
+      <Lock className="h-4 w-4" />
+      Connexion requise pour envoyer le formulaire
+    </div>
+
+    <SignInButton mode="modal">
+      <Button
+        type="button"
+        variant="outline"
+        size="lg"
+        className="w-full flex items-center justify-center gap-3"
+      >
+        <img
+          src="/google.svg"
+          alt="Google"
+          className="h-5 w-5"
+        />
+        Se connecter avec Google
+      </Button>
+    </SignInButton>
+  </div>
+)}
                     <Button
                       type="submit"
                       size="lg"
-                      disabled={isLoading}
-                      className="w-full bg-gradient-to-r from-blue-700 to-teal-500 disabled:opacity-70 disabled:cursor-not-allowed"
+                      disabled={!isSignedIn || isLoading}
+                       className="w-full bg-gradient-to-r from-blue-700 to-teal-500 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {isLoading ? (
                         <>
