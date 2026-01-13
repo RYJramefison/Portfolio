@@ -11,7 +11,9 @@ import Link from 'next/link'
 import { useLang } from '@/app/providers/lang-provider'
 import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
-import { useUser, SignInButton } from "@clerk/nextjs"
+import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs"
+
+
 
 const ContactSection = () => {
   const { t } = useLang()
@@ -478,6 +480,33 @@ const ContactSection = () => {
                         </motion.p>
                       )}
                     </div>
+                    {isSignedIn && (
+  <div className="flex items-center justify-between rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-3">
+    <div className="flex items-center gap-3">
+      <User className="h-5 w-5 text-blue-600" />
+      <div className="text-sm">
+        <p className="font-medium text-gray-900 dark:text-gray-200">
+          Connecté en tant que
+        </p>
+        <p className="text-gray-600 dark:text-gray-400">
+          {user?.primaryEmailAddress?.emailAddress}
+        </p>
+      </div>
+    </div>
+
+    <SignOutButton>
+      <Button
+        type="button"
+        variant="outline"
+        size="sm"
+        className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:hover:bg-red-900/30"
+      >
+        Se déconnecter
+      </Button>
+    </SignOutButton>
+  </div>
+)}
+
                     {!isSignedIn && (
   <div className="space-y-3">
     <div className="flex items-center gap-2 text-sm text-gray-500">
