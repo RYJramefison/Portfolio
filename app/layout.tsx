@@ -25,15 +25,15 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
-      <html lang="fr">
+    <html lang="fr">
       <body>
-        <LangProvider>
-          {children}
-        </LangProvider>
+        <ClerkProvider>
+          <LangProvider>
+            {children}
+          </LangProvider>
+        </ClerkProvider>
       </body>
     </html>
-    </ClerkProvider>
     
   )
 }
