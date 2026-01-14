@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
+import { motion } from 'framer-motion'
+
 
 const Header = () => {
   const { lang, setLang, t } = useLang()
@@ -69,20 +71,42 @@ const Header = () => {
           </span>
           <nav className="hidden md:flex space-x-8">
             {(t?.nav || []).map((label, i) => (
-              <button
-                key={label}
-                onClick={() => handleScrollTo(navLinks[i])}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 transition"
-              >
-                {label}
-              </button>
+              <motion.button
+              key={label}
+              onClick={() => handleScrollTo(navLinks[i])}
+              className="relative cursor-pointer text-gray-700 dark:text-gray-300 hover:text-blue-600 transition"
+              initial="rest"
+              whileHover="hover"
+              animate="rest"
+            >
+              {label}
+            
+              {/* underline */}
+              <motion.span
+                className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full"
+                variants={{
+                  rest: {
+                    width: 0,
+                    x: '-50%',
+                    opacity: 0,
+                  },
+                  hover: {
+                    width: '60%',
+                    x: '-50%',
+                    opacity: 1,
+                  },
+                }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              />
+            </motion.button>
+            
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-3">
-            <Button variant="ghost" onClick={toggleLang}>
+            <Button className='cursor-pointer' variant="ghost" onClick={toggleLang}>
               {lang.toUpperCase()}
             </Button>
-            <Button variant="ghost" size="icon" onClick={toggleTheme}>
+            <Button className='cursor-pointer' variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
             <a
@@ -91,7 +115,7 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-gradient-to-r from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
+              <Button className="cursor-pointer bg-gradient-to-r cursor-pointer from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
                 {t?.common?.cv}
               </Button>
             </a>
