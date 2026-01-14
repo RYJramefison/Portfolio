@@ -93,23 +93,47 @@ const HeroSection = () => {
             </motion.div>
           </motion.div>
           <motion.div
-            className="relative"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <div className="relative mx-auto w-full max-w-lg">
-              <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-pulse"></div>
-              <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-gradient-to-r from-orange-400 to-pink-400 rounded-full opacity-20 animate-pulse delay-1000"></div>
-              <div className="relative z-10 w-full aspect-square rounded-full flex items-center justify-center">
-                <img
-                  src="photo_pro-removebg-preview.png"
-                  alt="Profile"
-                  className="rounded-full border-8 border-white dark:border-gray-800 shadow-2xl"
-                />
-              </div>
-            </div>
-          </motion.div>
+  className="relative flex justify-center items-center w-full"
+  initial={{ opacity: 0, x: 40 }}
+  animate={{ opacity: 1, x: 0 }}
+  transition={{ duration: 0.9, ease: 'easeOut' }}
+>
+  {/* rond centré et taille contrôlée */}
+  <div className="relative w-[320px] sm:w-[360px] md:w-[380px] max-w-sm mx-auto aspect-square flex justify-center items-center">
+
+    {/* bulle haut gauche */}
+    <div className="absolute -top-4 -left-4 w-20 h-20
+      bg-gradient-to-r from-blue-400 to-purple-400
+      rounded-full opacity-20 animate-pulse" />
+
+    {/* bulle bas droite */}
+    <div className="absolute -bottom-4 -right-4 w-24 h-24
+      bg-gradient-to-r from-orange-400 to-pink-400
+      rounded-full opacity-20 animate-pulse delay-1000" />
+
+    {/* image */}
+    <div className="relative w-full aspect-square rounded-full flex items-center justify-center">
+      <img
+        src="photo_pro-removebg-preview.png"
+        alt="Profile"
+        className="
+          rounded-full
+          border-6 border-white dark:border-gray-800
+          shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)]
+        "
+      />
+    </div>
+
+  </div>
+</motion.div>
+
+
+
+
+
+
+
+
         </div>
       </div>
     </section>
