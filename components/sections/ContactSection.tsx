@@ -121,13 +121,14 @@ const ContactSection = () => {
       )
       .then(() => {
         setStatus('success')
-        setFormData({
+        setFormData((prev) => ({
+          ...prev,
           firstName: '',
           lastName: '',
-          email: '',
           subject: '',
           message: '',
-        })
+          email: prev.email, // Retain the user's email
+        }));
         setErrors({})
       })
       .catch(() => {
@@ -350,6 +351,7 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t.contact.form.emailPlaceholder}
+                      disabled
                     />
                     {errors.email && (
                       <motion.p
