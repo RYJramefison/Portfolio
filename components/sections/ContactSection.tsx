@@ -508,7 +508,7 @@ const ContactSection = () => {
                       type="submit"
                       size="lg"
                       disabled={!isSignedIn || isLoading}
-                       className="w-full bg-blue-600 disabled:opacity-60 disabled:cursor-not-allowed"
+                       className="w-full bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {isLoading ? (
                         <>

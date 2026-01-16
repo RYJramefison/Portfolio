@@ -1,9 +1,18 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono,Inter,  Space_Grotesk } from "next/font/google";
 import { LangProvider } from './providers/lang-provider'
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+})
+
+const space_Grotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+})
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,7 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr" suppressHydrationWarning>
-      <body suppressHydrationWarning>
+      <body className={inter.className} suppressHydrationWarning>
         <ClerkProvider>
           <LangProvider>
             {children}

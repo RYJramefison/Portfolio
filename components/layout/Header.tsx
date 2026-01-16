@@ -66,8 +66,7 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-[#1ECFE3]
- bg-clip-text text-transparent">
+          <span className="text-2xl font-semibold tracking-tight bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent">
             Juninho
           </span>
           <nav className="hidden md:flex space-x-8">
@@ -75,31 +74,34 @@ const Header = () => {
               <motion.button
               key={label}
               onClick={() => handleScrollTo(navLinks[i])}
-              className="relative cursor-pointer text-gray-700 dark:text-gray-300 hover:text-blue-600 transition"
+              className="relative cursor-pointer text-gray-700 dark:text-gray-300 transition"
               initial="rest"
               whileHover="hover"
               animate="rest"
             >
               {label}
             
-              {/* underline */}
+              {/* underline gauche */}
               <motion.span
-                className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-[#1ECFE3] rounded-full"
+                className="absolute left-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-600 rounded-full"
                 variants={{
-                  rest: {
-                    width: 0,
-                    x: '-50%',
-                    opacity: 0,
-                  },
-                  hover: {
-                    width: '60%',
-                    x: '-50%',
-                    opacity: 1,
-                  },
+                  rest: { width: 0 },
+                  hover: { width: '50%' },
+                }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
+              />
+            
+              {/* underline droite */}
+              <motion.span
+                className="absolute right-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-600 rounded-full"
+                variants={{
+                  rest: { width: 0 },
+                  hover: { width: '52%' },
                 }}
                 transition={{ duration: 0.3, ease: 'easeOut' }}
               />
             </motion.button>
+            
             
             ))}
           </nav>
@@ -116,9 +118,9 @@ const Header = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="cursor-pointer bg-gradient-to-r cursor-pointer from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
+              {/* <Button className="cursor-pointer bg-gradient-to-r cursor-pointer from-blue-700 to-blue-400 hover:from-blue-800 hover:to-blue-700">
                 {t?.common?.cv}
-              </Button>
+              </Button> */}
             </a>
           </div>
           <div className="md:hidden">
@@ -158,9 +160,9 @@ const Header = () => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button className="flex-1 bg-gradient-to-r from-blue-700 to-blue-500">
+                {/* <Button className="flex-1 bg-gradient-to-r from-blue-700 to-blue-500">
                   {t?.common?.cv}
-                </Button>
+                </Button> */}
               </a>
             </div>
           </div>
