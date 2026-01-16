@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 
 
 const Header = () => {
@@ -55,6 +55,7 @@ const Header = () => {
       behavior: 'smooth',
     })
   }
+  const languages = ['EN', 'FR'];
 
   return (
     <header
@@ -83,32 +84,58 @@ const Header = () => {
             
               {/* underline gauche */}
               <motion.span
-                className="absolute left-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-600 rounded-full"
+                className="absolute left-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-500 rounded-full origin-left"
                 variants={{
-                  rest: { width: 0 },
-                  hover: { width: '50%' },
+                  rest: { width: 0, opacity: 0 },
+                  hover: { width: '50%', opacity: 1 },
                 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
+                transition={{
+                  duration: 0.35,
+                  ease: [0.4, 0, 0.2, 1], 
+                }}
               />
             
               {/* underline droite */}
               <motion.span
-                className="absolute right-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-600 rounded-full"
+                className="absolute right-0 -bottom-1 h-[2px] bg-gray-900 dark:bg-blue-500 rounded-full origin-right"
                 variants={{
-                  rest: { width: 0 },
-                  hover: { width: '52%' },
+                  rest: { width: 0, opacity: 0 },
+                  hover: { width: '52%', opacity: 1 },
                 }}
-                transition={{ duration: 0.3, ease: 'easeOut' }}
+                transition={{
+                  duration: 0.35,
+                  ease: [0.4, 0, 0.2, 1],
+                  delay: 0.05, 
+                }}
               />
             </motion.button>
+            
             
             
             ))}
           </nav>
           <div className="hidden md:flex items-center gap-3">
-            <Button className='cursor-pointer' variant="ghost" onClick={toggleLang}>
-              {lang.toUpperCase()}
-            </Button>
+          <Button className="relative w-16 h-8 overflow-hidden cursor-pointer" variant="ghost" onClick={toggleLang}>
+  <div className="relative w-full h-full flex items-center justify-center">
+    {languages.map((l) => {
+      const isActive = l === lang.toUpperCase();
+      return (
+        <motion.span
+          key={l}
+          initial={{ x: isActive ? 0 : isActive ? 0 : isActive ? 0 : 0, scale: isActive ? 1.2 : 0.8, opacity: 1 }}
+          animate={{
+            x: isActive ? 0 : (lang.toUpperCase() === 'EN' ? 20 : -20), 
+            scale: isActive ? 1.0 : 0.6,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          className="absolute"
+        >
+          {l}
+        </motion.span>
+      );
+    })}
+  </div>
+</Button>
             <Button className='cursor-pointer' variant="ghost" size="icon" onClick={toggleTheme}>
               {theme === 'light' ? <Moon /> : <Sun />}
             </Button>
