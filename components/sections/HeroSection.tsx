@@ -6,7 +6,12 @@ import { motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/ui/lib/scrollToSection'
 import ParticlesBackground from '../ui/ParticlesParticlesBackground'
+import { Poppins, Montserrat } from 'next/font/google';
 
+const museoModerno = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 const HeroSection = () => {
   const { t } = useLang()
 
@@ -34,13 +39,13 @@ const HeroSection = () => {
                 </span>
               </motion.div>
               <motion.h1
-                className="text-5xl lg:text-6xl font-bold leading-tight"
+                className="text-4xl lg:text-5xl font-semibold leading-tight"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
-                <span className="text-gray-900 dark:text-gray-300">Juninho</span>{' '}
-                <span className="bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent">
+                <span className={`${museoModerno.className} text-gray-900 dark:text-gray-300`}>Juninho</span>{' '}
+                <span className={`${museoModerno.className} bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent`}>
                   Ramefison
                 </span>
               </motion.h1>

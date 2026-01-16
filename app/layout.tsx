@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono,Inter,  Space_Grotesk } from "next/font/google";
+import {Lato,Roboto,Poppins, Geist, Geist_Mono,Inter,  Space_Grotesk } from "next/font/google";
 import { LangProvider } from './providers/lang-provider'
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";

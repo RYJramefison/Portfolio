@@ -6,6 +6,13 @@ import { Menu, X, Sun, Moon } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { AnimatePresence, motion } from 'framer-motion'
 
+import { Poppins ,Montserrat} from 'next/font/google';
+
+const museoModerno = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
+
 
 const Header = () => {
   const { lang, setLang, t } = useLang()
@@ -67,9 +74,11 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <span className="text-2xl font-semibold tracking-tight bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent">
-            Juninho
-          </span>
+        <span
+      className={`${museoModerno.className} text-2xl font-semibold tracking-tight bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent`}
+    >
+      Juninho
+    </span>
           <nav className="hidden md:flex space-x-8">
             {(t?.nav || []).map((label, i) => (
               <motion.button
