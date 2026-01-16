@@ -66,7 +66,8 @@ const Header = () => {
     >
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
-          <span className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+          <span className="text-2xl font-bold bg-gradient-to-r from-blue-500 to-[#1ECFE3]
+ bg-clip-text text-transparent">
             Juninho
           </span>
           <nav className="hidden md:flex space-x-8">
@@ -83,7 +84,7 @@ const Header = () => {
             
               {/* underline */}
               <motion.span
-                className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-blue-600 to-teal-500 rounded-full"
+                className="absolute left-1/2 -bottom-1 h-[2px] w-0 bg-gradient-to-r from-blue-500 to-[#1ECFE3] rounded-full"
                 variants={{
                   rest: {
                     width: 0,

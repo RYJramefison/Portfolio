@@ -40,7 +40,7 @@ const HeroSection = () => {
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
                 <span className="text-gray-900 dark:text-gray-300">Juninho</span>{' '}
-                <span className="bg-gradient-to-r from-blue-600 to-teal-500 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-600 to-[#1ECFE3] bg-clip-text text-transparent">
                   Ramefison
                 </span>
               </motion.h1>
