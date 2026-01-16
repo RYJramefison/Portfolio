@@ -1,3 +1,5 @@
+import { link } from "fs";
+
 export type Lang = "fr" | "en";
 
 export const translations = {
@@ -203,18 +205,21 @@ export const translations = {
           description:
             "Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), disposant de solides bases en développement et en systèmes informatiques.",
           image: "HEI.png",
+          link: "https://www.hei.ch/",
         },
         {
           title: "Baccalauréat",
           description:
             "Obtention du baccalauréat scientifique (Série D) en 2023 au lycée MIRVA Alarobia Amboniloha.",
           image: "mirva.jpg",
+          link: "https://lyceemirva.edu.mg/",
         },
         {
           title: "Centres d’intérêt",
           description:
             "Je m’intéresse au football, à la natation, à la musique, au beatbox et aux échecs.",
           image: "Hobbies.jpeg",
+          link: null,
         },
       ],
     },
@@ -477,18 +482,21 @@ export const translations = {
           description:
             "Computer science student (Bachelor’s degree – Year 3) at HEI (Haute École d’Informatique), with solid foundations in development and computer systems.",
           image: "HEI.png",
+          link: "https://www.hei.ch/",
         },
         {
           title: "High School Diploma",
           description:
             "Scientific high school diploma (Series D) obtained in 2023 at MIRVA Alarobia Amboniloha High School.",
           image: "mirva.jpg",
+          link: "https://lyceemirva.edu.mg/",
         },
         {
           title: "Interests",
           description:
             "I am interested in football, swimming, music, beatboxing, and chess.",
           image: "Hobbies.jpeg",
+          link: null,
         },
       ],
     },

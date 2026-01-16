@@ -1,15 +1,18 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { GraduationCap, Heart, School } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
-
+import { FaChevronUp, FaCircle, FaFacebookF, FaThumbtack } from 'react-icons/fa';
+import { useState } from 'react'
 const icons = [School, GraduationCap, Heart]
 
 export default function AcademyStudentSection() {
   const { lang } = useLang()
-  const t = translations[lang] ?? translations.fr
+  const t = translations[lang] ?? translations.fr;
+  const [activeStep, setActiveStep] = useState<number | null>(null);
+;
 
   const steps = t.background.steps.map((step, index) => ({
     id: index + 1,
@@ -17,6 +20,7 @@ export default function AcademyStudentSection() {
     description: step.description,
     image: step.image,
     icon: icons[index],
+    link: step.link,
   }))
 
   return (
@@ -111,52 +115,104 @@ export default function AcademyStudentSection() {
               className="absolute left-5 top-0 h-full w-px
                 bg-gradient-to-b from-blue-600 via-gray-400/40 to-transparent"
             />
-            <div className="space-y-10">
-              {steps.map((step, index) => (
-                <motion.div
-                  key={step.id}
-                  initial={{ opacity: 0, x: 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.6, delay: index * 0.15 }}
-                  viewport={{ once: true }}
-                  className="relative"
-                >
-                  <div
-                    className="absolute -left-1.5 top-6 w-4 h-4 rounded-full
-                      bg-blue-600 shadow-md"
-                  />
-                  <motion.div
-                    whileHover={{ y: -6, scale: 1.02 }}
-                    className="bg-white dark:bg-slate-900/70
-                      border border-slate-200 dark:border-slate-800
-                      rounded-xl p-6
-                      shadow-md hover:shadow-lg transition"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div
-                        className="w-14 h-14 rounded-xl overflow-hidden
-                          bg-white dark:bg-gray-800
-                          shadow-md flex-shrink-0"
-                      >
-                        <img
-                          src={step.image}
-                          alt={step.title}
-                          className="w-full h-full object-cover"
-                        />
-                      </div>
-                      <div className="space-y-1">
-                        <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-                          {step.title}
-                        </h4>
-                        <p className="text-gray-500 text-sm leading-relaxed">
-                          {step.description}
-                        </p>
-                      </div>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              ))}
+                <div className="space-y-10 relative">
+      {steps.map((step, index) => {
+        const isActive = step.id === activeStep;
+
+        return (
+          <motion.div
+            key={step.id}
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.15 }}
+            className="relative"
+            style={{ zIndex: isActive ? 10 : 1 }} // card active au-dessus
+          >
+            {/* Icône moderne */}
+            <div className="absolute -left-3 top-6 flex items-center justify-center w-6 h-6 z-20">
+              <motion.div
+                animate={{
+                  scale: isActive ? 1.3 : 1, // cercle pulse légèrement
+                  rotate: isActive ? 15 : 0,
+                }}
+                transition={{ type: "spring", stiffness: 200, damping: 15 }}
+                className={`w-4 h-4 rounded-full border-2 ${
+                  isActive
+                    
+                    ? "bg-white dark:bg-gray-900 border-blue-600"
+                    : "bg-blue-600 border-blue-600 shadow-lg"
+                }`}
+              />
             </div>
+
+            {/* Card */}
+            <motion.div
+  onClick={() => setActiveStep(isActive ? null : step.id)}
+  whileHover={{ scale: 1.02 }}
+  animate={{
+    scale: isActive ? 1.05 : 1,
+    boxShadow: isActive
+      ? "0px 20px 40px rgba(0,0,0,0.3)"
+      : "0px 8px 20px rgba(0,0,0,0.1)",
+  }}
+  transition={{ type: "spring", stiffness: 180, damping: 20 }}
+  className="bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-md hover:shadow-lg cursor-pointer relative"
+>
+  <div className="flex items-start gap-4 relative">
+    {/* Image + lien */}
+    <div className="relative w-14 h-14 flex-shrink-0">
+      <div className="w-14 h-14 rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-md">
+        <img
+          src={step.image}
+          alt={step.title}
+          className="w-full h-full object-cover"
+        />
+      </div>
+
+      {/* Lien qui apparaît près du logo */}
+      <AnimatePresence>
+        {isActive && step.link && (
+          <motion.a
+            href={step.link}
+            target="_blank"
+            rel="noopener noreferrer"
+            initial={{ opacity: 0, scale: 0.8, y: 6 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 6 }}
+            transition={{ duration: 0.25, ease: "easeOut" }}
+            className="
+              absolute -bottom-2 -right-2
+              w-7 h-7
+              rounded-full
+              bg-blue-600
+              text-white
+              flex items-center justify-center
+              shadow-lg
+              hover:scale-110
+            "
+          >
+            <FaFacebookF className="w-3 h-3" />
+          </motion.a>
+        )}
+      </AnimatePresence>
+    </div>
+
+    {/* Texte */}
+    <div className="space-y-1">
+      <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+        {step.title}
+      </h4>
+      <p className="text-gray-500 text-sm leading-relaxed">
+        {step.description}
+      </p>
+    </div>
+  </div>
+</motion.div>
+
+          </motion.div>
+        );
+      })}
+    </div>
           </div>
         </div>
       </div>
