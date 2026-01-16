@@ -3,9 +3,10 @@
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, GithubIcon } from 'lucide-react';
-import { motion, type Variants } from 'framer-motion';
+import { ExternalLink, GithubIcon,ChevronLeft, ChevronRight  } from 'lucide-react';
+import { motion, type Variants,  AnimatePresence } from 'framer-motion';
 import { useLang } from '@/app/providers/lang-provider';
+import { useState } from 'react';
 
 const containerVariants: Variants = {
   hidden: {},
@@ -92,48 +93,99 @@ const ProjectSection = () => {
                     index === 1 ? 'ring-2 ring-blue-500/30' : ''
                   }`}
                 >
-                  <div className="relative h-60 overflow-hidden">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110 group-hover:-translate-y-2"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent dark:from-gray-900/80 dark:via-gray-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <div className="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-                      {project.previewUrl && (
-                        <Button
-                          asChild
-                          size="icon"
-                          className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-blue-600 shadow-lg hover:scale-110 transition"
-                        >
-                          <a
-                            href={project.previewUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Live preview"
-                          >
-                            <ExternalLink className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                      {project.githubUrl && (
-                        <Button
-                          asChild
-                          size="icon"
-                          className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-gray-900 hover:text-white dark:text-white shadow-lg hover:scale-110 transition"
-                        >
-                          <a
-                            href={project.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub repository"
-                          >
-                            <GithubIcon className="h-4 w-4" />
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
+                  <div className="relative h-60 overflow-hidden group">
+  {(() => {
+    const [currentImage, setCurrentImage] = useState(0);
+    const images = project.images;
+
+    const prevImage = () =>
+      setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    const nextImage = () =>
+      setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+
+    return (
+      <>
+        {/* Animation des images */}
+        <AnimatePresence initial={false}>
+          <motion.img
+            key={currentImage}
+            src={images[currentImage]}
+            alt={`${project.title} screenshot ${currentImage + 1}`}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110 group-hover:-translate-y-2"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -50 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+          />
+        </AnimatePresence>
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent dark:from-gray-900/80 dark:via-gray-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+        {/* Flèches gauche/droite */}
+        {images.length > 1 && (
+          <>
+            {/* Conteneur flèches légèrement hors de l'image */}
+            <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
+              <button
+                onClick={prevImage}
+                className="pointer-events-auto bg-white/70 dark:bg-black/70 rounded-full p-2 m-2 shadow hover:scale-110 transition"
+              >
+                <ChevronLeft className="w-4 h-4 text-gray-800 dark:text-white" />
+              </button>
+              <button
+                onClick={nextImage}
+                className="pointer-events-auto bg-white/70 dark:bg-black/70 rounded-full p-2 m-2 shadow hover:scale-110 transition"
+              >
+                <ChevronRight className="w-4 h-4 text-gray-800 dark:text-white" />
+              </button>
+            </div>
+          </>
+        )}
+
+        {/* Liens GitHub / Preview */}
+        <div className="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
+          {project.previewUrl && (
+            <Button
+              asChild
+              size="icon"
+              className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-blue-600 shadow-lg hover:scale-110 transition"
+            >
+              <a
+                href={project.previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Live preview"
+              >
+                <ExternalLink className="h-4 w-4" />
+              </a>
+            </Button>
+          )}
+          {project.githubUrl && (
+            <Button
+              asChild
+              size="icon"
+              className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-gray-900 hover:text-white dark:text-white shadow-lg hover:scale-110 transition"
+            >
+              <a
+                href={project.githubUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub repository"
+              >
+                <GithubIcon className="h-4 w-4" />
+              </a>
+            </Button>
+          )}
+        </div>
+      </>
+    );
+  })()}
+</div>
+
+
+
+
                   <div className="p-6 space-y-4">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white">
                       {project.title}

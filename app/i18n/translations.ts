@@ -146,7 +146,7 @@ export const translations = {
           title: "Restaurant API",
           description:
             "API backend pour la gestion des commandes et des stocks en restauration, avec vérification automatique des ingrédients.",
-          image: "api_restaurant.png",
+          images: ["api_restaurant.png"],
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "API Backend",
           githubUrl:
@@ -157,7 +157,11 @@ export const translations = {
           title: "Prévision météo",
           description:
             "Analyse de données climatiques pour recommander les meilleures périodes de voyage, avec pipeline ETL et visualisation via Power BI.",
-          image: "climat et tourisme.png",
+          images: [
+            "climat et tourisme.png",
+            "climat et tourisme.png",
+            "climat et tourisme.png",
+          ],
           tags: ["Python", "Apache Airflow", "Jupyter", "PowerBI"],
           category: "Plateforme",
           githubUrl: "https://github.com/RYJramefison/climat_tourism",
@@ -168,7 +172,11 @@ export const translations = {
           title: "Gestion de patrimoine",
           description:
             "Système CRUD de gestion de patrimoine personnel avec calcul des amortissements et visualisation graphique de l’évolution dans le temps.",
-          image: "Patrimoine economique.png",
+          images: [
+            "Patrimoine economique.png",
+            "Patrimoine economique.png",
+            "Patrimoine economique.png",
+          ],
           tags: ["React.js", "Express.js", "Bootstrap"],
           category: "API Backend",
           githubUrl:
@@ -412,7 +420,7 @@ export const translations = {
           title: "Restaurant API",
           description:
             "Backend API for managing restaurant orders and inventory, with automatic ingredient availability checks.",
-          image: "api_restaurant.png",
+          images: ["api_restaurant.png"],
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "Backend API",
           githubUrl:
@@ -423,7 +431,11 @@ export const translations = {
           title: "Weather Forecast",
           description:
             "Climate data analysis to recommend the best travel periods, with an automated ETL pipeline and data visualization using Power BI.",
-          image: "climat et tourisme.png",
+          images: [
+            "climat et tourisme.png",
+            "climat et tourisme.png",
+            "climat et tourisme.png",
+          ],
           tags: ["Python", "Apache Airflow", "Jupyter", "Power BI"],
           category: "Platform",
           githubUrl: "https://github.com/RYJramefison/climat_tourism",
@@ -434,7 +446,11 @@ export const translations = {
           title: "Asset Management",
           description:
             "CRUD system for personal asset management, including depreciation calculations and graphical visualization of asset evolution over time.",
-          image: "Patrimoine economique.png",
+          images: [
+            "Patrimoine economique.png",
+            "Patrimoine economique.png",
+            "Patrimoine economique.png",
+          ],
           tags: ["React.js", "Express.js", "Bootstrap"],
           category: "Backend API",
           githubUrl:
