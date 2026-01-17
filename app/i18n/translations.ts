@@ -246,14 +246,14 @@ export const translations = {
       subtitle: "Une philosophie qui guide chaque projet et décision",
       quote: {
         lines: [
-          "Let the moon be your mark.",
-          "A failure there is no true descent,",
-          "but a silent promotion to the starry court.",
+          "Que la lune soit ton repère.",
+          "L’échec n’est pas une vraie chute,",
+          "mais une ascension silencieuse vers la cour des étoiles.",
         ],
       },
       author: {
         name: "Juninho RAMEFISON",
-        role: "Développeur logiciel",
+        role: "Inspiré par Antoine de Saint‑Exupéry, Le Petit Prince",
       },
       tag: "Philosophie personnelle",
       footer:
@@ -546,7 +546,7 @@ export const translations = {
       },
       author: {
         name: "Juninho RAMEFISON",
-        role: "Software Developer",
+        role: "Inspired by Antoine de Saint-Exupéry, The Little Prince",
       },
       tag: "Personal philosophy",
       footer:

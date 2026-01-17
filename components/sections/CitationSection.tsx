@@ -57,33 +57,46 @@ export default function CitationSection() {
                 </div>
               </div>
               <blockquote className="mb-10">
-                <p className="text-2xl md:text-3xl font-light text-gray-800 
-                              leading-relaxed mb-6 dark:text-gray-200">
-                  {t.citation.quote.lines.map((line, i) => (
-                    <span key={i} className="block">
-                      {line}
-                    </span>
-                  ))}
-                </p>
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="flex-1 h-px bg-gradient-to-r from-blue-100 to-gray-100" />
-                  <div className="flex gap-1">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 fill-yellow-400 text-yellow-400"
-                      />
-                    ))}
-                  </div>
-                  <div className="flex-1 h-px bg-gradient-to-r from-gray-100 to-blue-100" />
-                </div>
-              </blockquote>
+  <p
+    className="
+      text-2xl md:text-3xl
+      font-['Source_Serif_4']
+      font-normal
+      tracking-wide
+      leading-relaxed
+      text-gray-800
+      dark:text-gray-200
+      mb-6
+    "
+  >
+    {t.citation.quote.lines.map((line, i) => (
+      <span key={i} className="block">
+        {line}
+      </span>
+    ))}
+  </p>
+
+  <div className="flex items-center gap-4 mb-8">
+    <div className="flex-1 h-px bg-gradient-to-r from-blue-100 to-gray-100" />
+    <div className="flex gap-1">
+      {[...Array(5)].map((_, i) => (
+        <Star
+          key={i}
+          className="w-5 h-5 fill-yellow-400 text-yellow-400"
+        />
+      ))}
+    </div>
+    <div className="flex-1 h-px bg-gradient-to-r from-gray-100 to-blue-100" />
+  </div>
+</blockquote>
+
+
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-1">
+                  <h4 className="text-lg font-bold text-gray-900 dark:text-gray-100 mb-1">
                     {t.citation.author.name}
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-400">
+                  <p className="text-sm text-gray-600 dark:text-gray-400">
                     {t.citation.author.role}
                   </p>
                 </div>
