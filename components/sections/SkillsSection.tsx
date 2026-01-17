@@ -100,35 +100,58 @@ export default function SkillsSection() {
                       />
                     </span>
                     <span
-                      className="
-                        relative z-10
-                        transition-all duration-300
-                        group-hover:opacity-0 group-hover:-translate-y-1
-                      "
-                    >
-                      {skill.name}
-                    </span>
-                    <span
-                      className="
-                        absolute left-1/2 -translate-x-1/2
-                        opacity-0 scale-75
-                        transition-all duration-300
-                        group-hover:opacity-100 group-hover:scale-110
-                        z-10
-                        flex items-center justify-center
-                      "
-                    >
-                      <Image
-                        src={skill.icon}
-                        alt={skill.name}
-                        width={22}
-                        height={22}
-                        className="
-                          object-contain
-                          drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
-                        "
-                      />
-                    </span>
+  className="
+    relative z-10 block
+    transition-all duration-500 ease-out
+    group-hover:opacity-0
+    group-hover:translate-x-1
+  "
+>
+  {skill.name}
+</span>
+
+<span
+  className="
+    absolute inset-0 z-10
+    origin-left
+    scale-x-0
+    group-hover:scale-x-100
+    transition-transform duration-500 ease-[cubic-bezier(0.4,0,0.2,1)]
+    bg-[rgba(var(--skill-color),0.12)]
+  "
+/>
+
+
+
+<span
+  className="
+    absolute inset-0 z-20
+    flex items-center justify-center
+    pointer-events-none
+  "
+>
+  <Image
+    src={skill.icon}
+    alt={skill.name}
+    width={22}
+    height={22}
+    className="
+      object-contain
+      opacity-0
+      scale-90
+      group-hover:opacity-100
+      group-hover:scale-110
+      transition-all duration-300 ease-out delay-150
+      drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
+    "
+  />
+</span>
+
+
+
+
+
+
                     {skill.primary && (
                       <span
                         className="
