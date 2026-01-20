@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Download } from 'lucide-react'
-import { motion } from 'framer-motion'
+import { easeOut, motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/ui/lib/scrollToSection'
 import ParticlesBackground from '../ui/ParticlesParticlesBackground'
@@ -15,6 +15,57 @@ const museoModerno = Montserrat({
 const HeroSection = () => {
   const { t } = useLang()
 
+  const greetingContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.04, 
+      },
+    },
+  }
+  
+  
+  const letter = {
+    hidden: { opacity: 0, y: 6 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        ease: easeOut,
+      },
+    },
+  }
+
+  const greetingLength = t.home.greeting.length
+const typingSpeed = 0.04
+
+const nameContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      delayChildren: greetingLength * typingSpeed + 0.2, 
+      staggerChildren: 0.05,
+    },
+  },
+}
+
+const fullName = [
+  ...'Juninho'.split('').map((char) => ({
+    char,
+    className: `${museoModerno.className} text-gray-900 dark:text-gray-300`,
+  })),
+  {
+    char: ' ',
+    className: '',
+  },
+  ...'Ramefison'.split('').map((char) => ({
+    char,
+    className: `${museoModerno.className} bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent`,
+  })),
+]
+
+  
+  
   return (
     <section id="home" className="relative pt-16 pb-20 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-white dark:bg-gray-950" />
@@ -28,27 +79,42 @@ const HeroSection = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="space-y-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.6 }}
-                className="flex items-center space-x-2"
-              >
-                <span className="text-gray-600 dark:text-gray-400">
-                  {t.home.greeting} 
-                </span>
-              </motion.div>
-              <motion.h1
-                className="text-4xl lg:text-5xl font-semibold leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.6 }}
-              >
-                <span className={`${museoModerno.className} text-gray-900 dark:text-gray-300`}>Juninho</span>{' '}
-                <span className={`${museoModerno.className} bg-gray-900 dark:text-gray-300 bg-clip-text text-transparent`}>
-                  Ramefison
-                </span>
-              </motion.h1>
+            <motion.div
+  variants={greetingContainer}
+  initial="hidden"
+  animate="visible"
+  className="flex items-center space-x-2"
+>
+  <span className="text-gray-600 dark:text-gray-400">
+    {t.home.greeting.split('').map((char, i) => (
+
+
+      <motion.span key={i} variants={letter}>
+        {char === ' ' ? '\u00A0' : char}
+      </motion.span>
+    ))}
+  </span>
+</motion.div>
+
+
+<motion.h1
+  variants={nameContainer}
+  initial="hidden"
+  animate="visible"
+  className="text-4xl lg:text-5xl font-semibold leading-tight"
+>
+  {fullName.map((item, i) => (
+    <motion.span
+      key={i}
+      variants={letter}
+      className={item.className}
+    >
+      {item.char === ' ' ? '\u00A0' : item.char}
+    </motion.span>
+  ))}
+</motion.h1>
+
+
               <motion.p
                 className="text-2xl text-blue-600 font-semibold"
                 initial={{ opacity: 0, y: 20 }}
