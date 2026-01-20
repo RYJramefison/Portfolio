@@ -13,28 +13,49 @@ import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs"
 
-
+const MAX_DAILY_SUBMISSIONS = 3
 
 const ContactSection = () => {
   const { t } = useLang()
-  const [status, setStatus] = useState<'success' | 'error' | null>(null)
+  const { user, isSignedIn } = useUser()
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    subject: '',
+    message: '',
+  })
+  const [status, setStatus] = useState<'success' | 'error' | 'limit' | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
-  const { user, isSignedIn } = useUser()
 
+  /* ===================== PREFILL USER ===================== */
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
         ...prev,
-        firstName: user.firstName || "",
-        lastName: user.lastName || "",
-        email: user.primaryEmailAddress?.emailAddress || "",
+        firstName: user.firstName || '',
+        lastName: user.lastName || '',
+        email: user.primaryEmailAddress?.emailAddress || '',
       }))
     }
   }, [user])
-  
 
+  useEffect(() => {
+    if (!isSignedIn) {
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+      setErrors({})
+      setStatus(null)
+    }
+  }, [isSignedIn])
 
+  /* ===================== CONTACT INFO ===================== */
   const contactInfo = [
     {
       icon: Mail,
@@ -56,48 +77,22 @@ const ContactSection = () => {
     },
   ]
 
+  /* ===================== AUTO CLEAR STATUS/ERRORS ===================== */
   useEffect(() => {
     if (!status) return
     const duration = status === 'success' ? 1500 : 3000
-    const timer = setTimeout(() => {
-      setStatus(null)
-    }, duration)
+    const timer = setTimeout(() => setStatus(null), duration)
     return () => clearTimeout(timer)
   }, [status])
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) return
-    const timer = setTimeout(() => {
-      setErrors({})
-    }, 1500)
+    const timer = setTimeout(() => setErrors({}), 1500)
     return () => clearTimeout(timer)
   }, [errors])
 
-  const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: '',
-  })
-
-  useEffect(() => {
-    if (!isSignedIn) {
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        subject: '',
-        message: '',
-      })
-      setErrors({})
-      setStatus(null)
-    }
-  }, [isSignedIn])
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  /* ===================== HANDLERS ===================== */
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
     if (errors[name]) {
@@ -109,61 +104,90 @@ const ContactSection = () => {
     }
   }
 
-  
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
+  const getTodayKey = () => {
+    const today = new Date().toISOString().split('T')[0]
+    return `contact_limit_${user?.id}_${today}`
+  }
 
-    if (!isSignedIn) {
-      setStatus('error')
-      setErrors({ global: "Veuillez vous connecter pour envoyer le message." })
-      return
-    }
-  
-    setStatus(null)
-    if (!validateForm()) return
-    setIsLoading(true)
+  const getDailyCount = () => {
+    if (!user) return 0
+    return Number(localStorage.getItem(getTodayKey()) || 0)
+  }
 
-    setStatus(null)
-    if (!validateForm()) return
-    setIsLoading(true)
-    emailjs
-      .send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formData,
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      )
-      .then(() => {
-        setStatus('success')
-        setFormData((prev) => ({
-          ...prev,
-          subject: '',
-          message: '',
-        }));
-        setErrors({})
-      })
-      .catch(() => {
-        setStatus('error')
-      })
-      .finally(() => {
-        setIsLoading(false)
-      })
+  const incrementDailyCount = () => {
+    if (!user) return
+    const key = getTodayKey()
+    localStorage.setItem(key, String(getDailyCount() + 1))
   }
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {}
     if (!formData.firstName.trim()) newErrors.firstName = 'Champ requis'
     if (!formData.lastName.trim()) newErrors.lastName = 'Champ requis'
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email requis'
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+    if (!formData.email.trim()) newErrors.email = 'Email requis'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
       newErrors.email = 'Email invalide'
-    }
     if (!formData.subject.trim()) newErrors.subject = 'Sujet requis'
     if (!formData.message.trim()) newErrors.message = 'Message requis'
     setErrors(newErrors)
     return Object.keys(newErrors).length === 0
   }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!isSignedIn) {
+      setStatus('error')
+      setErrors({ global: "Veuillez vous connecter pour envoyer le message." })
+      return
+    }
+
+    const dailyCount = getDailyCount()
+    if (dailyCount >= MAX_DAILY_SUBMISSIONS) {
+      setStatus('limit')
+      setErrors({ global: "Vous avez déjà envoyé 3 messages aujourd’hui, revenez demain." })
+      return
+    }
+
+    if (!validateForm()) return
+
+    setIsLoading(true)
+    setStatus(null)
+
+    try {
+      await emailjs.send(
+        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+        formData,
+        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
+      )
+      incrementDailyCount()
+      setStatus('success')
+      setFormData((prev) => ({
+        ...prev,
+        subject: '',
+        message: '',
+      }))
+      setErrors({})
+    } catch (error) {
+      setStatus('error')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    if (!status) return
+  
+    const duration =
+      status === 'success' ? 1500 :
+      status === 'limit' ? 4000 :
+      3000
+  
+    const timer = setTimeout(() => setStatus(null), duration)
+    return () => clearTimeout(timer)
+  }, [status])
+  
+
 
   return (
     <section
@@ -557,35 +581,53 @@ const ContactSection = () => {
                     </Button>
                   </form>
                   {status && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0 }}
-                    className={`mt-6 rounded-xl border px-4 py-3 flex items-start gap-3
-                      ${
-                        status === 'success'
-                          ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
-                          : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
-                      }
-                    `}
-                  >
-                    <div className="mt-0.5">
-                      {status === 'success' ? '✅' : '❌'}
-                    </div>
-                    <div>
-                      <p className="font-semibold">
-                        {status === 'success'
-                          ? 'Message envoyé avec succès'
-                          : 'Erreur lors de l’envoi'}
-                      </p>
-                      <p className="text-sm opacity-90">
-                        {status === 'success'
-                          ? 'Merci pour votre message. Je vous répondrai très prochainement.'
-                          : 'Une erreur est survenue. Veuillez réessayer plus tard.'}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
+  <motion.div
+    initial={{ opacity: 0, y: -10 }}
+    animate={{ opacity: 1, y: 0 }}
+    className={`mt-6 rounded-xl border px-4 py-3 flex items-start gap-3
+      ${
+        status === 'success'
+          ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
+          : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
+      }
+    `}
+  >
+    <div className="mt-0.5">
+      {status === 'success' ? '✅' : '⚠️'}
+    </div>
+
+    <div>
+      {status === 'success' && (
+        <>
+          <p className="font-semibold">Message envoyé avec succès</p>
+          <p className="text-sm opacity-90">
+            Merci pour votre message. Je vous répondrai très prochainement.
+          </p>
+        </>
+      )}
+
+      {status === 'limit' && (
+        <>
+          <p className="font-semibold">Limite atteinte</p>
+          <p className="text-sm opacity-90">
+            Vous avez déjà envoyé 3 messages aujourd’hui. Revenez demain.
+          </p>
+        </>
+      )}
+
+      {status === 'error' && (
+        <>
+          <p className="font-semibold">Erreur lors de l’envoi</p>
+          <p className="text-sm opacity-90">
+            Une erreur est survenue. Veuillez réessayer plus tard.
+          </p>
+        </>
+      )}
+    </div>
+  </motion.div>
+)}
+
+
                 </CardContent>
               </Card>
             </motion.div>
