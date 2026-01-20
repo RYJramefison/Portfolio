@@ -81,6 +81,20 @@ const ContactSection = () => {
     message: '',
   })
 
+  useEffect(() => {
+    if (!isSignedIn) {
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        subject: '',
+        message: '',
+      })
+      setErrors({})
+      setStatus(null)
+    }
+  }, [isSignedIn])
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -123,11 +137,8 @@ const ContactSection = () => {
         setStatus('success')
         setFormData((prev) => ({
           ...prev,
-          firstName: '',
-          lastName: '',
           subject: '',
           message: '',
-          email: prev.email, // Retain the user's email
         }));
         setErrors({})
       })
@@ -277,6 +288,7 @@ const ContactSection = () => {
                         value={formData.firstName}
                         onChange={handleChange}
                         placeholder={t.contact.form.firstNamePlaceholder}
+                        disabled
                       />
                       {errors.firstName && (
                         <motion.p
@@ -313,6 +325,7 @@ const ContactSection = () => {
                         value={formData.lastName}
                         onChange={handleChange}
                         placeholder={t.contact.form.lastNamePlaceholder}
+                        disabled
                       />
                       {errors.lastName && (
                         <motion.p
@@ -388,6 +401,7 @@ const ContactSection = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder={t.contact.form.subjectPlaceholder}
+                      disabled={!isSignedIn}
                     />
                     {errors.subject && (
                       <motion.p
@@ -426,6 +440,7 @@ const ContactSection = () => {
                       rows={6}
                       placeholder={t.contact.form.messagePlaceholder}
                       className="resize-none"
+                      disabled={!isSignedIn}
                     />
                     {errors.message && (
                       <motion.p
