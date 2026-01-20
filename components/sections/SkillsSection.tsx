@@ -36,7 +36,15 @@ export default function SkillsSection() {
               transition={{ delay: i * 0.15, duration: 0.6 }}
               className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-xl transition dark:bg-gray-900 dark:shadow-black/40"
             >
-              <div className="text-3xl mb-4">{cat.icon}</div>
+              <div className="mb-4">
+  <Image
+    src={cat.icon}
+    alt={cat.title}
+    width={36}
+    height={36}
+  />
+</div>
+
               <h3 className="text-xl font-semibold text-gray-900 dark:text-gray-200 mb-2">
                 {cat.title}
               </h3>

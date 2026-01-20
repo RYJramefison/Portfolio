@@ -35,7 +35,7 @@ export const translations = {
       categories: [
         {
           title: "Front-end",
-          icon: "💻",
+          icon: "/icons/skills/ux-design.png",
           description: "Développement d’interfaces performantes et dynamiques.",
           skills: [
             {
@@ -78,7 +78,7 @@ export const translations = {
         },
         {
           title: "Back-end",
-          icon: "🛠️",
+          icon: "/icons/skills/coding.png",
           description:
             "Architecture et développement d’APIs backend fiables, scalables et maintenables.",
           skills: [
@@ -114,7 +114,7 @@ export const translations = {
         },
         {
           title: "Outils & Autres",
-          icon: "⚙️",
+          icon: "/icons/skills/browser.png",
           description:
             "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
           skills: [
@@ -327,7 +327,7 @@ export const translations = {
       categories: [
         {
           title: "Front-end",
-          icon: "💻",
+          icon: "/icons/skills/ux-design.png",
           description:
             "Developing high-performance and dynamic user interfaces.",
           skills: [
@@ -371,7 +371,7 @@ export const translations = {
         },
         {
           title: "Back-end",
-          icon: "🛠️",
+          icon: "/icons/skills/coding.png",
           description:
             "Designing and developing reliable, scalable, and maintainable backend APIs.",
           skills: [
@@ -407,7 +407,7 @@ export const translations = {
         },
         {
           title: "Tools & Others",
-          icon: "⚙️",
+          icon: "/icons/skills/browser.png",
           description:
             "Using modern tools for development, data analysis, and collaboration.",
           skills: [
