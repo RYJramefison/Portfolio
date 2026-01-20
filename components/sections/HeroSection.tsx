@@ -35,7 +35,7 @@ const HeroSection = () => {
                 className="flex items-center space-x-2"
               >
                 <span className="text-gray-600 dark:text-gray-400">
-                  {t.home.greeting} 👋
+                  {t.home.greeting} 
                 </span>
               </motion.div>
               <motion.h1
