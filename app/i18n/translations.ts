@@ -49,7 +49,7 @@ export const translations = {
               name: "React",
               icon: "/icons/react-js.png",
               color: "59,130,246",
-              primary: false,
+              primary: true,
               documentation: "https://react.dev/",
             },
             {
@@ -63,7 +63,7 @@ export const translations = {
               name: "Tailwind CSS",
               icon: "/icons/tailwind.png",
               color: "14,165,233",
-              primary: true,
+              primary: false,
               documentation: "https://tailwindcss.com/docs",
             },
             {
@@ -82,6 +82,13 @@ export const translations = {
           description:
             "Architecture et développement d’APIs backend fiables, scalables et maintenables.",
           skills: [
+            {
+              name: "Spring Boot",
+              icon: "/icons/spring.png",
+              color: "109,179,63",
+              primary: true,
+              documentation: "https://spring.io/projects/spring-boot",
+            },
             {
               name: "Java",
               icon: "/icons/java.png",
@@ -103,15 +110,47 @@ export const translations = {
               primary: false,
               documentation: "https://nodejs.org/en/docs/",
             },
+          ],
+        },
+        {
+          title: "Data",
+          icon: "/icons/skills/data.png",
+          description:
+            "Analyse, traitement et orchestration des données pour produire des résultats fiables et exploitables.",
+          skills: [
             {
-              name: "Express.js",
-              icon: "/icons/express.png",
-              color: "107,114,128",
+              name: "Python",
+              icon: "/icons/python.png",
+              color: "55,118,171",
               primary: false,
-              documentation: "https://expressjs.com/en/starter/installing.html",
+              documentation: "https://docs.python.org/3/",
+            },
+            {
+              name: "Jupyter Notebook",
+              icon: "/icons/jupyter.png",
+              color: "243,118,38",
+              primary: false,
+              documentation: "https://jupyter.org/documentation",
+            },
+            {
+              name: "Apache Airflow",
+              icon: "/icons/airflow.png",
+              color: "1,124,238",
+              primary: false,
+              documentation:
+                "https://airflow.apache.org/docs/apache-airflow/stable/",
+            },
+            {
+              name: "Power BI",
+              icon: "/icons/powerbi.png",
+              color: "242,200,17",
+              primary: false,
+              documentation:
+                "https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview",
             },
           ],
         },
+
         {
           title: "Outils & Autres",
           icon: "/icons/skills/setting.png",
@@ -141,12 +180,12 @@ export const translations = {
               documentation: "https://docs.docker.com/get-started/",
             },
             {
-              name: "Power BI",
-              icon: "/icons/powerbi.png",
-              color: "234,179,8",
+              name: "Postman",
+              icon: "/icons/postman.png",
+              color: "255,108,55",
               primary: false,
               documentation:
-                "https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview",
+                "https://learning.postman.com/docs/getting-started/introduction/",
             },
           ],
         },
@@ -342,7 +381,7 @@ export const translations = {
               name: "React",
               icon: "/icons/react-js.png",
               color: "59,130,246",
-              primary: false,
+              primary: true,
               documentation: "https://react.dev/",
             },
             {
@@ -356,7 +395,7 @@ export const translations = {
               name: "Tailwind CSS",
               icon: "/icons/tailwind.png",
               color: "14,165,233",
-              primary: true,
+              primary: false,
               documentation: "https://tailwindcss.com/docs",
             },
             {
@@ -375,6 +414,13 @@ export const translations = {
           description:
             "Designing and developing reliable, scalable, and maintainable backend APIs.",
           skills: [
+            {
+              name: "Spring Boot",
+              icon: "/icons/spring.png",
+              color: "109,179,63",
+              primary: true,
+              documentation: "https://spring.io/projects/spring-boot",
+            },
             {
               name: "Java",
               icon: "/icons/java.png",
@@ -396,12 +442,43 @@ export const translations = {
               primary: false,
               documentation: "https://nodejs.org/en/docs/",
             },
+          ],
+        },
+        {
+          title: "Data",
+          icon: "/icons/skills/data.png",
+          description:
+            "Analysis, processing, and orchestration of data to produce reliable and actionable results.",
+          skills: [
             {
-              name: "Express.js",
-              icon: "/icons/express.png",
-              color: "107,114,128",
+              name: "Python",
+              icon: "/icons/python.png",
+              color: "55,118,171",
               primary: false,
-              documentation: "https://expressjs.com/en/starter/installing.html",
+              documentation: "https://docs.python.org/3/",
+            },
+            {
+              name: "Jupyter Notebook",
+              icon: "/icons/jupyter.png",
+              color: "243,118,38",
+              primary: false,
+              documentation: "https://jupyter.org/documentation",
+            },
+            {
+              name: "Apache Airflow",
+              icon: "/icons/airflow.png",
+              color: "1,124,238",
+              primary: false,
+              documentation:
+                "https://airflow.apache.org/docs/apache-airflow/stable/",
+            },
+            {
+              name: "Power BI",
+              icon: "/icons/powerbi.png",
+              color: "242,200,17",
+              primary: false,
+              documentation:
+                "https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview",
             },
           ],
         },
@@ -434,12 +511,12 @@ export const translations = {
               documentation: "https://docs.docker.com/get-started/",
             },
             {
-              name: "Power BI",
-              icon: "/icons/powerbi.png",
-              color: "234,179,8",
+              name: "Postman",
+              icon: "/icons/postman.png",
+              color: "255,108,55",
               primary: false,
               documentation:
-                "https://learn.microsoft.com/en-us/power-bi/fundamentals/power-bi-overview",
+                "https://learning.postman.com/docs/getting-started/introduction/",
             },
           ],
         },
