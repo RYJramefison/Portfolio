@@ -72,7 +72,7 @@ export default function SkillsSection() {
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.4 }}
-    className="bg-white dark:bg-gray-900 rounded-3xl p-8 shadow-xl"
+    className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl"
   >
     <div className="grid md:grid-cols-[120px_1fr_2fr] gap-8 items-center">
 
@@ -100,84 +100,104 @@ export default function SkillsSection() {
       </div>
 
       {/* Skills */}
-      <ul className="grid sm:grid-cols-2 gap-3">
-        {activeCategory.skills.map((skill) => (
-          <motion.li
-            key={skill.name}
-            role="link"
-            tabIndex={0}
-            onClick={() => (window.location.href = skill.documentation)}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault()
-                window.location.href = skill.documentation
-              }
-            }}
-            style={{ ['--skill-color' as any]: skill.color }}
-            whileHover={{ scale: 1.06 }}
-            transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-            className={`
-              group relative overflow-hidden
-              flex items-center justify-between
-              px-4 py-2 rounded-lg cursor-pointer
-              transition-all duration-300 ease-out
-              hover:shadow-lg
-              ${
-                skill.primary
-                  ? 'bg-blue-50 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                  : 'bg-gray-100 text-gray-700 dark:bg-gray-800 dark:text-gray-300'
-              }
-            `}
-          >
-            {/* Effet lumière */}
-            <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-              <span className="absolute -top-6 -left-6 h-16 w-16 rounded-full bg-[rgba(var(--skill-color),0.35)] blur-2xl animate-pulse" />
-              <span className="absolute bottom-0 right-4 h-10 w-10 rounded-full bg-[rgba(var(--skill-color),0.25)] blur-xl" />
-            </span>
+      <ul className="grid grid-cols-3 sm:grid-cols-4 gap-4">
+  {activeCategory.skills.map((skill) => (
+    <motion.li
+      key={skill.name}
+      role="link"
+      tabIndex={0}
+      onClick={() => (window.location.href = skill.documentation)}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          window.location.href = skill.documentation
+        }
+      }}
+      style={{ ['--skill-color' as any]: skill.color }}
+      whileHover={{ scale: 1.08 }}
+      transition={{ type: 'spring', stiffness: 260, damping: 18 }}
+      className={`
+        group relative overflow-hidden
+        aspect-square
+        rounded-2xl cursor-pointer
+        flex items-center justify-center
+        transition-all duration-300 ease-out
+        hover:shadow-xl
+        ${
+          skill.primary
+            ? 'bg-blue-50 dark:bg-blue-950'
+            : 'bg-gray-100 dark:bg-gray-800'
+        }
+      `}
+    >
+      {/* Effet lumière */}
+      <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+        <span className="absolute -top-6 -left-6 h-20 w-20 rounded-full bg-[rgba(var(--skill-color),0.35)] blur-2xl animate-pulse" />
+        <span className="absolute bottom-2 right-2 h-12 w-12 rounded-full bg-[rgba(var(--skill-color),0.25)] blur-xl" />
+      </span>
 
-            {/* Nom */}
-            <span className="relative z-20 transition-all duration-500 ease-out group-hover:opacity-0 group-hover:translate-x-1">
-              {skill.name}
-            </span>
+      {/* Fond animé gauche → droite */}
+      <span
+        className="
+          absolute inset-0 z-10
+          origin-left scale-x-0
+          group-hover:scale-x-100
+          transition-transform duration-500
+          ease-[cubic-bezier(0.4,0,0.2,1)]
+          bg-[rgba(var(--skill-color),0.14)]
+        "
+      />
 
-            {/* Fond animé gauche → droite */}
-            <span
-              className="
-                absolute inset-0 z-10
-                origin-left scale-x-0
-                group-hover:scale-x-100
-                transition-transform duration-500
-                ease-[cubic-bezier(0.4,0,0.2,1)]
-                bg-[rgba(var(--skill-color),0.12)]
-              "
-            />
+      {/* Icône */}
+      <span className="relative z-20 flex flex-col items-center gap-2">
+        <Image
+          src={skill.icon}
+          alt={skill.name}
+          width={36}
+          height={36}
+          className="
+            object-contain
+            transition-all duration-300 ease-out
+            group-hover:scale-110
+            drop-shadow-[0_0_12px_rgba(var(--skill-color),0.8)]
+          "
+        />
 
-            {/* Icône */}
-            <span className="absolute inset-0 z-30 flex items-center justify-center pointer-events-none">
-              <Image
-                src={skill.icon}
-                alt={skill.name}
-                width={22}
-                height={22}
-                className="
-                  object-contain
-                  opacity-0 scale-90
-                  group-hover:opacity-100 group-hover:scale-110
-                  transition-all duration-300 ease-out delay-150
-                  drop-shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
-                "
-              />
-            </span>
+        {/* Nom du skill (apparait au hover) */}
+        <span
+          className="
+            text-xs font-medium
+            text-gray-800 dark:text-gray-200
+            opacity-0 translate-y-2
+            group-hover:opacity-100 group-hover:translate-y-0
+            transition-all duration-300 ease-out
+          "
+        >
+          {skill.name}
+        </span>
+      </span>
 
-            {/* Badge */}
-            {skill.primary && (
-              <span className="relative z-20 text-xs px-2 py-0.5 rounded-full bg-blue-600 text-white transition-all duration-300 group-hover:bg-[rgba(var(--skill-color),0.95)]">
-                Main
-              </span>
-            )}
-          </motion.li>
-        ))}
-      </ul>
+      {/* Badge Main */}
+      {/* Badge Main */}
+{skill.primary && (
+  <span
+    className="
+      absolute top-2 right-2 z-30
+      text-[10px] px-2 py-0.5 rounded-full
+      bg-blue-600 text-white
+      transition-all duration-300 ease-out
+      group-hover:bg-[rgba(var(--skill-color),1)]
+      group-hover:shadow-[0_0_10px_rgba(var(--skill-color),0.8)]
+    "
+  >
+    Main
+  </span>
+)}
+
+    </motion.li>
+  ))}
+</ul>
+
     </div>
   </motion.div>
 </AnimatePresence>
