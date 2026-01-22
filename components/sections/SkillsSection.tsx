@@ -1,10 +1,12 @@
 'use client'
 
 import { motion, AnimatePresence } from 'framer-motion'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
 import Image from 'next/image'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+
 
 export default function SkillsSection() {
   const { lang } = useLang()
@@ -12,6 +14,22 @@ export default function SkillsSection() {
 
   const [activeIndex, setActiveIndex] = useState(0)
   const activeCategory = t.categories[activeIndex]
+  const ITEMS_PER_PAGE = 4
+const [page, setPage] = useState(0)
+
+const totalPages = Math.ceil(
+  activeCategory.skills.length / ITEMS_PER_PAGE
+)
+
+const visibleSkills = activeCategory.skills.slice(
+  page * ITEMS_PER_PAGE,
+  page * ITEMS_PER_PAGE + ITEMS_PER_PAGE
+)
+
+useEffect(() => {
+  setPage(0)
+}, [activeIndex])
+
 
   return (
     <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
@@ -100,8 +118,46 @@ export default function SkillsSection() {
       </div>
 
       {/* Skills */}
-      <ul className="grid grid-cols-3 sm:grid-cols-4 gap-4">
-  {activeCategory.skills.map((skill) => (
+      <div className="relative">
+  {/* Flèche gauche */}
+  {activeCategory.skills.length > ITEMS_PER_PAGE && page > 0 && (
+    <button
+      onClick={() => setPage((p) => p - 1)}
+      className="
+        absolute -left-6 top-1/2 -translate-y-1/2 z-40
+        h-10 w-10 rounded-full
+        bg-white/80 dark:bg-gray-900/80
+        backdrop-blur
+        shadow-lg
+        flex items-center justify-center
+        hover:scale-110 transition
+      "
+    >
+      <ChevronLeft className="h-5 w-5" />
+    </button>
+  )}
+
+  {/* Flèche droite */}
+  {activeCategory.skills.length > ITEMS_PER_PAGE &&
+    page < totalPages - 1 && (
+      <button
+        onClick={() => setPage((p) => p + 1)}
+        className="
+          absolute -right-6 top-1/2 -translate-y-1/2 z-40
+          h-10 w-10 rounded-full
+          bg-white/80 dark:bg-gray-900/80
+          backdrop-blur
+          shadow-lg
+          flex items-center justify-center
+          hover:scale-110 transition
+        "
+      >
+        <ChevronRight className="h-5 w-5" />
+      </button>
+    )}
+
+<ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+  {visibleSkills.map((skill) => (
     <motion.li
       key={skill.name}
       role="link"
@@ -116,22 +172,18 @@ export default function SkillsSection() {
       style={{ ['--skill-color' as any]: skill.color }}
       whileHover={{ scale: 1.08 }}
       transition={{ type: 'spring', stiffness: 260, damping: 18 }}
-      className={`
+      className="
         group relative overflow-hidden
         aspect-square
         rounded-2xl cursor-pointer
         flex items-center justify-center
         transition-all duration-300 ease-out
         hover:shadow-xl
-        ${
-          skill.primary
-            ? 'bg-blue-50 dark:bg-blue-950'
-            : 'bg-gray-100 dark:bg-gray-800'
-        }
-      `}
+        bg-gray-100 dark:bg-gray-800
+      "
     >
-      {/* Effet lumière */}
-      <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+           {/* Effet lumière */}
+           <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
         <span className="absolute -top-6 -left-6 h-20 w-20 rounded-full bg-[rgba(var(--skill-color),0.35)] blur-2xl animate-pulse" />
         <span className="absolute bottom-2 right-2 h-12 w-12 rounded-full bg-[rgba(var(--skill-color),0.25)] blur-xl" />
       </span>
@@ -194,9 +246,12 @@ export default function SkillsSection() {
   </span>
 )}
 
+
     </motion.li>
   ))}
 </ul>
+</div>
+
 
     </div>
   </motion.div>
