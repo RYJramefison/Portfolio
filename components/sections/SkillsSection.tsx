@@ -16,6 +16,7 @@ export default function SkillsSection() {
   const activeCategory = t.categories[activeIndex]
   const ITEMS_PER_PAGE = 4
 const [page, setPage] = useState(0)
+const [direction, setDirection] = useState<1 | -1>(1)
 
 const totalPages = Math.ceil(
   activeCategory.skills.length / ITEMS_PER_PAGE
@@ -30,6 +31,20 @@ useEffect(() => {
   setPage(0)
 }, [activeIndex])
 
+const pageVariants = {
+  initial: (direction: number) => ({
+    opacity: 0,
+    x: direction > 0 ? 40 : -40,
+  }),
+  animate: {
+    opacity: 1,
+    x: 0,
+  },
+  exit: (direction: number) => ({
+    opacity: 0,
+    x: direction > 0 ? -40 : 40,
+  }),
+}
 
   return (
     <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
@@ -122,16 +137,23 @@ useEffect(() => {
   {/* Flèche gauche */}
   {activeCategory.skills.length > ITEMS_PER_PAGE && page > 0 && (
     <button
-      onClick={() => setPage((p) => p - 1)}
-      className="
-        absolute -left-6 top-1/2 -translate-y-1/2 z-40
-        h-10 w-10 rounded-full
-        bg-white/80 dark:bg-gray-900/80
-        backdrop-blur
-        shadow-lg
-        flex items-center justify-center
-        hover:scale-110 transition
-      "
+    onClick={() => {
+      setDirection(-1)
+      setPage((p) => p - 1)
+    }}
+    
+    className="
+    absolute -left-5 top-1/2 -translate-y-1/2 z-40
+    h-8 w-8 rounded-full
+    bg-white/80 dark:bg-gray-900/80
+    backdrop-blur
+    shadow-md
+    flex items-center justify-center
+    opacity-60
+    hover:opacity-100
+    hover:scale-105
+    transition-all
+  "
     >
       <ChevronLeft className="h-5 w-5" />
     </button>
@@ -141,22 +163,39 @@ useEffect(() => {
   {activeCategory.skills.length > ITEMS_PER_PAGE &&
     page < totalPages - 1 && (
       <button
-        onClick={() => setPage((p) => p + 1)}
-        className="
-          absolute -right-6 top-1/2 -translate-y-1/2 z-40
-          h-10 w-10 rounded-full
-          bg-white/80 dark:bg-gray-900/80
-          backdrop-blur
-          shadow-lg
-          flex items-center justify-center
-          hover:scale-110 transition
-        "
+      onClick={() => {
+        setDirection(1)
+        setPage((p) => p + 1)
+      }}
+      
+      className="
+      absolute -right-5 top-1/2 -translate-y-1/2 z-40
+      h-8 w-8 rounded-full
+      bg-white/80 dark:bg-gray-900/80
+      backdrop-blur
+      shadow-md
+      flex items-center justify-center
+      opacity-60
+      hover:opacity-100
+      hover:scale-105
+      transition-all
+    "
       >
         <ChevronRight className="h-5 w-5" />
       </button>
     )}
 
-<ul className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+<AnimatePresence mode="wait" custom={direction}>
+  <motion.ul
+    key={page}
+    custom={direction}
+    variants={pageVariants}
+    initial="initial"
+    animate="animate"
+    exit="exit"
+    transition={{ duration: 0.35, ease: 'easeOut' }}
+    className="grid grid-cols-2 sm:grid-cols-4 gap-4"
+  >
   {visibleSkills.map((skill) => (
     <motion.li
       key={skill.name}
@@ -249,7 +288,9 @@ useEffect(() => {
 
     </motion.li>
   ))}
-</ul>
+  </motion.ul>
+</AnimatePresence>
+
 </div>
 
 
