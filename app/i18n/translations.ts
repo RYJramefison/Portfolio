@@ -32,6 +32,8 @@ export const translations = {
     skills: {
       title: "Compétences",
       subtitle: "Ce que je fais",
+      description:
+        "Voici les compétences techniques que j’utilise pour développer des solutions modernes et efficaces.",
       categories: [
         {
           title: "Front-end",
@@ -65,6 +67,28 @@ export const translations = {
               color: "14,165,233",
               primary: false,
               documentation: "https://tailwindcss.com/docs",
+            },
+            {
+              name: "JavaScript",
+              icon: "/icons/javascript.png",
+              color: "247,223,30",
+              primary: false,
+              documentation:
+                "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+            },
+            {
+              name: "HTLM",
+              icon: "/icons/htlm.png",
+              color: "227,79,38",
+              primary: false,
+              documentation: "https://html.spec.whatwg.org/multipage/",
+            },
+            {
+              name: "CSS",
+              icon: "/icons/css.png",
+              color: "38,77,228",
+              primary: false,
+              documentation: "https://www.w3.org/TR/CSS/#css",
             },
             {
               name: "Bootstrap",
@@ -363,6 +387,8 @@ export const translations = {
     skills: {
       title: "Skills",
       subtitle: "What I Do",
+      description:
+        "These are the technical skills I use to develop modern and efficient solutions.",
       categories: [
         {
           title: "Front-end",
@@ -397,6 +423,28 @@ export const translations = {
               color: "14,165,233",
               primary: false,
               documentation: "https://tailwindcss.com/docs",
+            },
+            {
+              name: "JavaScript",
+              icon: "/icons/javascript.png",
+              color: "247,223,30",
+              primary: false,
+              documentation:
+                "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
+            },
+            {
+              name: "HTLM",
+              icon: "/icons/htlm.png",
+              color: "227,79,38",
+              primary: false,
+              documentation: "https://html.spec.whatwg.org/multipage/",
+            },
+            {
+              name: "CSS",
+              icon: "/icons/css.png",
+              color: "38,77,228",
+              primary: false,
+              documentation: "https://www.w3.org/TR/CSS/#css",
             },
             {
               name: "Bootstrap",

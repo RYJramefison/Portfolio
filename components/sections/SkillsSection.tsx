@@ -56,14 +56,17 @@ const pageVariants = {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-14"
+          className="text-center mb-8"
         >
-          <p className="text-sm uppercase tracking-widest text-blue-600 mb-2">
+          <p className="text-sm font-bold uppercase tracking-widest text-blue-600 mb-2">
             {t.title}
           </p>
           <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-200">
             {t.subtitle}
           </h2>
+          <p className="text-gray-600 pt-5 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+            {t.description}
+          </p>
         </motion.div>
 
         {/* Navigation (rectangles en haut) */}
