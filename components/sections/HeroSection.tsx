@@ -73,7 +73,7 @@ const fullName = [
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
           <motion.div
-            className="space-y-8"
+            className="space-y-8 order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -164,7 +164,7 @@ const fullName = [
             </motion.div>
           </motion.div>
           <motion.div
-  className="relative flex justify-center items-center w-full"
+  className="relative flex justify-center items-center w-full order-1 lg:order-2"
   initial={{ opacity: 0, x: 40 }}
   animate={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.9, ease: 'easeOut' }}
@@ -196,15 +196,7 @@ const fullName = [
     </div>
 
   </div>
-</motion.div>
-
-
-
-
-
-
-
-
+          </motion.div>
         </div>
       </div>
     </section>

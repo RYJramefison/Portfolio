@@ -214,11 +214,12 @@ const ContactSection = () => {
         </motion.div>
         <div className="grid lg:grid-cols-2 gap-12">
           <motion.div
-            className="space-y-8"
+            className="space-y-8 order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            
           >
             <div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-6">
@@ -297,6 +298,7 @@ const ContactSection = () => {
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
+            className='order-1 lg:order-2'
           >
             <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
               <CardContent className="p-8">
