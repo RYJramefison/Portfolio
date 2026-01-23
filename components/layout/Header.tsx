@@ -20,7 +20,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false)
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
 
-  const navLinks = ['home', 'projects', 'background', 'skills', 'citation', 'contact']
+  const navLinks = ['home', 'skills', 'projects', 'background', 'citation', 'contact']
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50)

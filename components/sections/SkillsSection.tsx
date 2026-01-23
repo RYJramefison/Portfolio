@@ -47,7 +47,7 @@ const pageVariants = {
 }
 
   return (
-    <section id="skills" className="py-24 bg-gray-50 dark:bg-gray-950">
+    <section id="skills" className="py-24 bg-white dark:bg-gray-950">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}
@@ -108,7 +108,7 @@ const pageVariants = {
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.4 }}
-    className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg"
+    className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl"
   >
     <div className="grid md:grid-cols-[120px_1fr_2fr] gap-8 items-center">
 

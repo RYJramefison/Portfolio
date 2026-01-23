@@ -6,9 +6,9 @@ export const translations = {
   fr: {
     nav: [
       "Accueil",
+      "Compétences",
       "Projets",
       "Parcours",
-      "Compétences",
       "Citation",
       "Contact",
     ],
@@ -23,10 +23,11 @@ export const translations = {
     home: {
       greeting: "Bonjour, je suis",
       job: "Développeur Web Full Stack",
+      technologies: ["React", "Next.js", "Spring Boot", "PostgreSQL"],
       description:
-        "Développeur web en formation (L3), je crée des applications web modernes, sécurisées et performantes. Je participe aux différentes étapes du projet, notamment la conception et le développement. Orienté qualité et simplicité, mon objectif est de proposer des solutions fiables et intuitives.",
+        "Développeur web en formation (L3), je conçois et développe des applications web modernes et performantes. J’interviens sur l’ensemble du cycle de développement avec un fort accent sur la qualité, la simplicité et l’expérience utilisateur.",
       projectsBtn: "Voir mes projets",
-      downloadCv: "Télécharger CV",
+      downloadCv: "Télécharger mon CV",
     },
 
     skills: {
@@ -368,7 +369,7 @@ export const translations = {
   },
 
   en: {
-    nav: ["Home", "projects", "Background", "Skills", "Citation", "Contact"],
+    nav: ["Home", "Skills", "projects", "Background", "Citation", "Contact"],
 
     common: {
       cv: "Download CV",
@@ -379,6 +380,7 @@ export const translations = {
     home: {
       greeting: "Hello, I am",
       job: "Full Stack Web Developer",
+      technologies: ["React", "Next.js", "Spring Boot", "PostgreSQL"],
       description:
         "Web developer in training (Bachelor’s degree – Year 3), I build modern, secure, and high-performance web applications. I contribute to different stages of a project, particularly design and development. Focused on quality and simplicity, my goal is to deliver reliable and intuitive solutions.",
       projectsBtn: "View my projects",
