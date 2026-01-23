@@ -228,7 +228,7 @@ export const translations = {
         {
           title: "Restaurant API",
           description:
-            "API backend pour la gestion des commandes et des stocks en restauration, avec vérification automatique des ingrédients.",
+            "Conception et développement d’une API REST assurant la gestion des commandes de leur création à la livraison, avec le suivi des stocks et la vérification de la disponibilité des ingrédients.",
           images: ["api_restaurant.png"],
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "API Backend",
@@ -239,7 +239,7 @@ export const translations = {
         {
           title: "Prévision météo",
           description:
-            "Analyse de données climatiques pour recommander les meilleures périodes de voyage, avec pipeline ETL et visualisation via Power BI.",
+            "Analyse de données climatiques afin de recommander les meilleures périodes de voyage, à travers un pipeline ETL et une visualisation des résultats avec Power BI.",
           images: [
             "climat et tourisme.png",
             "climat et tourisme.png",
@@ -254,7 +254,7 @@ export const translations = {
         {
           title: "Gestion de patrimoine",
           description:
-            "Système CRUD de gestion de patrimoine personnel avec calcul des amortissements et visualisation graphique de l’évolution dans le temps.",
+            "Système CRUD de gestion de patrimoine personnel intégrant le calcul des amortissements et la visualisation graphique de l’évolution dans le temps.",
           images: [
             "Patrimoine economique.png",
             "Patrimoine economique.png",
@@ -286,14 +286,14 @@ export const translations = {
           description:
             "Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), disposant de solides bases en développement et en systèmes informatiques.",
           image: "HEI.png",
-          link: "https://www.hei.ch/",
+          link: "https://hei.school/",
         },
         {
           title: "Baccalauréat",
           description:
             "Obtention du baccalauréat scientifique (Série D) en 2023 au lycée MIRVA Alarobia Amboniloha.",
           image: "mirva.jpg",
-          link: "https://lyceemirva.edu.mg/",
+          link: "https://lyceemirva35.com/",
         },
         {
           title: "Centres d’intérêt",
@@ -382,7 +382,7 @@ export const translations = {
       job: "Full Stack Web Developer",
       technologies: ["React", "Next.js", "Spring Boot", "PostgreSQL"],
       description:
-        "Web developer in training (Bachelor’s degree – Year 3), I build modern, secure, and high-performance web applications. I contribute to different stages of a project, particularly design and development. Focused on quality and simplicity, my goal is to deliver reliable and intuitive solutions.",
+        "Web development student (3rd year), I design and build modern, high-performance web applications. I work across the full development lifecycle with a strong focus on quality, simplicity, and user experience.",
       projectsBtn: "View my projects",
       downloadCv: "Download CV",
     },
@@ -584,7 +584,7 @@ export const translations = {
         {
           title: "Restaurant API",
           description:
-            "Backend API for managing restaurant orders and inventory, with automatic ingredient availability checks.",
+            "Development of a REST API to manage orders from creation to delivery, including inventory tracking and ingredient availability checks.",
           images: ["api_restaurant.png"],
           tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
           category: "Backend API",
@@ -595,7 +595,7 @@ export const translations = {
         {
           title: "Weather Forecast",
           description:
-            "Climate data analysis to recommend the best travel periods, with an automated ETL pipeline and data visualization using Power BI.",
+            "Climate data analysis to recommend the best travel periods, using an ETL pipeline and data visualization with Power BI.",
           images: [
             "climat et tourisme.png",
             "climat et tourisme.png",
@@ -610,7 +610,7 @@ export const translations = {
         {
           title: "Asset Management",
           description:
-            "CRUD system for personal asset management, including depreciation calculations and graphical visualization of asset evolution over time.",
+            "CRUD-based personal asset management system including depreciation calculations and graphical visualization of asset evolution over time.",
           images: [
             "Patrimoine economique.png",
             "Patrimoine economique.png",
@@ -642,14 +642,14 @@ export const translations = {
           description:
             "Computer science student (Bachelor’s degree – Year 3) at HEI (Haute École d’Informatique), with solid foundations in development and computer systems.",
           image: "HEI.png",
-          link: "https://www.hei.ch/",
+          link: "https://hei.school/",
         },
         {
           title: "High School Diploma",
           description:
             "Scientific high school diploma (Series D) obtained in 2023 at MIRVA Alarobia Amboniloha High School.",
           image: "mirva.jpg",
-          link: "https://lyceemirva.edu.mg/",
+          link: "https://lyceemirva35.com/",
         },
         {
           title: "Interests",

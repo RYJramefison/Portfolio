@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { GraduationCap, Heart, School } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
-import { FaChevronUp, FaCircle, FaFacebookF, FaThumbtack } from 'react-icons/fa';
+import { HiOutlineGlobeAlt } from "react-icons/hi";
 import { useState } from 'react'
 const icons = [School, GraduationCap, Heart]
 
@@ -191,7 +191,7 @@ export default function AcademyStudentSection() {
               hover:scale-110
             "
           >
-            <FaFacebookF className="w-3 h-3" />
+            <HiOutlineGlobeAlt className="w-3 h-3" />
           </motion.a>
         )}
       </AnimatePresence>
