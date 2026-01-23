@@ -283,22 +283,26 @@ export const translations = {
       steps: [
         {
           title: "Formation universitaire",
+          establishment: "HEI (Haute École d’Informatique)",
           description:
-            "Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), avec de solides bases en développement web, algorithmique et systèmes informatiques.",
+            "Étudiant en informatique (L3), avec de solides bases en développement web, algorithmique et systèmes informatiques.",
           image: "HEI.png",
+
           link: "https://hei.school/",
         },
         {
           title: "Baccalauréat scientifique",
+          establishment: "Lycée MIRVA Alarobia Amboniloha",
           description:
-            "Obtention du baccalauréat scientifique (Série D) en 2023 au lycée MIRVA Alarobia Amboniloha.",
+            "Obtention du baccalauréat scientifique (Série D) en 2023.",
           image: "mirva.jpg",
           link: "https://lyceemirva35.com/",
         },
         {
           title: "Centres d’intérêt",
+          establishment: "Loisirs personnels",
           description:
-            "Football et natation développent la discipline, musique et beatbox la créativité, et les échecs l’esprit stratégique.",
+            "Pratique de la musique et du beatbox pour stimuler la créativité, et des échecs pour renforcer l’esprit stratégique.",
           image: "Hobbies.jpeg",
           link: null,
         },
@@ -639,22 +643,25 @@ export const translations = {
       steps: [
         {
           title: "University Education",
+          establishment: "HEI (Haute École d’Informatique)",
           description:
-            "Computer Science student (Bachelor’s level) at HEI (Haute École d’Informatique), with strong foundations in web development, algorithms, and computer systems.",
+            "Computer Science student (Bachelor’s level), with strong foundations in web development, algorithms, and computer systems.",
           image: "HEI.png",
           link: "https://hei.school/",
         },
         {
           title: "Scientific Baccalaureate",
+          establishment: "Lycée MIRVA Alarobia Amboniloha",
           description:
-            "Obtained a Scientific Baccalaureate (Series D) in 2023 from MIRVA Alarobia Amboniloha High School.",
+            "Obtained a Scientific Baccalaureate (Series D) in 2023.",
           image: "mirva.jpg",
           link: "https://lyceemirva35.com/",
         },
         {
           title: "Interests",
+          establishment: "Personal Hobbies",
           description:
-            "Football and swimming for discipline, music and beatboxing for creativity, and chess for strategic thinking.",
+            "Practice of music and beatboxing to foster creativity, and chess to develop strategic thinking.",
           image: "Hobbies.jpeg",
           link: null,
         },

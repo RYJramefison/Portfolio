@@ -18,6 +18,7 @@ export default function AcademyStudentSection() {
     id: index + 1,
     title: step.title,
     description: step.description,
+    establishment: step.establishment,
     image: step.image,
     icon: icons[index],
     link: step.link,
@@ -97,6 +98,7 @@ export default function AcademyStudentSection() {
                   <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
                     {t.background.profile.description}
                   </p>
+
                   <div className="flex justify-center gap-3 pt-2">
                     {[...Array(3)].map((_, i) => (
                       <span
@@ -199,13 +201,25 @@ export default function AcademyStudentSection() {
 
     {/* Texte */}
     <div className="space-y-1">
-      <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-        {step.title}
-      </h4>
-      <p className="text-gray-500 text-sm leading-relaxed">
-        {step.description}
+  {/* Titre + établissement */}
+  <div className="flex flex-col gap-0.5">
+    <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
+      {step.title}
+    </h4>
+    {step.establishment && (
+      <p className="text-blue-700 text-sm">
+        {step.establishment}
       </p>
-    </div>
+    )}
+  </div>
+
+  {/* Description */}
+  <p className="text-gray-600 mt-2 dark:text-gray-400 text-sm leading-relaxed">
+    {step.description}
+  </p>
+</div>
+
+
   </div>
 </motion.div>
 
