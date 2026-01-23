@@ -108,7 +108,7 @@ const pageVariants = {
     animate={{ opacity: 1, y: 0 }}
     exit={{ opacity: 0, y: -20 }}
     transition={{ duration: 0.4 }}
-    className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-xl"
+    className="bg-white dark:bg-gray-900 rounded-2xl p-8 shadow-lg"
   >
     <div className="grid md:grid-cols-[120px_1fr_2fr] gap-8 items-center">
 
@@ -136,7 +136,7 @@ const pageVariants = {
       </div>
 
       {/* Skills */}
-      <div className="relative">
+      <div className="relative ">
   {/* Flèche gauche */}
   {activeCategory.skills.length > ITEMS_PER_PAGE && page > 0 && (
     <button

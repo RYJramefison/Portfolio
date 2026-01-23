@@ -36,9 +36,10 @@ export const translations = {
         "Voici les compétences techniques que j’utilise pour développer des solutions modernes et efficaces.",
       categories: [
         {
-          title: "Front-end",
+          title: "Front-End",
           icon: "/icons/skills/front-end.png",
-          description: "Développement d’interfaces performantes et dynamiques.",
+          description:
+            "Création et développement d’interfaces utilisateur performantes, responsives et modulaires.",
           skills: [
             {
               name: "Next.js",
@@ -101,10 +102,10 @@ export const translations = {
           ],
         },
         {
-          title: "Back-end",
+          title: "Back-End",
           icon: "/icons/skills/back-end.png",
           description:
-            "Architecture et développement d’APIs backend fiables, scalables et maintenables.",
+            "Développement d’APIs backend fiables et évolutives, incluant la gestion des bases de données.",
           skills: [
             {
               name: "Spring Boot",
@@ -137,7 +138,7 @@ export const translations = {
           ],
         },
         {
-          title: "Data",
+          title: "Pipelines Data",
           icon: "/icons/skills/data.png",
           description:
             "Analyse, traitement et orchestration des données pour produire des résultats fiables et exploitables.",
@@ -176,10 +177,10 @@ export const translations = {
         },
 
         {
-          title: "Outils & Autres",
+          title: "Outils & Flux de travail",
           icon: "/icons/skills/setting.png",
           description:
-            "Utilisation d’outils modernes pour le développement, l’analyse et la collaboration.",
+            "Utilisation d’outils modernes pour le développement, le déploiement et la collaboration.",
           skills: [
             {
               name: "GIT",
@@ -391,10 +392,10 @@ export const translations = {
         "These are the technical skills I use to develop modern and efficient solutions.",
       categories: [
         {
-          title: "Front-end",
+          title: "Front-End",
           icon: "/icons/skills/front-end.png",
           description:
-            "Developing high-performance and dynamic user interfaces.",
+            "Designing and developing performant, responsive, and modular user interfaces.",
           skills: [
             {
               name: "Next.js",
@@ -457,10 +458,10 @@ export const translations = {
           ],
         },
         {
-          title: "Back-end",
+          title: "Back-End",
           icon: "/icons/skills/back-end.png",
           description:
-            "Designing and developing reliable, scalable, and maintainable backend APIs.",
+            "Development of reliable and scalable backend APIs, including database management.",
           skills: [
             {
               name: "Spring Boot",
@@ -493,7 +494,7 @@ export const translations = {
           ],
         },
         {
-          title: "Data",
+          title: "Data Pipeline Architect",
           icon: "/icons/skills/data.png",
           description:
             "Analysis, processing, and orchestration of data to produce reliable and actionable results.",
@@ -531,10 +532,10 @@ export const translations = {
           ],
         },
         {
-          title: "Tools & Others",
+          title: "Dev Tools & Workflow",
           icon: "/icons/skills/setting.png",
           description:
-            "Using modern tools for development, data analysis, and collaboration.",
+            "Using modern tools for development, deployment, and collaboration.",
           skills: [
             {
               name: "GIT",

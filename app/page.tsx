@@ -11,8 +11,8 @@ export default function Home() {
       <Header/>
       <HeroSection/>
       <ProjectSection/>
-      <AcademyStudentSection/>
       <SkillsSection/>
+      <AcademyStudentSection/>
       <CitationSection/>
       <ContactSection/>
     </div>
