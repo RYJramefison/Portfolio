@@ -270,26 +270,26 @@ export const translations = {
     },
 
     background: {
-      badge: "Mon Parcours",
-      title: "Mes parcours académiques",
+      badge: "Mon parcours",
+      title: "Parcours académique",
       description:
-        "Une vision claire et structurée de mon évolution académique et personnelle",
+        "Un aperçu clair et structuré de mon parcours académique et de mon évolution personnelle.",
       profile: {
         badge: "Profil",
-        title: "Academy Student",
+        title: "Étudiant en informatique",
         description:
-          "Développeur en formation, focalisé sur des solutions modernes et performantes.",
+          "Développeur en formation, orienté vers la conception de solutions modernes, performantes et fiables.",
       },
       steps: [
         {
           title: "Formation universitaire",
           description:
-            "Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), disposant de solides bases en développement et en systèmes informatiques.",
+            "Étudiant en informatique (L3) à l’HEI (Haute École d’Informatique), avec de solides bases en développement web, algorithmique et systèmes informatiques.",
           image: "HEI.png",
           link: "https://hei.school/",
         },
         {
-          title: "Baccalauréat",
+          title: "Baccalauréat scientifique",
           description:
             "Obtention du baccalauréat scientifique (Série D) en 2023 au lycée MIRVA Alarobia Amboniloha.",
           image: "mirva.jpg",
@@ -298,7 +298,7 @@ export const translations = {
         {
           title: "Centres d’intérêt",
           description:
-            "Je m’intéresse au football, à la natation, à la musique, au beatbox et aux échecs.",
+            "Football et natation développent la discipline, musique et beatbox la créativité, et les échecs l’esprit stratégique.",
           image: "Hobbies.jpeg",
           link: null,
         },
@@ -626,35 +626,35 @@ export const translations = {
     },
 
     background: {
-      badge: "My Journey",
-      title: "My Academic Background",
+      badge: "My Background",
+      title: "Academic Background",
       description:
-        "A clear and structured overview of my academic and personal journey.",
+        "A clear and structured overview of my academic journey and personal development.",
       profile: {
         badge: "Profile",
-        title: "Academic Student",
+        title: "Computer Science Student",
         description:
-          "Developer in training, focused on building modern and high-performance solutions.",
+          "Developer in training, focused on designing modern, high-performance, and reliable solutions.",
       },
       steps: [
         {
           title: "University Education",
           description:
-            "Computer science student (Bachelor’s degree – Year 3) at HEI (Haute École d’Informatique), with solid foundations in development and computer systems.",
+            "Computer Science student (Bachelor’s level) at HEI (Haute École d’Informatique), with strong foundations in web development, algorithms, and computer systems.",
           image: "HEI.png",
           link: "https://hei.school/",
         },
         {
-          title: "High School Diploma",
+          title: "Scientific Baccalaureate",
           description:
-            "Scientific high school diploma (Series D) obtained in 2023 at MIRVA Alarobia Amboniloha High School.",
+            "Obtained a Scientific Baccalaureate (Series D) in 2023 from MIRVA Alarobia Amboniloha High School.",
           image: "mirva.jpg",
           link: "https://lyceemirva35.com/",
         },
         {
           title: "Interests",
           description:
-            "I am interested in football, swimming, music, beatboxing, and chess.",
+            "Football and swimming for discipline, music and beatboxing for creativity, and chess for strategic thinking.",
           image: "Hobbies.jpeg",
           link: null,
         },
