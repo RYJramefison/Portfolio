@@ -1,7 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Download, Github, Linkedin, Mail } from 'lucide-react'
+import { ArrowRight, Download } from 'lucide-react'
 import { easeOut, motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/ui/lib/scrollToSection'
@@ -73,7 +73,7 @@ const fullName = [
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
           <motion.div
-            className="space-y-8 order-2 lg:order-1"
+            className="space-y-8 order-2 lg:order-1 mt-10 lg:mt-0"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
@@ -196,7 +196,7 @@ const fullName = [
   animate={{ opacity: 1, x: 0 }}
   transition={{ duration: 0.9, ease: "easeOut" }}
 >
-  <div className="relative w-[320px] sm:w-[360px] md:w-[350px] max-w-sm mx-auto aspect-square flex justify-center items-center">
+  <div className="relative w-[240px] sm:w-[320px] md:w-[350px] max-w-sm mx-auto aspect-square flex justify-center items-center">
 
     {/* bulles décoratives */}
     <div className="absolute -top-4 -left-4 w-20 h-20
