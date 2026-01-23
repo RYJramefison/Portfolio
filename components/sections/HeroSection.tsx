@@ -127,16 +127,43 @@ const fullName = [
 
 {/* Skills badges */}
 
-              <motion.p
-                className="text-lg text-gray-600 max-w-lg leading-relaxed dark:text-gray-200"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.8, duration: 0.6 }}
-              >
-                {t.home.description}
-              </motion.p>
+              
               
             </div>
+            <div className="flex flex-col">
+  <motion.p
+    className="text-lg text-gray-600 max-w-lg leading-relaxed dark:text-gray-200 order-2 md:order-1"
+    initial={{ opacity: 0, y: 20 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.8, duration: 0.6 }}
+  >
+    {t.home.description}
+  </motion.p>
+
+  <motion.ul
+    className="flex flex-wrap gap-3 mt-0 md:mt-3 my-4 md:my-0 order-1 md:order-2"
+    initial={{ opacity: 0, y: 15 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.75, duration: 0.6 }}
+  >
+    {t.home.technologies.map((tech, index) => (
+      <motion.li
+        key={tech}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.97 }}
+        className={`${museoModerno.className} px-3 py-1 rounded-full text-xs font-medium
+                   bg-gray-100 text-gray-900 
+                   dark:bg-blue-900/30 dark:text-blue-300
+                   border border-blue-100 dark:border-blue-800
+                  `}
+      >
+        {tech}
+      </motion.li>
+    ))}
+  </motion.ul>
+</div>
+
+            
             <motion.div
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
@@ -168,27 +195,7 @@ const fullName = [
               </a>
               
             </motion.div>
-            <motion.ul
-  className="flex flex-wrap gap-3 mt-3"
-  initial={{ opacity: 0, y: 15 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.75, duration: 0.6 }}
->
-  {t.home.technologies.map((tech, index) => (
-    <motion.li
-      key={tech}
-      whileHover={{ scale: 1.05 }}
-      whileTap={{ scale: 0.97 }}
-      className={`${museoModerno.className} px-3 py-1 rounded-full text-xs font-medium
-                 bg-gray-100 text-gray-900 
-                 dark:bg-blue-900/30 dark:text-blue-300
-                 border border-blue-100 dark:border-blue-800
-                `}
-    >
-      {tech}
-    </motion.li>
-  ))}
-</motion.ul>
+            
           </motion.div>
           <motion.div
   className="relative flex justify-center md:-top-10 items-center w-full order-1 lg:order-2"
