@@ -65,7 +65,7 @@ const ProjectSection = () => {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-14"
         >
           {projects.projects.map((project, index) => (
             <motion.div
@@ -80,7 +80,9 @@ const ProjectSection = () => {
                 stiffness: 160,
                 damping: 18,
               }}
-              className="relative"
+              className={`relative mx-auto w-full max-w-[520px] ${
+                index % 2 === 1 ? 'md:mt-16' : ''
+              }`}
             >
               <div
                 className={`pointer-events-none absolute inset-0 rounded-2xl blur-2xl transition-opacity duration-700 ${
@@ -93,7 +95,7 @@ const ProjectSection = () => {
                     index === 1 ? 'ring-2 ring-blue-500/30' : ''
                   }`}
                 >
-                  <div className="relative h-60 overflow-hidden group">
+                  <div className="relative aspect-video overflow-hidden group">
   {(() => {
     const [currentImage, setCurrentImage] = useState(0);
     const images = project.images;
