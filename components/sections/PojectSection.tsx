@@ -7,7 +7,13 @@ import { ExternalLink, GithubIcon,ChevronLeft, ChevronRight  } from 'lucide-reac
 import { motion, type Variants,  AnimatePresence } from 'framer-motion';
 import { useLang } from '@/app/providers/lang-provider';
 import { useState } from 'react';
+import { Montserrat } from 'next/font/google';
 
+
+const museoModerno = Montserrat({
+  subsets: ['latin'],
+  weight: ['400', '700'],
+});
 const containerVariants: Variants = {
   hidden: {},
   show: {
@@ -145,41 +151,8 @@ const ProjectSection = () => {
           </>
         )}
 
-        {/* Liens GitHub / Preview */}
-        <div className="absolute bottom-4 right-4 flex gap-3 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500">
-          {project.previewUrl && (
-            <Button
-              asChild
-              size="icon"
-              className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-blue-600 shadow-lg hover:scale-110 transition"
-            >
-              <a
-                href={project.previewUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Live preview"
-              >
-                <ExternalLink className="h-4 w-4" />
-              </a>
-            </Button>
-          )}
-          {project.githubUrl && (
-            <Button
-              asChild
-              size="icon"
-              className="rounded-full bg-white/90 dark:bg-black/70 backdrop-blur text-gray-900 hover:text-white dark:text-white shadow-lg hover:scale-110 transition"
-            >
-              <a
-                href={project.githubUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub repository"
-              >
-                <GithubIcon className="h-4 w-4" />
-              </a>
-            </Button>
-          )}
-        </div>
+      
+
       </>
     );
   })()}
@@ -188,24 +161,68 @@ const ProjectSection = () => {
 
 
 
-                  <div className="p-6 space-y-4">
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-                      {project.title}
-                    </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          className="bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white border border-gray-200 dark:border-white/20 transition-all duration-300 hover:scale-105 hover:bg-blue-600 hover:text-white"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
+<div className="p-6 space-y-4">
+  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
+    {project.title}
+  </h3>
+  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+    {project.description}
+  </p>
+
+  {/* Tags / Technologies */}
+  <div className="flex flex-wrap gap-2">
+    {project.tags.map((tag) => (
+      <Badge
+        key={tag}
+        className={`${museoModerno.className} text-xs font-bold bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white border border-gray-200 dark:border-white/20 transition-all duration-300 hover:scale-105 hover:bg-blue-600 hover:text-white`}
+      >
+        {tag}
+      </Badge>
+    ))}
+  </div>
+
+  {/* Boutons Demo / Code */}
+  <div className="flex flex-wrap gap-4 mt-4">
+  {/* Demo Button - Bleu */}
+  {project.previewUrl && (
+    <Button
+      asChild
+      className="flex items-center gap-2 rounded-md bg-blue-600 hover:bg-blue-600 text-white shadow hover:scale-105 transition px-4 py-2"
+    >
+      <a
+        href={project.previewUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Live demo"
+      >
+        <span className="text-sm font-medium">{projects.actions.demo}</span>
+        <ExternalLink className="h-4 w-4" />
+      </a>
+    </Button>
+  )}
+
+  {/* Code Button - Transparent avec bordure */}
+  {project.githubUrl && (
+    <Button
+      asChild
+      className="flex items-center gap-2 rounded-md bg-transparent hover:gb-gray-900 hover:dark:bg-white/5
+ hover:text-white border border-gray-600 dark:border-white text-black dark:text-white shadow-none hover:scale-105 transition px-4 py-2"
+    >
+      <a
+        href={project.githubUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View code"
+      >
+        <span className="text-sm font-medium">{projects.actions.view}</span>
+        <GithubIcon className="h-4 w-4" />
+      </a>
+    </Button>
+  )}
+</div>
+
+</div>
+
                 </div>
               </Card>
             </motion.div>

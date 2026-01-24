@@ -224,6 +224,10 @@ export const translations = {
       description:
         "Explorez une sélection de projets personnels démontrant ma créativité et mes compétences techniques.",
       cta: "Voir tous les projets",
+      actions: {
+        view: "code",
+        demo: "demo",
+      },
       projects: [
         {
           title: "Restaurant API",
@@ -584,6 +588,10 @@ export const translations = {
       description:
         "Explore a selection of personal projects showcasing my creativity and technical skills.",
       cta: "View all projects",
+      actions: {
+        view: "code",
+        demo: "demo",
+      },
       projects: [
         {
           title: "Restaurant API",
