@@ -261,37 +261,7 @@ const ContactSection = () => {
                 </motion.div>
               ))}
             </div>
-            <motion.div
-              className="pt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h4 className="font-semibold text-gray-900 dark:text-gray-200 mb-4">
-                {t.contact.social.title}
-              </h4>
-              <div className="flex flex-wrap gap-4">
-                <Link href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/" target="_blank">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
-                    <SiLinkedin className="text-blue-600" size={18} />
-                    LinkedIn
-                  </Button>
-                </Link>
-                <Link href="https://github.com/RYJramefison" target="_blank">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
-                    <SiGithub size={18} />
-                    GitHub
-                  </Button>
-                </Link>
-                <Link href="https://www.facebook.com/ryj.rafson" target="_blank">
-                  <Button variant="outline" size="sm" className="flex items-center gap-2 hover:scale-105 transition">
-                    <SiFacebook className="text-blue-500" size={18} />
-                    Facebook
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
+            
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}

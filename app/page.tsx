@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import AcademyStudentSection from "@/components/sections/AcademyStudentSection";
 import CitationSection from "@/components/sections/CitationSection";
@@ -15,6 +16,7 @@ export default function Home() {
       <AcademyStudentSection/>
       <CitationSection/>
       <ContactSection/>
+      <Footer/>
     </div>
   );
 }
