@@ -1,241 +1,328 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ExternalLink, GithubIcon,ChevronLeft, ChevronRight  } from 'lucide-react';
-import { motion, type Variants,  AnimatePresence } from 'framer-motion';
+import { ExternalLink, GithubIcon, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useLang } from '@/app/providers/lang-provider';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { translations } from '@/app/i18n/translations';
+import Image from 'next/image';
 import { Montserrat } from 'next/font/google';
 
+/* ================== TYPES ================== */
 
-const museoModerno = Montserrat({
-  subsets: ['latin'],
-  weight: ['400', '700'],
-});
-const containerVariants: Variants = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.12,
-    },
-  },
-};
+type ProjectsTranslation =
+  (typeof translations)[keyof typeof translations]['projects'];
+type Project = ProjectsTranslation['projects'][number];
 
-const cardVariants: Variants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    scale: 0.95,
-  },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      type: 'spring',
-      stiffness: 120,
-      damping: 18,
-    },
-  },
-};
+/* ================== FONT ================== */
+
+const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '600', '700'] });
+
+/* ================== COMPONENT ================== */
 
 const ProjectSection = () => {
-  const { t, lang } = useLang();
+  const { t } = useLang();
   const projects = t.projects;
+  const list: Project[] = [...projects.projects];
 
   return (
-    <section id="projects" className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
-      <div className="relative max-w-7xl mx-auto px-4">
+    <section
+      id="projects"
+      className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden"
+    >
+      {/* Ligne déco haut */}
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-300/30 dark:via-blue-700/20 to-transparent" />
+
+      <div className="relative max-w-6xl mx-auto px-4">
+
+        {/* ── Header ── */}
         <motion.div
-          className="text-center mb-20"
-          initial={{ opacity: 0, y: 30 }}
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <p className="text-blue-600 dark:text-blue-400 font-semibold text-lg mb-2">
+          <span className="inline-block text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-widest uppercase mb-3">
             {projects.label}
-          </p>
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-6">
-            {projects.title}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            {projects.description}
-          </p>
+          </span>
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100">
+              {projects.title}
+            </h2>
+            <p className="text-gray-500 dark:text-gray-400 max-w-sm text-sm leading-relaxed md:text-right">
+              {projects.description}
+            </p>
+          </div>
+          {/* Séparateur */}
+          <div className="mt-8 h-px bg-gradient-to-r from-blue-500/30 via-gray-200 dark:via-gray-800 to-transparent" />
         </motion.div>
-        <motion.div
-          key={lang}
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="show"
-          viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-2 gap-14"
-        >
-          {projects.projects.map((project, index) => (
-            <motion.div
+
+        {/* ── Liste projets ── */}
+        <div className="space-y-0">
+          {list.map((project, index) => (
+            <ProjectRow
               key={project.title}
-              variants={cardVariants}
-              whileHover={{
-                y: -12,
-                scale: index === 1 ? 1.08 : 1.04,
-              }}
-              transition={{
-                type: 'spring',
-                stiffness: 160,
-                damping: 18,
-              }}
-              className={`relative mx-auto w-full max-w-[520px] ${
-                index % 2 === 1 ? 'md:mt-16' : ''
-              }`}
-            >
-              <div
-                className={`pointer-events-none absolute inset-0 rounded-2xl blur-2xl transition-opacity duration-700 ${
-                  index === 1 ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'
-                } bg-gradient-to-r from-blue-500/25 via-indigo-500/25 to-purple-500/25`}
-              />
-              <Card className="group relative h-full border-none bg-transparent shadow-none">
-                <div
-                  className={`relative rounded-2xl overflow-hidden border border-gray-200/60 dark:border-white/10 bg-white dark:bg-gray-900 shadow-lg dark:shadow-2xl transition-all duration-500 group-hover:shadow-2xl ${
-                    index === 1 ? 'ring-2 ring-blue-500/30' : ''
-                  }`}
-                >
-                  <div className="relative aspect-video overflow-hidden group">
-  {(() => {
-    const [currentImage, setCurrentImage] = useState(0);
-    const images = project.images;
-
-    const prevImage = () =>
-      setCurrentImage((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-    const nextImage = () =>
-      setCurrentImage((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-
-    return (
-      <>
-        {/* Animation des images */}
-        <AnimatePresence initial={false}>
-          <motion.img
-            key={currentImage}
-            src={images[currentImage]}
-            alt={`${project.title} screenshot ${currentImage + 1}`}
-            className="absolute inset-0 w-full h-full object-cover transition-transform duration-[900ms] ease-out group-hover:scale-110 group-hover:-translate-y-2"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -50 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
-          />
-        </AnimatePresence>
-
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-white/80 via-white/40 to-transparent dark:from-gray-900/80 dark:via-gray-900/40 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-        {/* Flèches gauche/droite */}
-        {images.length > 1 && (
-          <>
-            {/* Conteneur flèches légèrement hors de l'image */}
-            <div className="absolute inset-0 flex justify-between items-center pointer-events-none">
-              <button
-                onClick={prevImage}
-                className="pointer-events-auto bg-white/70 dark:bg-black/70 rounded-full p-2 m-2 shadow hover:scale-110 transition"
-              >
-                <ChevronLeft className="w-4 h-4 text-gray-800 dark:text-white" />
-              </button>
-              <button
-                onClick={nextImage}
-                className="pointer-events-auto bg-white/70 dark:bg-black/70 rounded-full p-2 m-2 shadow hover:scale-110 transition"
-              >
-                <ChevronRight className="w-4 h-4 text-gray-800 dark:text-white" />
-              </button>
-            </div>
-          </>
-        )}
-
-      
-
-      </>
-    );
-  })()}
-</div>
-
-
-
-
-<div className="p-6 space-y-4">
-  <h3 className="text-xl font-bold text-gray-900 dark:text-white">
-    {project.title}
-  </h3>
-  <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
-    {project.description}
-  </p>
-
-  {/* Tags / Technologies */}
-  <div className="flex flex-wrap gap-2">
-    {project.tags.map((tag) => (
-      <Badge
-        key={tag}
-        className={`${museoModerno.className} text-xs font-bold bg-gray-100 dark:bg-white/10 text-gray-800 dark:text-white border border-gray-200 dark:border-white/20 transition-all duration-300 hover:scale-105 hover:bg-blue-600 hover:text-white`}
-      >
-        {tag}
-      </Badge>
-    ))}
-  </div>
-
-  {/* Boutons Demo / Code */}
-  <div className="flex flex-wrap gap-4 mt-4">
-  {/* Demo Button - Bleu */}
-  {project.previewUrl && (
-    <Button
-      asChild
-      className="flex items-center gap-2 rounded-md bg-blue-600 hover:bg-blue-600 text-white shadow hover:scale-105 transition px-4 py-2"
-    >
-      <a
-        href={project.previewUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Live demo"
-      >
-        <span className="text-sm font-medium">{projects.actions.demo}</span>
-        <ExternalLink className="h-4 w-4" />
-      </a>
-    </Button>
-  )}
-
-  {/* Code Button - Transparent avec bordure */}
-  {project.githubUrl && (
-    <Button
-      asChild
-      className="flex items-center gap-2 rounded-md bg-transparent hover:gb-gray-900 hover:dark:bg-white/5
- hover:text-white border border-gray-600 dark:border-white text-black dark:text-white shadow-none hover:scale-105 transition px-4 py-2"
-    >
-      <a
-        href={project.githubUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="View code"
-      >
-        <span className="text-sm font-medium">{projects.actions.view}</span>
-        <GithubIcon className="h-4 w-4" />
-      </a>
-    </Button>
-  )}
-</div>
-
-</div>
-
-                </div>
-              </Card>
-            </motion.div>
+              project={project}
+              index={index}
+              actions={projects.actions}
+              montserratClass={montserrat.className}
+              isLast={index === list.length - 1}
+            />
           ))}
-        </motion.div>
-        <div className="text-center mt-16">
-          <Button size="lg" variant="outline">
-            {projects.cta}
-          </Button>
         </div>
+
+        {/* ── CTA ── */}
+        <motion.div
+          className="mt-14 flex justify-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
+        >
+          <Button
+            size="lg"
+            variant="outline"
+            className="rounded-full border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 gap-2 transition-all group"
+          >
+            {projects.cta}
+            <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
+          </Button>
+        </motion.div>
       </div>
     </section>
   );
 };
 
 export default ProjectSection;
+
+/* ================== HELPERS ================== */
+
+/**
+ * Normalise les chemins d'images pour next/image :
+ * - "api_restaurant.png"  → "/api_restaurant.png"
+ * - "/api_restaurant.png" → "/api_restaurant.png"  (inchangé)
+ * - "https://..."         → "https://..."           (inchangé)
+ */
+function normalizeImageSrc(src: string): string {
+  if (!src) return '/placeholder.png'
+  if (src.startsWith('http://') || src.startsWith('https://') || src.startsWith('/')) {
+    return src
+  }
+  return `/${src}`
+}
+
+/* ================== PROJECT ROW ================== */
+
+interface RowProps {
+  project: Project;
+  index: number;
+  actions: { demo: string; view: string };
+  montserratClass: string;
+  isLast: boolean;
+}
+
+function ProjectRow({ project, index, actions, montserratClass, isLast }: RowProps) {
+  const isEven = index % 2 === 0;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ duration: 0.55, delay: index * 0.06 }}
+      className={`group relative ${!isLast ? 'border-b border-gray-100 dark:border-white/[0.05]' : ''}`}
+    >
+      <div
+        className={`
+          grid grid-cols-1 lg:grid-cols-2 gap-10 py-14
+          ${!isEven ? 'lg:grid-flow-dense' : ''}
+        `}
+      >
+
+        {/* ── Image ── */}
+        <div
+          className={`
+            relative overflow-hidden rounded-2xl aspect-video
+            bg-gray-100 dark:bg-gray-800/40
+            border border-gray-200/60 dark:border-white/[0.06]
+            shadow-sm group-hover:shadow-xl dark:group-hover:shadow-black/40
+            transition-all duration-500
+            ${!isEven ? 'lg:col-start-2' : ''}
+          `}
+        >
+          <ProjectImageSlider images={project.images} title={project.title} />
+
+          {/* Overlay subtil au hover */}
+          <div className="absolute inset-0 bg-blue-950/0 group-hover:bg-blue-950/10 dark:group-hover:bg-blue-900/15 transition-colors duration-500 pointer-events-none" />
+
+          {/* Numéro */}
+          <div className="absolute top-4 left-4 z-20 w-8 h-8 rounded-full bg-white/90 dark:bg-gray-900/90 backdrop-blur-sm flex items-center justify-center shadow-sm border border-gray-200/50 dark:border-white/10 pointer-events-none">
+            <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+        </div>
+
+        {/* ── Contenu ── */}
+        <div
+          className={`
+            flex flex-col justify-center gap-5
+            ${!isEven ? 'lg:col-start-1 lg:row-start-1' : ''}
+          `}
+        >
+          {/* Titre */}
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300 leading-tight">
+            {project.title}
+          </h3>
+
+          {/* Description */}
+          <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+            {project.description}
+          </p>
+
+          {/* Tags */}
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((tag, i) => (
+              <Badge
+                key={i}
+                className={`
+                  ${montserratClass} text-xs font-semibold cursor-default
+                  bg-gray-100 dark:bg-white/[0.05]
+                  text-gray-700 dark:text-gray-300
+                  border border-gray-200 dark:border-white/[0.08]
+                  hover:bg-blue-600 hover:text-white hover:border-blue-600
+                  dark:hover:bg-blue-600 dark:hover:text-white
+                  transition-all duration-200 rounded-full
+                `}
+              >
+                {'label' in tag ? tag.label : tag.key}
+              </Badge>
+            ))}
+          </div>
+
+          {/* Boutons */}
+          <div className="flex flex-wrap gap-3 pt-1">
+            {project.previewUrl && (
+              <Button
+                asChild size="sm"
+                className="rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-600/20 gap-2"
+              >
+                <a href={project.previewUrl} target="_blank" rel="noopener noreferrer">
+                  {actions.demo}
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            )}
+            {project.githubUrl && (
+              <Button
+                asChild size="sm" variant="outline"
+                className="rounded-full border-gray-200 dark:border-gray-700 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 gap-2 transition-colors"
+              >
+                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                  {actions.view}
+                  <GithubIcon className="h-3.5 w-3.5" />
+                </a>
+              </Button>
+            )}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+/* ================== IMAGE SLIDER ================== */
+
+interface SliderProps {
+  images: readonly string[];
+  title: string;
+}
+
+function ProjectImageSlider({ images, title }: SliderProps) {
+  const [current, setCurrent] = useState(0);
+  const [dir, setDir] = useState(1);
+
+  // Reset quand les images changent
+  useEffect(() => { setCurrent(0); }, [images]);
+
+  const prev = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDir(-1);
+    setCurrent((c) => (c === 0 ? images.length - 1 : c - 1));
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDir(1);
+    setCurrent((c) => (c === images.length - 1 ? 0 : c + 1));
+  };
+
+  return (
+    <div className="relative w-full h-full min-h-[200px]">
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={current}
+          initial={{ opacity: 0, x: dir * 24 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0, x: dir * -24 }}
+          transition={{ duration: 0.25, ease: 'easeInOut' }}
+          className="absolute inset-0"
+        >
+          <Image
+            src={normalizeImageSrc(images[current])}
+            alt={`${title} ${current + 1}`}
+            fill
+            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      {images.length > 1 && (
+        <>
+          {/* Bouton précédent */}
+          <button
+            onClick={prev}
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 hover:scale-110 transition-all"
+          >
+            <ChevronLeft className="w-4 h-4 text-white" />
+          </button>
+
+          {/* Bouton suivant */}
+          <button
+            onClick={next}
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-20 w-8 h-8 rounded-full bg-black/40 dark:bg-black/60 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 hover:scale-110 transition-all"
+          >
+            <ChevronRight className="w-4 h-4 text-white" />
+          </button>
+
+          {/* Dots */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 z-20 flex gap-1.5">
+            {images.map((_, i) => (
+              <button
+                key={i}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setDir(i > current ? 1 : -1);
+                  setCurrent(i);
+                }}
+                className={`rounded-full transition-all duration-300 ${
+                  i === current
+                    ? 'w-4 h-1.5 bg-white'
+                    : 'w-1.5 h-1.5 bg-white/45 hover:bg-white/75'
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Compteur discret */}
+          <div className="absolute top-3 right-3 z-20 px-2 py-0.5 rounded-full bg-black/40 backdrop-blur-sm text-white text-xs font-medium">
+            {current + 1} / {images.length}
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
