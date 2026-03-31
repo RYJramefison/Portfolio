@@ -396,11 +396,19 @@ export const translations = {
           link: "https://lyceemirva35.com/",
         },
         {
+          title: "Communauté Kodata",
+          establishment: "Madagascar · Data & IA",
+          description:
+            "Membre de Kodata — espace d'apprentissage et de partage dédié aux passionnés de data analyse et data science à Madagascar.",
+          image: "Hobbies.jpeg",
+          link: "kodata.jpeg",
+        },
+        {
           title: "Centres d’intérêt",
           establishment: "Loisirs personnels",
           description:
             "Pratique de la musique et du beatbox pour stimuler la créativité, et des échecs pour renforcer l’esprit stratégique.",
-          image: "Hobbies.jpeg",
+          image: "kodata.png",
           link: null,
         },
       ],
@@ -850,6 +858,14 @@ export const translations = {
             "Obtained a Scientific Baccalaureate (Series D) in 2023.",
           image: "mirva.jpg",
           link: "https://lyceemirva35.com/",
+        },
+        {
+          title: "Kodata Community",
+          establishment: "Madagascar · Data & AI",
+          description:
+            "Member of Kodata — a learning and sharing space dedicated to data analysis and data science enthusiasts in Madagascar.",
+          image: "kodata.jpeg",
+          link: null,
         },
         {
           title: "Interests",

@@ -208,7 +208,7 @@ export default function SkillsSection() {
                         key={skill.name}
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: i * 0.04, duration: 0.3 }}
+                        transition={{ delay: i * 0.04, duration: 0.3 , type: 'spring', stiffness: 280, damping: 18 }}
                         role="link"
                         tabIndex={0}
                         onClick={() => window.open(skill.documentation, '_blank')}
@@ -220,7 +220,6 @@ export default function SkillsSection() {
                         }}
                         style={{ ['--skill-color' as any]: skill.color }}
                         whileHover={{ y: -4, scale: 1.05 }}
-                        transition={{ type: 'spring', stiffness: 280, damping: 18 }}
                         className="group relative aspect-square rounded-2xl cursor-pointer flex flex-col items-center justify-center gap-2 p-3 transition-all duration-300 bg-gray-50 dark:bg-gray-800/60 border border-gray-200/80 dark:border-white/[0.06] hover:border-[rgba(var(--skill-color),0.5)] hover:shadow-lg dark:hover:shadow-black/30 overflow-hidden"
                       >
                         {/* Fond couleur skill au hover */}

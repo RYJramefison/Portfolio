@@ -1,18 +1,17 @@
 'use client'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { GraduationCap, Heart, School } from 'lucide-react'
+import { GraduationCap, Heart, School, ExternalLink, Users } from 'lucide-react'
 import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
-import { HiOutlineGlobeAlt } from "react-icons/hi";
 import { useState } from 'react'
-const icons = [School, GraduationCap, Heart]
+
+const icons = [School, GraduationCap, Users, Heart]
 
 export default function AcademyStudentSection() {
   const { lang } = useLang()
-  const t = translations[lang] ?? translations.fr;
-  const [activeStep, setActiveStep] = useState<number | null>(null);
-;
+  const t = translations[lang] ?? translations.fr
+  const [activeStep, setActiveStep] = useState<number | null>(null)
 
   const steps = t.background.steps.map((step, index) => ({
     id: index + 1,
@@ -20,213 +19,208 @@ export default function AcademyStudentSection() {
     description: step.description,
     establishment: step.establishment,
     image: step.image,
-    icon: icons[index],
+    icon: icons[index] ?? Heart,
     link: step.link,
+    isCommunity: step.title.toLowerCase().includes('kodata'),
   }))
 
   return (
-    <section id="background" className="py-28 bg-white relative overflow-hidden dark:bg-gray-950">
-      <div className="max-w-7xl mx-auto px-4">
+    <section id="background" className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
+
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-300/30 dark:via-blue-700/20 to-transparent" />
+
+      <div className="relative max-w-5xl mx-auto px-4">
+
+        {/* ── Header ── */}
         <motion.div
           className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="text-blue-600 font-semibold text-lg mb-2">
+          <span className="inline-block text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-widest uppercase mb-3">
             {t.background.badge}
-          </p>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {t.background.title}
           </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
             {t.background.description}
           </p>
+          <div className="mt-8 h-px bg-gradient-to-r from-transparent via-blue-500/30 dark:via-blue-700/20 to-transparent" />
         </motion.div>
-        <div className="relative flex flex-col lg:flex-row items-center justify-center gap-20">
-          <div className="relative w-[22rem] h-[22rem]">
-            <div
-              className="
-                pointer-events-none
-                absolute inset-0
-                rounded-3xl
-                bg-blue-500/35
-                blur-[1rem]
-                opacity-25 dark:opacity-50
-              "
-            />
-            <motion.div
-              initial={{ scale: 0.85, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              viewport={{ once: true }}
-              className="
-                relative z-10
-                w-full h-full
-              "
-            >
-              <div
-                className="
-                  w-full h-full
-                  rounded-3xl
-                  bg-white dark:bg-slate-900
-                  backdrop-blur-xl
-                  border border-slate-200/60 dark:border-slate-800
-                  shadow-xl dark:shadow-2xl
-                  flex items-center justify-center text-center px-10
-                "
-              >
-                <div className="space-y-4">
-                  <h3
-                    className="
-                      text-[2.08rem]
-                      font-semibold
-                      tracking-wide
-                      font-[Poppins]
-                      bg-gradient-to-r
-                      from-gray-900 to-gray-600
-                      dark:from-white dark:to-gray-300
-                      bg-clip-text text-transparent
-                    "
-                  >
+
+        {/* ── Layout ── */}
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
+
+          {/* ── Profil gauche ── */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.55 }}
+            viewport={{ once: true }}
+            className="w-full lg:w-56 flex-shrink-0"
+          >
+            <div className="rounded-2xl border border-gray-200/80 dark:border-white/[0.07] bg-white dark:bg-gray-900 overflow-hidden shadow-sm dark:shadow-black/20">
+              <div className="h-1 bg-blue-600 w-full" />
+
+              <div className="p-6 flex flex-col items-center text-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-blue-600/10 dark:bg-blue-500/10 border border-blue-200/50 dark:border-blue-500/20 flex items-center justify-center">
+                  <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                </div>
+                <div className="space-y-1.5">
+                  <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100">
                     {t.background.profile.title}
                   </h3>
-                  <span className="inline-block px-4 py-1 text-xs font-semibold rounded-full bg-gray-100 dark:bg-slate-800 text-gray-900 dark:text-gray-100 shadow-sm">
+                  <span className="inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full bg-blue-600/10 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200/40 dark:border-blue-500/20">
                     {t.background.profile.badge}
                   </span>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed max-w-xs mx-auto">
-                    {t.background.profile.description}
-                  </p>
-
-                  <div className="flex justify-center gap-3 pt-2">
-                    {[...Array(3)].map((_, i) => (
-                      <span
-                        key={i}
-                        className="w-2.5 h-2.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 animate-pulse"
-                        style={{ animationDelay: `${i * 0.3}s` }}
-                      />
-                    ))}
-                  </div>
+                </div>
+                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
+                  {t.background.profile.description}
+                </p>
+                <div className="flex gap-1.5">
+                  {[0, 1, 2].map((i) => (
+                    <span
+                      key={i}
+                      className="w-1.5 h-1.5 rounded-full bg-blue-600/60 dark:bg-blue-500/60 animate-pulse"
+                      style={{ animationDelay: `${i * 0.35}s` }}
+                    />
+                  ))}
                 </div>
               </div>
-            </motion.div>
-          </div>
-          <div className="relative max-w-md pl-12">
-            <div
-              className="absolute left-5 top-0 h-full w-px
-                bg-gradient-to-b from-blue-600 via-gray-400/40 to-transparent"
-            />
-                <div className="space-y-10 relative">
-      {steps.map((step, index) => {
-        const isActive = step.id === activeStep;
 
-        return (
-          <motion.div
-            key={step.id}
-            initial={{ opacity: 0, x: 40 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.15 }}
-            className="relative"
-            style={{ zIndex: isActive ? 10 : 1 }} // card active au-dessus
-          >
-            {/* Icône moderne */}
-            <div className="absolute -left-3 top-6 flex items-center justify-center w-6 h-6 z-20">
-              <motion.div
-                animate={{
-                  scale: isActive ? 1.3 : 1, // cercle pulse légèrement
-                  rotate: isActive ? 15 : 0,
-                }}
-                transition={{ type: "spring", stiffness: 200, damping: 15 }}
-                className={`w-4 h-4 rounded-full border-2 ${
-                  isActive
-                    
-                    ? "bg-white dark:bg-gray-900 border-blue-600"
-                    : "bg-blue-600 border-blue-600 shadow-lg"
-                }`}
-              />
+              {/* Mini nav */}
+              
             </div>
-
-            {/* Card */}
-            <motion.div
-  onClick={() => setActiveStep(isActive ? null : step.id)}
-  whileHover={{ scale: 1.02 }}
-  animate={{
-    scale: isActive ? 1.05 : 1,
-    boxShadow: isActive
-      ? "0px 20px 40px rgba(0,0,0,0.3)"
-      : "0px 8px 20px rgba(0,0,0,0.1)",
-  }}
-  transition={{ type: "spring", stiffness: 180, damping: 20 }}
-  className="bg-white dark:bg-slate-900/70 border border-slate-200 dark:border-slate-800 rounded-xl p-6 shadow-md hover:shadow-lg cursor-pointer relative"
->
-  <div className="flex items-start gap-4 relative">
-    {/* Image + lien */}
-    <div className="relative w-14 h-14 flex-shrink-0">
-      <div className="w-14 h-14 rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-md">
-        <img
-          src={step.image}
-          alt={step.title}
-          className="w-full h-full object-cover"
-        />
-      </div>
-
-      {/* Lien qui apparaît près du logo */}
-      <AnimatePresence>
-        {isActive && step.link && (
-          <motion.a
-            href={step.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0, scale: 0.8, y: 6 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 6 }}
-            transition={{ duration: 0.25, ease: "easeOut" }}
-            className="
-              absolute -bottom-2 -right-2
-              w-7 h-7
-              rounded-full
-              bg-blue-600
-              text-white
-              flex items-center justify-center
-              shadow-lg
-              hover:scale-110
-            "
-          >
-            <HiOutlineGlobeAlt className="w-3 h-3" />
-          </motion.a>
-        )}
-      </AnimatePresence>
-    </div>
-
-    {/* Texte */}
-    <div className="space-y-1">
-  {/* Titre + établissement */}
-  <div className="flex flex-col gap-0.5">
-    <h4 className="text-lg font-semibold text-gray-900 dark:text-gray-100">
-      {step.title}
-    </h4>
-    {step.establishment && (
-      <p className="text-blue-700 text-sm">
-        {step.establishment}
-      </p>
-    )}
-  </div>
-
-  {/* Description */}
-  <p className="text-gray-600 mt-2 dark:text-gray-400 text-sm leading-relaxed">
-    {step.description}
-  </p>
-</div>
-
-
-  </div>
-</motion.div>
-
           </motion.div>
-        );
-      })}
-    </div>
+
+          {/* ── Timeline ── */}
+          <div className="relative flex-1 w-full">
+            <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-blue-600 via-blue-300/30 dark:via-blue-700/20 to-transparent" />
+
+            <div className="space-y-3">
+              {steps.map((step, index) => {
+                const isActive = step.id === activeStep
+                const Icon = step.icon
+
+                return (
+                  <motion.div
+                    key={step.id}
+                    initial={{ opacity: 0, x: 24 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.45, delay: index * 0.07 }}
+                    viewport={{ once: true }}
+                    className="relative pl-12"
+                  >
+                    {/* Dot */}
+                    <div className="absolute left-0 top-3.5 w-10 h-10 flex items-center justify-center">
+                      <motion.div
+                        animate={{
+                          scale: isActive ? 1.1 : 1,
+                          backgroundColor: isActive ? 'rgb(37 99 235)' : 'rgb(255 255 255)',
+                        }}
+                        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+                        className="w-9 h-9 rounded-xl border-2 border-blue-600 dark:border-blue-500 bg-white dark:bg-gray-900 shadow-sm flex items-center justify-center relative z-10"
+                      >
+                        <Icon className={`w-3.5 h-3.5 transition-colors duration-200 ${isActive ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+                      </motion.div>
+                    </div>
+
+                    {/* Card */}
+                    <motion.div
+                      onClick={() => setActiveStep(isActive ? null : step.id)}
+                      whileHover={{ y: -2 }}
+                      transition={{ type: 'spring', stiffness: 220, damping: 22 }}
+                      className={`cursor-pointer rounded-2xl border transition-all duration-200
+                        ${isActive
+                          ? 'bg-white dark:bg-gray-900 border-blue-200/60 dark:border-blue-600/20 shadow-md shadow-blue-600/[0.07]'
+                          : 'bg-white dark:bg-gray-900 border-gray-200/80 dark:border-white/[0.06] hover:border-gray-300/80 dark:hover:border-white/[0.10] shadow-sm'
+                        }`}
+                    >
+                      <div className="p-4 flex items-start gap-3.5">
+
+                        {/* Logo */}
+                        <div className="relative flex-shrink-0">
+                          <div className="w-10 h-10 rounded-xl overflow-hidden border border-gray-200/60 dark:border-white/[0.07] bg-gray-50 dark:bg-gray-800">
+                            <img src={step.image} alt={step.title} className="w-full h-full object-cover" />
+                          </div>
+                          <AnimatePresence>
+                            {isActive && step.link && (
+                              <motion.a
+                                href={step.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                onClick={(e) => e.stopPropagation()}
+                                initial={{ opacity: 0, scale: 0.5 }}
+                                animate={{ opacity: 1, scale: 1 }}
+                                exit={{ opacity: 0, scale: 0.5 }}
+                                transition={{ duration: 0.15 }}
+                                className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full bg-blue-600 text-white flex items-center justify-center shadow hover:bg-blue-700 transition-colors"
+                              >
+                                <ExternalLink className="w-2 h-2" />
+                              </motion.a>
+                            )}
+                          </AnimatePresence>
+                        </div>
+
+                        {/* Texte */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 flex-wrap mb-0.5">
+                            <h4 className="text-sm font-semibold text-gray-900 dark:text-gray-100">
+                              {step.title}
+                            </h4>
+                            {step.isCommunity && (
+                              <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-full text-[10px] font-semibold bg-blue-50 dark:bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-500/20">
+                                <Users className="w-2.5 h-2.5" />
+                                Communauté
+                              </span>
+                            )}
+                          </div>
+
+                          {step.establishment && (
+                            <p className="text-[11px] text-blue-600 dark:text-blue-400 font-medium mb-0.5">
+                              {step.establishment}
+                            </p>
+                          )}
+
+                          {!isActive && (
+                            <p className="text-[11px] text-gray-400 dark:text-gray-500 line-clamp-1">
+                              {step.description}
+                            </p>
+                          )}
+
+                          <AnimatePresence>
+                            {isActive && (
+                              <motion.p
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                transition={{ duration: 0.2 }}
+                                className="text-xs text-gray-500 dark:text-gray-400 leading-relaxed pt-1.5 overflow-hidden"
+                              >
+                                {step.description}
+                              </motion.p>
+                            )}
+                          </AnimatePresence>
+                        </div>
+
+                        {/* Chevron */}
+                        <motion.svg
+                          animate={{ rotate: isActive ? 180 : 0 }}
+                          transition={{ duration: 0.18 }}
+                          className="w-3.5 h-3.5 text-gray-300 dark:text-gray-600 flex-shrink-0 mt-1"
+                          fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                        >
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                        </motion.svg>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )
+              })}
+            </div>
           </div>
         </div>
       </div>
