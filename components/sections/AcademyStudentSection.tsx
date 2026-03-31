@@ -45,7 +45,7 @@ export default function AcademyStudentSection() {
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {t.background.title}
           </h2>
-          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-xs leading-relaxed">
             {t.background.description}
           </p>
           <div className="mt-8 h-px bg-gradient-to-r from-transparent via-blue-500/30 dark:via-blue-700/20 to-transparent" />
