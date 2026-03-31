@@ -234,7 +234,24 @@ export const translations = {
           description:
             "Conception et développement d’une API REST assurant la gestion des commandes de leur création à la livraison, avec le suivi des stocks et la vérification de la disponibilité des ingrédients.",
           images: ["api_restaurant.png"],
-          tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
+          tags: [
+            {
+              label: "Spring Boot",
+              color: "bg-green-600/20 text-green-400 border-green-500/30",
+            },
+            {
+              label: "PostgreSQL",
+              color: "bg-blue-600/20 text-blue-400 border-blue-500/30",
+            },
+            {
+              label: "JDBC",
+              color: "bg-orange-600/20 text-orange-400 border-orange-500/30",
+            },
+            {
+              label: "Java 21",
+              color: "bg-red-600/20 text-red-400 border-red-500/30",
+            },
+          ],
           category: "API Backend",
           githubUrl:
             "https://github.com/RYJramefison/restaurant-management-25-backend.git",
@@ -249,7 +266,24 @@ export const translations = {
             "climat et tourisme.png",
             "climat et tourisme.png",
           ],
-          tags: ["Python", "Apache Airflow", "Jupyter", "PowerBI"],
+          tags: [
+            {
+              key: "python",
+              color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+            },
+            {
+              key: "airflow",
+              color: "bg-pink-600/20 text-pink-400 border-pink-500/30",
+            },
+            {
+              key: "jupyter",
+              color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+            },
+            {
+              key: "powerbi",
+              color: "bg-yellow-600/20 text-yellow-300 border-yellow-600/30",
+            },
+          ],
           category: "Plateforme",
           githubUrl: "https://github.com/RYJramefison/climat_tourism",
           previewUrl:
@@ -264,11 +298,70 @@ export const translations = {
             "Patrimoine economique.png",
             "Patrimoine economique.png",
           ],
-          tags: ["React.js", "Express.js", "Bootstrap"],
+          tags: [
+            {
+              key: "react",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "express",
+              color: "bg-gray-500/20 text-gray-300 border-gray-400/30",
+            },
+            {
+              key: "bootstrap",
+              color: "bg-purple-600/20 text-purple-400 border-purple-500/30",
+            },
+          ],
           category: "API Backend",
           githubUrl:
             "https://github.com/RYJramefison/gestion_patrimoine_render",
           previewUrl: "https://my-patrimoine-economique-frontend.onrender.com/",
+        },
+        {
+          title: "Volako",
+          description:
+            "Application mobile de gestion d’argent permettant de suivre les dettes, transactions et soldes en temps réel avec une interface moderne et fluide.",
+          images: ["volako-1.png", "volako-2.png", "volako-3.png"],
+          tags: [
+            {
+              key: "reactnative",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "tailwind",
+              color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+            {
+              key: "zustand",
+              color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+            },
+          ],
+          category: "Mobile Application",
+          githubUrl: "https://github.com/RYJramefison/volako",
+          previewUrl: "",
+        },
+        {
+          title: "Kanto-Feo",
+          description:
+            "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
+          images: ["kanto-feo-1.png", "kanto-feo-2.png", "kanto-feo-3.png"],
+          tags: [
+            {
+              key: "vite",
+              color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+            },
+            {
+              key: "react",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "tailwind",
+              color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+          ],
+          category: "Web Application",
+          githubUrl: "https://github.com/RYJramefison/kanto-feo",
+          previewUrl: "",
         },
       ],
     },
@@ -364,7 +457,7 @@ export const translations = {
 
         firstNamePlaceholder: "Votre prénom",
         lastNamePlaceholder: "Votre nom",
-        emailPlaceholder: "votre@email.com",
+        emailPlaceholder: "votre@gmail.com",
         subjectPlaceholder: "Sujet de votre message",
         messagePlaceholder: "Décrivez votre projet...",
         loading: "Envoi en cours...",
@@ -598,7 +691,24 @@ export const translations = {
           description:
             "Development of a REST API to manage orders from creation to delivery, including inventory tracking and ingredient availability checks.",
           images: ["api_restaurant.png"],
-          tags: ["Spring Boot", "PostgreSQL", "JDBC", "Java 21"],
+          tags: [
+            {
+              label: "Spring Boot",
+              color: "bg-green-600/20 text-green-400 border-green-500/30",
+            },
+            {
+              label: "PostgreSQL",
+              color: "bg-blue-600/20 text-blue-400 border-blue-500/30",
+            },
+            {
+              label: "JDBC",
+              color: "bg-orange-600/20 text-orange-400 border-orange-500/30",
+            },
+            {
+              label: "Java 21",
+              color: "bg-red-600/20 text-red-400 border-red-500/30",
+            },
+          ],
           category: "Backend API",
           githubUrl:
             "https://github.com/RYJramefison/restaurant-management-25-backend.git",
@@ -613,7 +723,24 @@ export const translations = {
             "climat et tourisme.png",
             "climat et tourisme.png",
           ],
-          tags: ["Python", "Apache Airflow", "Jupyter", "Power BI"],
+          tags: [
+            {
+              key: "python",
+              color: "bg-yellow-500/20 text-yellow-400 border-yellow-500/30",
+            },
+            {
+              key: "airflow",
+              color: "bg-pink-600/20 text-pink-400 border-pink-500/30",
+            },
+            {
+              key: "jupyter",
+              color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+            },
+            {
+              key: "powerbi",
+              color: "bg-yellow-600/20 text-yellow-300 border-yellow-600/30",
+            },
+          ],
           category: "Platform",
           githubUrl: "https://github.com/RYJramefison/climat_tourism",
           previewUrl:
@@ -628,11 +755,70 @@ export const translations = {
             "Patrimoine economique.png",
             "Patrimoine economique.png",
           ],
-          tags: ["React.js", "Express.js", "Bootstrap"],
+          tags: [
+            {
+              key: "react",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "express",
+              color: "bg-gray-500/20 text-gray-300 border-gray-400/30",
+            },
+            {
+              key: "bootstrap",
+              color: "bg-purple-600/20 text-purple-400 border-purple-500/30",
+            },
+          ],
           category: "Backend API",
           githubUrl:
             "https://github.com/RYJramefison/gestion_patrimoine_render",
           previewUrl: "https://my-patrimoine-economique-frontend.onrender.com/",
+        },
+        {
+          title: "Volako",
+          description:
+            "Application mobile de gestion d’argent permettant de suivre les dettes, transactions et soldes en temps réel avec une interface moderne et fluide.",
+          images: ["volako-1.png", "volako-2.png", "volako-3.png"],
+          tags: [
+            {
+              key: "reactnative",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "tailwind",
+              color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+            {
+              key: "zustand",
+              color: "bg-orange-500/20 text-orange-400 border-orange-500/30",
+            },
+          ],
+          category: "Mobile Application",
+          githubUrl: "https://github.com/RYJramefison/volako",
+          previewUrl: "",
+        },
+        {
+          title: "Kanto-Feo",
+          description:
+            "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
+          images: ["kanto-feo-1.png", "kanto-feo-2.png", "kanto-feo-3.png"],
+          tags: [
+            {
+              key: "vite",
+              color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
+            },
+            {
+              key: "react",
+              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+            },
+            {
+              key: "tailwind",
+              color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+          ],
+          category: "Web Application",
+          githubUrl: "https://github.com/RYJramefison/kanto-feo",
+          previewUrl: "",
         },
       ],
     },
@@ -727,7 +913,7 @@ export const translations = {
 
         firstNamePlaceholder: "Your first name",
         lastNamePlaceholder: "Your last name",
-        emailPlaceholder: "your@email.com",
+        emailPlaceholder: "your@gmail.com",
         subjectPlaceholder: "Message subject",
         messagePlaceholder: "Describe your project...",
         send: "Send message",

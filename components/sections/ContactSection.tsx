@@ -60,8 +60,8 @@ const ContactSection = () => {
     {
       icon: Mail,
       title: t.contact.infos.email,
-      value: 'juninho.ramefison@email.com',
-      href: 'mailto:juninho.ramefison@email.com',
+      value: 'juninho.ramefison@gmail.com',
+      href: 'mailto:juninho.ramefison@gmail.com',
     },
     {
       icon: Phone,
