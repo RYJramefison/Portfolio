@@ -4,7 +4,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Phone, MapPin, Send, Lock, User } from 'lucide-react'
+import { Mail, Phone, MapPin, Send, User } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 import Link from 'next/link'
@@ -13,17 +13,29 @@ import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs"
 
-const MAX_DAILY_SUBMISSIONS = 3
+const MAX_DAILY_SUBMISSIONS_SIGNED = 3
+const MAX_DAILY_SUBMISSIONS_GUEST = 1
 
 const ContactSection = () => {
   const { t } = useLang()
   const { user, isSignedIn } = useUser()
+
+  // Fix hydratation : Clerk renvoie undefined côté serveur, true/false côté client.
+  // On attend que le composant soit monté avant d'utiliser isSignedIn.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => { setMounted(true) }, [])
+
+  // Vue normalisée : avant le montage, on considère l'utilisateur comme non connecté
+  const userIsSignedIn = mounted ? !!isSignedIn : false
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
     subject: '',
     message: '',
+    // Champ honeypot — doit rester vide
+    website: '',
   })
   const [status, setStatus] = useState<'success' | 'error' | 'limit' | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
@@ -42,18 +54,19 @@ const ContactSection = () => {
   }, [user])
 
   useEffect(() => {
-    if (!isSignedIn) {
+    if (!userIsSignedIn) {
       setFormData({
         firstName: '',
         lastName: '',
         email: '',
         subject: '',
         message: '',
+        website: '',
       })
       setErrors({})
       setStatus(null)
     }
-  }, [isSignedIn])
+  }, [userIsSignedIn])
 
   /* ===================== CONTACT INFO ===================== */
   const contactInfo = [
@@ -80,7 +93,10 @@ const ContactSection = () => {
   /* ===================== AUTO CLEAR STATUS/ERRORS ===================== */
   useEffect(() => {
     if (!status) return
-    const duration = status === 'success' ? 1500 : 3000
+    const duration =
+      status === 'success' ? 1500 :
+      status === 'limit' ? 4000 :
+      3000
     const timer = setTimeout(() => setStatus(null), duration)
     return () => clearTimeout(timer)
   }, [status])
@@ -90,6 +106,30 @@ const ContactSection = () => {
     const timer = setTimeout(() => setErrors({}), 1500)
     return () => clearTimeout(timer)
   }, [errors])
+
+  /* ===================== RATE LIMIT HELPERS ===================== */
+  const getGuestKey = () => {
+    const today = new Date().toISOString().split('T')[0]
+    return `contact_guest_${today}`
+  }
+
+  const getSignedKey = () => {
+    const today = new Date().toISOString().split('T')[0]
+    return `contact_limit_${user?.id}_${today}`
+  }
+
+  const getDailyCount = () => {
+    const key = userIsSignedIn ? getSignedKey() : getGuestKey()
+    return Number(localStorage.getItem(key) || 0)
+  }
+
+  const incrementDailyCount = () => {
+    const key = userIsSignedIn ? getSignedKey() : getGuestKey()
+    localStorage.setItem(key, String(getDailyCount() + 1))
+  }
+
+  const getLimit = () =>
+    userIsSignedIn ? MAX_DAILY_SUBMISSIONS_SIGNED : MAX_DAILY_SUBMISSIONS_GUEST
 
   /* ===================== HANDLERS ===================== */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -102,22 +142,6 @@ const ContactSection = () => {
         return newErrors
       })
     }
-  }
-
-  const getTodayKey = () => {
-    const today = new Date().toISOString().split('T')[0]
-    return `contact_limit_${user?.id}_${today}`
-  }
-
-  const getDailyCount = () => {
-    if (!user) return 0
-    return Number(localStorage.getItem(getTodayKey()) || 0)
-  }
-
-  const incrementDailyCount = () => {
-    if (!user) return
-    const key = getTodayKey()
-    localStorage.setItem(key, String(getDailyCount() + 1))
   }
 
   const validateForm = () => {
@@ -135,16 +159,13 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    if (!isSignedIn) {
-      setStatus('error')
-      setErrors({ global: "Veuillez vous connecter pour envoyer le message." })
-      return
-    }
+
+    // Honeypot — si le champ caché est rempli, c'est un bot
+    if (formData.website.trim() !== '') return
 
     const dailyCount = getDailyCount()
-    if (dailyCount >= MAX_DAILY_SUBMISSIONS) {
+    if (dailyCount >= getLimit()) {
       setStatus('limit')
-      setErrors({ global: "Vous avez déjà envoyé 3 messages aujourd’hui, revenez demain." })
       return
     }
 
@@ -157,7 +178,13 @@ const ContactSection = () => {
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        formData,
+        {
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       incrementDailyCount()
@@ -166,6 +193,8 @@ const ContactSection = () => {
         ...prev,
         subject: '',
         message: '',
+        // On vide aussi prénom/nom/email si l'utilisateur n'est pas connecté
+        ...(!userIsSignedIn && { firstName: '', lastName: '', email: '' }),
       }))
       setErrors({})
     } catch (error) {
@@ -175,20 +204,7 @@ const ContactSection = () => {
     }
   }
 
-  useEffect(() => {
-    if (!status) return
-  
-    const duration =
-      status === 'success' ? 1500 :
-      status === 'limit' ? 4000 :
-      3000
-  
-    const timer = setTimeout(() => setStatus(null), duration)
-    return () => clearTimeout(timer)
-  }, [status])
-  
-
-
+  /* ===================== RENDER ===================== */
   return (
     <section
       id="contact"
@@ -212,14 +228,15 @@ const ContactSection = () => {
             {t.contact.description}
           </p>
         </motion.div>
+
         <div className="grid lg:grid-cols-2 gap-12">
+          {/* ── Colonne gauche : infos de contact ── */}
           <motion.div
             className="space-y-8 order-2 lg:order-1"
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            
           >
             <div>
               <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-6">
@@ -229,6 +246,7 @@ const ContactSection = () => {
                 {t.contact.stayInTouch.description}
               </p>
             </div>
+
             <div className="space-y-6">
               {contactInfo.map((info, index) => (
                 <motion.div
@@ -250,7 +268,7 @@ const ContactSection = () => {
                           </h4>
                           <a
                             href={info.href}
-                            className="text-gray-600 text-gray-400 hover:text-blue-600 transition-colors break-words"
+                            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors break-words"
                           >
                             {info.value}
                           </a>
@@ -261,19 +279,33 @@ const ContactSection = () => {
                 </motion.div>
               ))}
             </div>
-            
           </motion.div>
+
+          {/* ── Colonne droite : formulaire ── */}
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
             viewport={{ once: true }}
-            className='order-1 lg:order-2'
+            className="order-1 lg:order-2"
           >
             <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
               <CardContent className="p-8">
-                
                 <form className="space-y-6" onSubmit={handleSubmit}>
+
+                  {/* ── Honeypot (invisible pour les humains) ── */}
+                  <div style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+                    <input
+                      type="text"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleChange}
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
+                  {/* ── Prénom / Nom ── */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
@@ -284,33 +316,10 @@ const ContactSection = () => {
                         value={formData.firstName}
                         onChange={handleChange}
                         placeholder={t.contact.form.firstNamePlaceholder}
-                        disabled
+                        // Pré-rempli et verrouillé si connecté
+                        disabled={userIsSignedIn}
                       />
-                      {errors.firstName && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="
-                            mt-1 flex items-center gap-2 rounded-lg
-                            bg-gray-100 px-3 py-2
-                            text-sm text-gray-700
-                            dark:bg-gray-800/80 dark:text-gray-300
-                          "
-                        >
-                          <span
-                            className="
-                              inline-flex h-5 w-5 items-center justify-center
-                              rounded-full bg-gray-300
-                              text-xs font-bold text-gray-800
-                              dark:bg-gray-700 dark:text-gray-200
-                            "
-                          >
-                            !
-                          </span>
-                          {errors.firstName}
-                        </motion.p>
-                      )}
+                      {errors.firstName && <ErrorMessage message={errors.firstName} />}
                     </div>
                     <div className="space-y-2">
                       <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
@@ -321,35 +330,13 @@ const ContactSection = () => {
                         value={formData.lastName}
                         onChange={handleChange}
                         placeholder={t.contact.form.lastNamePlaceholder}
-                        disabled
+                        disabled={userIsSignedIn}
                       />
-                      {errors.lastName && (
-                        <motion.p
-                          initial={{ opacity: 0, y: -4 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ duration: 0.2 }}
-                          className="
-                            mt-1 flex items-center gap-2 rounded-lg
-                            bg-gray-100 px-3 py-2
-                            text-sm text-gray-700
-                            dark:bg-gray-800/80 dark:text-gray-300
-                          "
-                        >
-                          <span
-                            className="
-                              inline-flex h-5 w-5 items-center justify-center
-                              rounded-full bg-gray-300
-                              text-xs font-bold text-gray-800
-                              dark:bg-gray-700 dark:text-gray-200
-                            "
-                          >
-                            !
-                          </span>
-                          {errors.lastName}
-                        </motion.p>
-                      )}
+                      {errors.lastName && <ErrorMessage message={errors.lastName} />}
                     </div>
                   </div>
+
+                  {/* ── Email ── */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.email}
@@ -360,34 +347,12 @@ const ContactSection = () => {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder={t.contact.form.emailPlaceholder}
-                      disabled
+                      disabled={userIsSignedIn}
                     />
-                    {errors.email && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="
-                          mt-1 flex items-center gap-2 rounded-lg
-                          bg-gray-100 px-3 py-2
-                          text-sm text-gray-700
-                          dark:bg-gray-800/80 dark:text-gray-300
-                        "
-                      >
-                        <span
-                          className="
-                            inline-flex h-5 w-5 items-center justify-center
-                            rounded-full bg-gray-300
-                            text-xs font-bold text-gray-800
-                            dark:bg-gray-700 dark:text-gray-200
-                          "
-                        >
-                          !
-                        </span>
-                        {errors.email}
-                      </motion.p>
-                    )}
+                    {errors.email && <ErrorMessage message={errors.email} />}
                   </div>
+
+                  {/* ── Sujet ── */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.subject}
@@ -397,34 +362,11 @@ const ContactSection = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder={t.contact.form.subjectPlaceholder}
-                      disabled={!isSignedIn}
                     />
-                    {errors.subject && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="
-                          mt-1 flex items-center gap-2 rounded-lg
-                          bg-gray-100 px-3 py-2
-                          text-sm text-gray-700
-                          dark:bg-gray-800/80 dark:text-gray-300
-                        "
-                      >
-                        <span
-                          className="
-                            inline-flex h-5 w-5 items-center justify-center
-                            rounded-full bg-gray-300
-                            text-xs font-bold text-gray-800
-                            dark:bg-gray-700 dark:text-gray-200
-                          "
-                        >
-                          !
-                        </span>
-                        {errors.subject}
-                      </motion.p>
-                    )}
+                    {errors.subject && <ErrorMessage message={errors.subject} />}
                   </div>
+
+                  {/* ── Message ── */}
                   <div className="space-y-2">
                     <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
                       {t.contact.form.message}
@@ -436,177 +378,159 @@ const ContactSection = () => {
                       rows={6}
                       placeholder={t.contact.form.messagePlaceholder}
                       className="resize-none"
-                      disabled={!isSignedIn}
                     />
-                    {errors.message && (
-                      <motion.p
-                        initial={{ opacity: 0, y: -4 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="
-                          mt-1 flex items-center gap-2 rounded-lg
-                          bg-gray-100 px-3 py-2
-                          text-sm text-gray-700
-                          dark:bg-gray-800/80 dark:text-gray-300
-                        "
-                      >
-                        <span
-                            className="
-                              inline-flex h-5 w-5 items-center justify-center
-                              rounded-full bg-gray-300
-                              text-xs font-bold text-gray-800
-                              dark:bg-gray-700 dark:text-gray-200
-                            "
-                          >
-                            !
-                          </span>
-                          {errors.message}
-                        </motion.p>
+                    {errors.message && <ErrorMessage message={errors.message} />}
+                  </div>
+
+                  {/* ── Bandeau connecté ── */}
+                  {userIsSignedIn && (
+                    <div className="flex items-center justify-between rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-3">
+                      <div className="flex items-center gap-3">
+                        <User className="h-5 w-5 text-blue-600" />
+                        <div className="text-sm">
+                          <p className="font-medium text-gray-900 dark:text-gray-200">
+                            Connecté en tant que
+                          </p>
+                          <p className="text-gray-600 dark:text-gray-400">
+                            {user?.primaryEmailAddress?.emailAddress}
+                          </p>
+                        </div>
+                      </div>
+                      <SignOutButton>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:hover:bg-red-900/30"
+                        >
+                          {t.contact.form.logOut}
+                        </Button>
+                      </SignOutButton>
+                    </div>
+                  )}
+
+                  {/* ── Connexion optionnelle ── */}
+                  {!userIsSignedIn && (
+                    <div className="rounded-xl border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/30 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                      <p className="text-sm text-blue-700 dark:text-blue-300">
+                        Connectez-vous pour envoyer jusqu'à{' '}
+                        <span className="font-semibold">{MAX_DAILY_SUBMISSIONS_SIGNED} messages/jour</span>
+                        {' '}(sinon 1/jour en anonyme).
+                      </p>
+                      <SignInButton mode="modal">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          className="flex items-center gap-2 shrink-0 border-blue-200 dark:border-blue-800"
+                        >
+                          <img src="/icons/google.png" alt="Google" className="h-4 w-4" />
+                          {t.contact.form.logIn}
+                        </Button>
+                      </SignInButton>
+                    </div>
+                  )}
+
+                  {/* ── Bouton envoyer ── */}
+                  <Button
+                    type="submit"
+                    size="lg"
+                    disabled={isLoading}
+                    className="w-full bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {isLoading ? (
+                      <>
+                        <svg className="mr-2 h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+                        </svg>
+                        Envoi en cours...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="mr-2 h-5 w-5" />
+                        {t.contact.form.send}
+                      </>
+                    )}
+                  </Button>
+                </form>
+
+                {/* ── Statut envoi ── */}
+                {status && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className={`mt-6 rounded-xl border px-4 py-3 flex items-start gap-3
+                      ${status === 'success'
+                        ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
+                        : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
+                      }`}
+                  >
+                    <div className="mt-0.5">{status === 'success' ? '✅' : '⚠️'}</div>
+                    <div>
+                      {status === 'success' && (
+                        <>
+                          <p className="font-semibold">Message envoyé avec succès</p>
+                          <p className="text-sm opacity-90">Merci pour votre message. Je vous répondrai très prochainement.</p>
+                        </>
+                      )}
+                      {status === 'limit' && (
+                        <>
+                          <p className="font-semibold">Limite atteinte</p>
+                          <p className="text-sm opacity-90">
+                            {userIsSignedIn
+                              ? `Vous avez déjà envoyé ${MAX_DAILY_SUBMISSIONS_SIGNED} messages aujourd'hui. Revenez demain.`
+                              : `En tant que visiteur, vous pouvez envoyer 1 message par jour. Connectez-vous avec Google pour en envoyer ${MAX_DAILY_SUBMISSIONS_SIGNED}.`
+                            }
+                          </p>
+                        </>
+                      )}
+                      {status === 'error' && (
+                        <>
+                          <p className="font-semibold">Erreur lors de l'envoi</p>
+                          <p className="text-sm opacity-90">Une erreur est survenue. Veuillez réessayer plus tard.</p>
+                        </>
                       )}
                     </div>
-                    {isSignedIn && (
-                      <div className="flex items-center justify-between rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-3">
-                        <div className="flex items-center gap-3">
-                          <User className="h-5 w-5 text-blue-600" />
-                          <div className="text-sm">
-                            <p className="font-medium text-gray-900 dark:text-gray-200">
-                              Connecté en tant que
-                            </p>
-                            <p className="text-gray-600 dark:text-gray-400">
-                              {user?.primaryEmailAddress?.emailAddress}
-                            </p>
-                          </div>
-                        </div>
+                  </motion.div>
+                )}
 
-                        <SignOutButton>
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:hover:bg-red-900/30"
-                          >
-                            {t.contact.form.logOut}
-                          </Button>
-                        </SignOutButton>
-                      </div>
-                    )}
+                {/* ── Séparateur + email direct ── */}
+                <div className="mt-6 flex items-center gap-3">
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                  <span className="text-xs text-gray-400 dark:text-gray-500">ou</span>
+                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                </div>
+                <a
+                  href="mailto:juninho.ramefison@gmail.com"
+                  className="mt-4 flex items-center justify-center gap-2 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                >
+                  <Mail className="h-4 w-4" />
+                  juninho.ramefison@gmail.com
+                </a>
 
-                                        {!isSignedIn && (
-                      <div className="space-y-3">
-                        <div className="flex items-center gap-2 text-sm text-gray-500">
-                          <Lock className="h-4 w-4" />
-                          {t.contact.form.info}
-                        </div>
-
-                        <SignInButton mode="modal">
-                          <Button
-                            type="button"
-                            variant="outline"
-                            size="lg"
-                            className="w-full flex items-center justify-center gap-3"
-                          >
-                            <img
-                              src="/icons/google.png"
-                              alt="Google"
-                              className="h-5 w-5"
-                            />
-                            {t.contact.form.logIn}
-                          </Button>
-                        </SignInButton>
-                      </div>
-                    )}
-                    <Button
-                      type="submit"
-                      size="lg"
-                      disabled={!isSignedIn || isLoading}
-                       className="w-full bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
-                    >
-                      {isLoading ? (
-                        <>
-                          <svg
-                            className="mr-2 h-5 w-5 animate-spin"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                          >
-                            <circle
-                              className="opacity-25"
-                              cx="12"
-                              cy="12"
-                              r="10"
-                              stroke="currentColor"
-                              strokeWidth="4"
-                            />
-                            <path
-                              className="opacity-75"
-                              fill="currentColor"
-                              d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-                            />
-                          </svg>
-                          Envoi en cours...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="mr-2 h-5 w-5" />
-                          {t.contact.form.send}
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                  {status && (
-  <motion.div
-    initial={{ opacity: 0, y: -10 }}
-    animate={{ opacity: 1, y: 0 }}
-    className={`mt-6 rounded-xl border px-4 py-3 flex items-start gap-3
-      ${
-        status === 'success'
-          ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
-          : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
-      }
-    `}
-  >
-    <div className="mt-0.5">
-      {status === 'success' ? '✅' : '⚠️'}
-    </div>
-
-    <div>
-      {status === 'success' && (
-        <>
-          <p className="font-semibold">Message envoyé avec succès</p>
-          <p className="text-sm opacity-90">
-            Merci pour votre message. Je vous répondrai très prochainement.
-          </p>
-        </>
-      )}
-
-      {status === 'limit' && (
-        <>
-          <p className="font-semibold">Limite atteinte</p>
-          <p className="text-sm opacity-90">
-            Vous avez déjà envoyé 3 messages aujourd’hui. Revenez demain.
-          </p>
-        </>
-      )}
-
-      {status === 'error' && (
-        <>
-          <p className="font-semibold">Erreur lors de l’envoi</p>
-          <p className="text-sm opacity-90">
-            Une erreur est survenue. Veuillez réessayer plus tard.
-          </p>
-        </>
-      )}
-    </div>
-  </motion.div>
-)}
-
-
-                </CardContent>
-              </Card>
-            </motion.div>
-          </div>
+              </CardContent>
+            </Card>
+          </motion.div>
         </div>
-      </section>
-    )
-  }
+      </div>
+    </section>
+  )
+}
 
-  export default ContactSection
+/* ── Composant utilitaire message d'erreur ── */
+const ErrorMessage = ({ message }: { message: string }) => (
+  <motion.p
+    initial={{ opacity: 0, y: -4 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.2 }}
+    className="mt-1 flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 dark:bg-gray-800/80 dark:text-gray-300"
+  >
+    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-bold text-gray-800 dark:bg-gray-700 dark:text-gray-200">
+      !
+    </span>
+    {message}
+  </motion.p>
+)
+
+export default ContactSection
