@@ -3,113 +3,116 @@
 import { motion } from "framer-motion";
 import { Mail, MapPin, ArrowUp, Download } from "lucide-react";
 import Link from "next/link";
-import { SiFacebook, SiGithub, SiLinkedin, SiNextdotjs, SiTailwindcss, SiSpringboot, SiPostgresql } from "react-icons/si";
+import { SiFacebook, SiGithub, SiLinkedin } from "react-icons/si";
+import { useLang } from "@/app/providers/lang-provider";
 
 const socials = [
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/",
-    icon: <SiLinkedin size={16} />,
-    color: "hover:text-blue-500 hover:border-blue-500/40",
+    icon: <SiLinkedin size={14} />,
+    hover:
+      "hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-300/60 dark:hover:border-blue-500/40",
   },
   {
     label: "GitHub",
     href: "https://github.com/RYJramefison/",
-    icon: <SiGithub size={16} />,
-    color: "hover:text-gray-100 hover:border-gray-400/40 dark:hover:text-white",
+    icon: <SiGithub size={14} />,
+    hover:
+      "hover:text-gray-900 dark:hover:text-white hover:border-gray-400/60 dark:hover:border-gray-400/40",
   },
   {
     label: "Facebook",
     href: "https://www.facebook.com/ryj.rafson",
-    icon: <SiFacebook size={16} />,
-    color: "hover:text-blue-400 hover:border-blue-400/40",
+    icon: <SiFacebook size={14} />,
+    hover:
+      "hover:text-blue-500 dark:hover:text-blue-400 hover:border-blue-300/60 dark:hover:border-blue-400/40",
   },
 ];
 
-const navLinks = [
-  { label: "Accueil", href: "#accueil" },
-  { label: "Compétences", href: "#competences" },
-  { label: "Projets", href: "#projets" },
-  { label: "Parcours", href: "#parcours" },
-  { label: "Contact", href: "#contact" },
-];
-
+// Uniquement les technos réellement utilisées dans CE projet
 const stack = [
-  { icon: <SiNextdotjs size={14} />, label: "Next.js" },
-  { icon: <SiTailwindcss size={14} className="text-cyan-500" />, label: "Tailwind" },
-  { icon: <SiSpringboot size={14} className="text-green-500" />, label: "Spring Boot" },
-  { icon: <SiPostgresql size={14} className="text-blue-400" />, label: "PostgreSQL" },
-  { icon: <span className="text-xs">🌍</span>, label: "i18n" },
+  { label: "Next.js", dot: "bg-gray-800 dark:bg-gray-200" },
+  { label: "Tailwind CSS", dot: "bg-cyan-500" },
+  { label: "Framer Motion", dot: "bg-purple-500" },
+  { label: "i18n", dot: "bg-green-500" },
 ];
 
 export default function Footer() {
+  const { t } = useLang();
+
+  const navLinks =
+    t?.nav?.map((label: string, i: number) => ({
+      label,
+      href: `#${
+        ["home", "skills", "projects", "background", "citation", "contact"][i]
+      }`,
+    })) ?? [];
+
   return (
-    <footer className="relative bg-gray-950 text-gray-400 overflow-hidden">
+    <footer className="relative bg-gray-50 dark:bg-gray-950 overflow-hidden border-t border-gray-200/80 dark:border-white/[0.06]">
+      {/* Lueur subtile */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-blue-400/40 dark:via-blue-600/50 to-transparent" />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-12 bg-blue-600/[0.04] dark:bg-blue-700/10 blur-[40px] rounded-full" />
 
-      {/* Lueur bleue subtile en haut — cohérente avec le hero */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[1px] bg-gradient-to-r from-transparent via-blue-600/60 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[80px] bg-blue-700/10 blur-[60px] rounded-full" />
-
-      <div className="relative max-w-6xl mx-auto px-6 pt-16 pb-10">
-
-        {/* ── Grille principale 3 colonnes ── */}
+      <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-8">
+        {/* ── Grille 3 colonnes ── */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-14"
+          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10"
         >
-
-          {/* Colonne 1 — Identité */}
+          {/* Col 1 — Identité */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-blue-600 inline-block" />
-              <span className="text-white font-semibold text-lg tracking-tight">
+              <span className="w-2 h-2 rounded-full bg-blue-600 flex-shrink-0" />
+              <span className="font-bold text-sm text-gray-900 dark:text-gray-100 tracking-tight">
                 Juninho Ramefison
               </span>
             </div>
-            <p className="text-sm text-gray-500 leading-relaxed">
-              Développeur Web Full Stack en formation (L3). Je conçois des
-              applications modernes avec un fort accent sur la qualité et
-              l'expérience utilisateur.
+            <p className="text-xs text-gray-500 leading-relaxed">
+              Développeur Web Full Stack en formation (L3). Applications
+              modernes, accent sur la qualité et l'expérience utilisateur.
             </p>
-
-            {/* Badge disponibilité */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-blue-700/10 border border-blue-700/25 text-xs text-blue-400">
-              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse" />
-              Disponible pour un stage / alternance
+            <div
+              className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs
+              bg-blue-50 dark:bg-blue-700/10
+              border border-blue-200/60 dark:border-blue-700/25
+              text-blue-700 dark:text-blue-400"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse flex-shrink-0" />
+              Disponible — stage / alternance
             </div>
-
-            {/* Infos */}
-            <div className="space-y-2 pt-1">
-              <div className="flex items-center gap-2 text-xs text-gray-500">
-                <MapPin size={13} />
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
+                <MapPin size={11} />
                 Madagascar, Antananarivo
               </div>
               <a
                 href="mailto:juninho.ramefison@gmail.com"
-                className="flex items-center gap-2 text-xs text-gray-500 hover:text-blue-400 transition-colors"
+                className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
-                <Mail size={13} />
+                <Mail size={11} />
                 juninho.ramefison@gmail.com
               </a>
             </div>
           </div>
 
-          {/* Colonne 2 — Navigation */}
+          {/* Col 2 — Navigation */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-widest">
+            <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
               Navigation
             </h4>
-            <ul className="space-y-2.5">
-              {navLinks.map((link) => (
+            <ul className="space-y-2">
+              {navLinks.map((link: { label: string; href: string }) => (
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-sm text-gray-500 hover:text-blue-400 transition-colors flex items-center gap-1.5 group"
+                    className="group flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
                   >
-                    <span className="w-0 group-hover:w-3 h-px bg-blue-500 transition-all duration-300 overflow-hidden" />
+                    <span className="w-0 group-hover:w-3 h-px bg-blue-500 transition-all duration-300 overflow-hidden flex-shrink-0" />
                     {link.label}
                   </a>
                 </li>
@@ -117,81 +120,89 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Colonne 3 — Socials + CV */}
+          {/* Col 3 — Socials + CV */}
           <div className="space-y-4">
-            <h4 className="text-xs font-semibold text-gray-300 uppercase tracking-widest">
+            <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
               Retrouvez-moi
             </h4>
-
-            <div className="flex flex-col gap-2.5">
+            <div className="flex flex-col gap-2">
               {socials.map((s) => (
                 <Link
                   key={s.label}
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={`flex items-center gap-3 px-4 py-2.5 rounded-lg border border-white/5 bg-white/[0.03] text-sm text-gray-400 transition-all duration-200 ${s.color}`}
+                  className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl
+                    border border-gray-200/80 dark:border-white/[0.06]
+                    bg-white dark:bg-white/[0.03]
+                    text-sm text-gray-500 dark:text-gray-400
+                    transition-all duration-200 ${s.hover}`}
                 >
                   {s.icon}
                   {s.label}
                 </Link>
               ))}
             </div>
-
             <a
               href="/cv/Juninho_RAMEFISON_CV.pdf"
               download
-              className="mt-2 flex items-center gap-2 px-4 py-2.5 rounded-lg border border-blue-700/30 bg-blue-700/10 text-sm text-blue-400 hover:bg-blue-700/20 hover:border-blue-600/50 transition-all duration-200"
+              className="flex items-center gap-2 px-3.5 py-2.5 rounded-xl
+                border border-blue-300/50 dark:border-blue-700/30
+                bg-blue-50 dark:bg-blue-700/10
+                text-sm text-blue-700 dark:text-blue-400
+                hover:bg-blue-100 dark:hover:bg-blue-700/20
+                transition-all duration-200"
             >
-              <Download size={14} />
+              <Download size={13} />
               Télécharger mon CV
             </a>
           </div>
         </motion.div>
 
-        {/* ── Stack technique ── */}
+        {/* ── Stack utilisé ── */}
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
+          initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap items-center justify-center gap-2 mb-10"
+          className="flex flex-wrap justify-center items-center gap-3 mb-8"
         >
-          {stack.map((tech) => (
-            <div
-              key={tech.label}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.07] text-xs text-gray-500 hover:text-gray-300 hover:border-white/15 transition-all"
-            >
-              {tech.icon}
-              {tech.label}
+          <span className="text-[11px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mr-1">
+            Construit avec
+          </span>
+          {stack.map((tech, i) => (
+            <div key={tech.label} className="flex items-center gap-1.5">
+              <span className={`w-1.5 h-1.5 rounded-full ${tech.dot}`} />
+              <span className="text-xs text-gray-500 dark:text-gray-500 font-medium">
+                {tech.label}
+              </span>
+              {i < stack.length - 1 && (
+                <span className="text-gray-300 dark:text-gray-700 ml-1">·</span>
+              )}
             </div>
           ))}
         </motion.div>
 
         {/* ── Séparateur ── */}
-        <div className="border-t border-white/[0.07]" />
+        <div className="border-t border-gray-200/80 dark:border-white/[0.07]" />
 
-        {/* ── Bas de page ── */}
-        <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-gray-600 text-center sm:text-left">
-            © 2026 Juninho Ramefison — Construit avec{" "}
-            <span className="text-gray-500">Next.js</span> &{" "}
-            <span className="text-gray-500">Tailwind CSS</span>
+        {/* ── Bas ── */}
+        <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <p className="text-[11px] text-gray-400 dark:text-gray-600 text-center sm:text-left">
+            © 2026 Juninho Ramefison. Tous droits réservés.
           </p>
-
           <motion.button
             whileHover={{ y: -2 }}
             whileTap={{ scale: 0.95 }}
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-            className="flex items-center gap-2 text-xs text-gray-600 hover:text-blue-400 transition-colors group"
+            className="group flex items-center gap-2 text-[11px] text-gray-400 dark:text-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
             Retour en haut
-            <span className="w-6 h-6 rounded-full border border-white/10 flex items-center justify-center group-hover:border-blue-500/40 transition-colors">
-              <ArrowUp size={11} />
+            <span className="w-6 h-6 rounded-full border border-gray-300 dark:border-white/10 flex items-center justify-center group-hover:border-blue-400/60 dark:group-hover:border-blue-500/40 transition-colors">
+              <ArrowUp size={10} />
             </span>
           </motion.button>
         </div>
-
       </div>
     </footer>
   );
