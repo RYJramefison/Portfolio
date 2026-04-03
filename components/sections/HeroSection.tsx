@@ -1,12 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Download, MapPin } from 'lucide-react'
+import { ArrowRight, Download, Mail, MapPin } from 'lucide-react'
 import { easeOut, motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/ui/lib/scrollToSection'
 import ParticlesBackground from '../ui/ParticlesParticlesBackground'
 import { Montserrat } from 'next/font/google';
+import { SiGithub, SiLinkedin } from 'react-icons/si'
 const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '600', '700'] })
 
 const museoModerno = Montserrat({
@@ -24,7 +25,23 @@ const HeroSection = () => {
       },
     },
   }
-  
+  const socials = [
+    {
+      href: 'https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/',
+      icon: <SiLinkedin className="w-4 h-4" />,
+      label: 'LinkedIn',
+    },
+    {
+      href: 'https://github.com/RYJramefison/',
+      icon: <SiGithub className="w-4 h-4" />,
+      label: 'GitHub',
+    },
+    {
+      href: 'mailto:juninho.ramefison@gmail.com',
+      icon: <Mail className="w-4 h-4" />,
+      label: 'Email',
+    },
+  ]
   const letter = {
     hidden: { opacity: 0, y: 6 },
     visible: {
@@ -226,70 +243,32 @@ const fullName = [
 
     {/* boutons sociaux */}
     <motion.div
-  className="absolute -bottom-14 flex gap-4"
-  initial={{ opacity: 0, y: 15 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.6, duration: 0.5 }}
->
-  {/* LinkedIn */}
-  <a
-    href="https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-11 h-11 rounded-full flex items-center justify-center
-               bg-white/80 dark:bg-gray-900/70 backdrop-blur
-               border border-gray-200 dark:border-gray-700
-               shadow-[0_6px_20px_rgba(0,0,0,0.12)]
-               hover:scale-110
-               transition-all
-               opacity-70 hover:opacity-100"
-  >
-    <img
-      src="/icons/linkedin.svg"
-      alt="LinkedIn"
-      className="w-5 h-5 object-contain 
-                 dark:invert" // <- invert les couleurs en dark mode
-    />
-  </a>
-
-  {/* GitHub */}
-  <a
-    href="https://github.com/RYJramefison/"
-    target="_blank"
-    rel="noopener noreferrer"
-    className="w-11 h-11 rounded-full flex items-center justify-center
-               bg-white/80 dark:bg-gray-900/70 backdrop-blur
-               border border-gray-200 dark:border-gray-700
-               shadow-[0_6px_20px_rgba(0,0,0,0.12)]
-               hover:scale-110
-               transition-all
-               opacity-70 hover:opacity-100"
-  >
-    <img
-      src="/icons/github.svg"
-      alt="GitHub"
-      className="w-5 h-5 object-contain dark:invert"
-    />
-  </a>
-
-  {/* Email */}
-  <a
-    href="mailto:juninho.ramefison@email.com"
-    className="w-11 h-11 rounded-full flex items-center justify-center
-               bg-white/80 dark:bg-gray-900/70 backdrop-blur
-               border border-gray-200 dark:border-gray-700
-               shadow-[0_6px_20px_rgba(0,0,0,0.12)]
-               hover:scale-110
-               transition-all
-               opacity-70 hover:opacity-100"
-  >
-    <img
-      src="/icons/mail.svg"
-      alt="Email"
-      className="w-5 h-5 object-contain dark:invert"
-    />
-  </a>
-</motion.div>
+                className="absolute -bottom-14 left-1/2 -translate-x-1/2 flex gap-3"
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.7, duration: 0.5 }}
+              >
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target={s.href.startsWith('mailto') ? undefined : '_blank'}
+                    rel="noopener noreferrer"
+                    title={s.label}
+                    className="w-10 h-10 rounded-full flex items-center justify-center
+                      bg-white dark:bg-gray-900
+                      border border-gray-200/80 dark:border-white/[0.08]
+                      text-gray-500 dark:text-gray-400
+                      shadow-sm hover:shadow-md
+                      hover:border-blue-400/60 dark:hover:border-blue-500/40
+                      hover:text-blue-600 dark:hover:text-blue-400
+                      hover:scale-110
+                      transition-all duration-200"
+                  >
+                    {s.icon}
+                  </a>
+                ))}
+              </motion.div>
 
 
 
