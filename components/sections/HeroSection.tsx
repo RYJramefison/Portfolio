@@ -1,12 +1,13 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Download } from 'lucide-react'
+import { ArrowRight, Download, MapPin } from 'lucide-react'
 import { easeOut, motion } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { scrollToSection } from '@/components/ui/lib/scrollToSection'
 import ParticlesBackground from '../ui/ParticlesParticlesBackground'
 import { Montserrat } from 'next/font/google';
+const montserrat = Montserrat({ subsets: ['latin'], weight: ['400', '600', '700'] })
 
 const museoModerno = Montserrat({
   subsets: ['latin'],
@@ -23,7 +24,6 @@ const HeroSection = () => {
       },
     },
   }
-  
   
   const letter = {
     hidden: { opacity: 0, y: 6 },
@@ -64,6 +64,7 @@ const fullName = [
   })),
 ]
 
+
   
   
   return (
@@ -72,32 +73,32 @@ const fullName = [
       <ParticlesBackground />
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
-          <motion.div
-            className="space-y-8 order-2 lg:order-1 mt-10 lg:mt-0"
-            initial={{ opacity: 0, x: -50 }}
+        <motion.div
+            className="space-y-7 order-2 lg:order-1"
+            initial={{ opacity: 0, x: -32 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.7 }}
           >
-            <div className="space-y-4">
-            <motion.div
-  variants={greetingContainer}
-  initial="hidden"
-  animate="visible"
-  className="flex items-center space-x-2"
->
-  <span className="text-gray-600 dark:text-gray-400">
-    {t.home.greeting.split('').map((char, i) => (
-
-
-      <motion.span key={i} variants={letter}>
-        {char === ' ' ? '\u00A0' : char}
-      </motion.span>
-    ))}
-  </span>
-</motion.div>
-
-
-<motion.h1
+            {/* Greeting */}
+            <div className="space-y-3">
+              <motion.div
+                variants={greetingContainer}
+                initial="hidden"
+                animate="visible"
+                className="flex items-center gap-2"
+              >
+                <span className="w-6 h-px bg-blue-600 dark:bg-blue-400" />
+                <span className="text-sm font-medium text-gray-500 dark:text-gray-400 tracking-wide">
+                  {t.home.greeting.split('').map((char, i) => (
+                    <motion.span key={i} variants={letter}>
+                      {char === ' ' ? '\u00A0' : char}
+                    </motion.span>
+                  ))}
+                </span>
+              </motion.div>
+ 
+              {/* Nom animé */}
+              <motion.h1
   variants={nameContainer}
   initial="hidden"
   animate="visible"
@@ -113,89 +114,85 @@ const fullName = [
     </motion.span>
   ))}
 </motion.h1>
-
-
-            
+ 
+              {/* Titre */}
               <motion.p
-  className="text-2xl text-blue-600 font-semibold"
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ delay: 0.6, duration: 0.6 }}
->
-  {t.home.job}
-</motion.p>
-
-{/* Skills badges */}
-
-              
-              
+                className="text-xl font-semibold text-gray-600 dark:text-gray-300"
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.65, duration: 0.5 }}
+              >
+                {t.home.job}
+              </motion.p>
             </div>
-            <div className="flex flex-col">
-  <motion.p
-    className="text-lg text-gray-600 max-w-lg leading-relaxed dark:text-gray-200 order-2 md:order-1"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.8, duration: 0.6 }}
-  >
-    {t.home.description}
-  </motion.p>
-
-  <motion.ul
-    className="flex flex-wrap gap-3 mt-0 md:mt-3 my-4 md:my-0 order-1 md:order-2"
-    initial={{ opacity: 0, y: 15 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ delay: 0.75, duration: 0.6 }}
-  >
-    {t.home.technologies.map((tech, index) => (
-      <motion.li
-        key={tech}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.97 }}
-        className={`${museoModerno.className} px-3 py-1 rounded-full text-xs font-medium
-                   bg-gray-100 text-gray-900 
-                   dark:bg-blue-900/30 dark:text-blue-300
-                   border border-blue-100 dark:border-blue-800
-                  `}
-      >
-        {tech}
-      </motion.li>
-    ))}
-  </motion.ul>
-</div>
-
-            
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4"
-              initial={{ opacity: 0, y: 20 }}
+ 
+            {/* Description */}
+            <motion.p
+              className="text-base text-gray-500 dark:text-gray-400 max-w-md leading-relaxed"
+              initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1, duration: 0.6 }}
+              transition={{ delay: 0.8, duration: 0.5 }}
+            >
+              {t.home.description}
+            </motion.p>
+ 
+            {/* Tech badges */}
+            <motion.div
+              className="flex flex-wrap gap-2"
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.9, duration: 0.5 }}
+            >
+              {t.home.technologies.map((tech) => (
+                <span
+                  key={tech}
+                  className={`${montserrat.className} px-3 py-1 rounded-full text-xs font-semibold
+                    bg-gray-100 dark:bg-gray-800/80
+                    text-gray-700 dark:text-gray-300
+                    border border-gray-200/80 dark:border-white/[0.08]`}
+                >
+                  {tech}
+                </span>
+              ))}
+            </motion.div>
+ 
+            {/* CTA buttons */}
+            <motion.div
+              className="flex flex-wrap gap-3"
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.0, duration: 0.5 }}
             >
               <Button
                 size="lg"
                 onClick={() => scrollToSection('projects')}
-                className="bg-gradient-to-r from-blue-700 to-blue-600 group"
+                className="rounded-full bg-blue-600 hover:bg-blue-700 text-white shadow-md shadow-blue-600/20 gap-2 group"
               >
                 {t.home.projectsBtn}
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
-              <a
-                href="/cv/Juninho_RAMEFISON_CV.pdf"
-                download
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a href="/cv/Juninho_RAMEFISON_CV.pdf" download target="_blank" rel="noopener noreferrer">
                 <Button
                   size="lg"
                   variant="outline"
-                  className="border-gray-300 hover:border-blue-600 hover:text-blue-600"
+                  className="rounded-full border-gray-300 dark:border-gray-700 hover:border-blue-500 hover:text-blue-600 dark:hover:border-blue-500 dark:hover:text-blue-400 gap-2 transition-all"
                 >
-                  <Download className="mr-2 h-5 w-5" />
+                  <Download className="w-4 h-4" />
                   {t.home.downloadCv}
                 </Button>
               </a>
-              
             </motion.div>
-            
+ 
+            {/* Localisation */}
+            <motion.div
+              className="flex items-center gap-1.5 text-xs text-gray-400 dark:text-gray-500"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.2, duration: 0.5 }}
+            >
+              <MapPin className="w-3 h-3" />
+              Madagascar, Antananarivo
+            </motion.div>
           </motion.div>
           <motion.div
   className="relative flex justify-center md:-top-10 items-center w-full order-1 lg:order-2"
