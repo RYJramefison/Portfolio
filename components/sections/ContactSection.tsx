@@ -1,17 +1,15 @@
 'use client'
 
-import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
-import { Mail, Phone, MapPin, Send, User } from 'lucide-react'
-import { motion } from 'framer-motion'
-import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
-import Link from 'next/link'
+import { Mail, Phone, MapPin, Send, User, ExternalLink } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useLang } from '@/app/providers/lang-provider'
 import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs"
+import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 
 const MAX_DAILY_SUBMISSIONS_SIGNED = 3
 const MAX_DAILY_SUBMISSIONS_GUEST = 1
@@ -20,28 +18,18 @@ const ContactSection = () => {
   const { t } = useLang()
   const { user, isSignedIn } = useUser()
 
-  // Fix hydratation : Clerk renvoie undefined côté serveur, true/false côté client.
-  // On attend que le composant soit monté avant d'utiliser isSignedIn.
   const [mounted, setMounted] = useState(false)
   useEffect(() => { setMounted(true) }, [])
-
-  // Vue normalisée : avant le montage, on considère l'utilisateur comme non connecté
   const userIsSignedIn = mounted ? !!isSignedIn : false
 
   const [formData, setFormData] = useState({
-    firstName: '',
-    lastName: '',
-    email: '',
-    subject: '',
-    message: '',
-    // Champ honeypot — doit rester vide
-    website: '',
+    firstName: '', lastName: '', email: '',
+    subject: '', message: '', website: '',
   })
   const [status, setStatus] = useState<'success' | 'error' | 'limit' | null>(null)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isLoading, setIsLoading] = useState(false)
 
-  /* ===================== PREFILL USER ===================== */
   useEffect(() => {
     if (user) {
       setFormData((prev) => ({
@@ -55,93 +43,50 @@ const ContactSection = () => {
 
   useEffect(() => {
     if (!userIsSignedIn) {
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        subject: '',
-        message: '',
-        website: '',
-      })
+      setFormData({ firstName: '', lastName: '', email: '', subject: '', message: '', website: '' })
       setErrors({})
       setStatus(null)
     }
   }, [userIsSignedIn])
 
-  /* ===================== CONTACT INFO ===================== */
   const contactInfo = [
-    {
-      icon: Mail,
-      title: t.contact.infos.email,
-      value: 'juninho.ramefison@gmail.com',
-      href: 'mailto:juninho.ramefison@gmail.com',
-    },
-    {
-      icon: Phone,
-      title: t.contact.infos.phone,
-      value: '+261 32 89 522 79',
-      href: 'tel:+261328952279',
-    },
-    {
-      icon: MapPin,
-      title: t.contact.infos.location,
-      value: 'Madagascar, Antananarivo',
-      href: 'https://www.google.com/maps/place/Madagascar,+Antananarivo',
-    },
+    { icon: Mail, title: t.contact.infos.email, value: 'juninho.ramefison@gmail.com', href: 'mailto:juninho.ramefison@gmail.com' },
+    { icon: Phone, title: t.contact.infos.phone, value: '+261 32 89 522 79', href: 'tel:+261328952279' },
+    { icon: MapPin, title: t.contact.infos.location, value: 'Madagascar, Antananarivo', href: 'https://www.google.com/maps/place/Madagascar,+Antananarivo' },
   ]
 
-  /* ===================== AUTO CLEAR STATUS/ERRORS ===================== */
+  const socials = [
+    { icon: <SiLinkedin size={15} />, href: 'https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/', label: 'LinkedIn', color: 'hover:text-blue-600 hover:border-blue-300/60' },
+    { icon: <SiGithub size={15} />, href: 'https://github.com/RYJramefison/', label: 'GitHub', color: 'hover:text-gray-900 dark:hover:text-white hover:border-gray-400/60' },
+    { icon: <SiFacebook size={15} />, href: 'https://www.facebook.com/ryj.rafson', label: 'Facebook', color: 'hover:text-blue-500 hover:border-blue-300/60' },
+  ]
+
   useEffect(() => {
     if (!status) return
-    const duration =
-      status === 'success' ? 1500 :
-      status === 'limit' ? 4000 :
-      3000
+    const duration = status === 'success' ? 2000 : status === 'limit' ? 4000 : 3000
     const timer = setTimeout(() => setStatus(null), duration)
     return () => clearTimeout(timer)
   }, [status])
 
   useEffect(() => {
     if (Object.keys(errors).length === 0) return
-    const timer = setTimeout(() => setErrors({}), 1500)
+    const timer = setTimeout(() => setErrors({}), 2000)
     return () => clearTimeout(timer)
   }, [errors])
 
-  /* ===================== RATE LIMIT HELPERS ===================== */
-  const getGuestKey = () => {
-    const today = new Date().toISOString().split('T')[0]
-    return `contact_guest_${today}`
-  }
-
-  const getSignedKey = () => {
-    const today = new Date().toISOString().split('T')[0]
-    return `contact_limit_${user?.id}_${today}`
-  }
-
-  const getDailyCount = () => {
-    const key = userIsSignedIn ? getSignedKey() : getGuestKey()
-    return Number(localStorage.getItem(key) || 0)
-  }
-
+  const getGuestKey = () => `contact_guest_${new Date().toISOString().split('T')[0]}`
+  const getSignedKey = () => `contact_limit_${user?.id}_${new Date().toISOString().split('T')[0]}`
+  const getDailyCount = () => Number(localStorage.getItem(userIsSignedIn ? getSignedKey() : getGuestKey()) || 0)
   const incrementDailyCount = () => {
     const key = userIsSignedIn ? getSignedKey() : getGuestKey()
     localStorage.setItem(key, String(getDailyCount() + 1))
   }
+  const getLimit = () => userIsSignedIn ? MAX_DAILY_SUBMISSIONS_SIGNED : MAX_DAILY_SUBMISSIONS_GUEST
 
-  const getLimit = () =>
-    userIsSignedIn ? MAX_DAILY_SUBMISSIONS_SIGNED : MAX_DAILY_SUBMISSIONS_GUEST
-
-  /* ===================== HANDLERS ===================== */
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
-    if (errors[name]) {
-      setErrors((prev) => {
-        const newErrors = { ...prev }
-        delete newErrors[name]
-        return newErrors
-      })
-    }
+    if (errors[name]) setErrors((prev) => { const n = { ...prev }; delete n[name]; return n })
   }
 
   const validateForm = () => {
@@ -149,8 +94,7 @@ const ContactSection = () => {
     if (!formData.firstName.trim()) newErrors.firstName = 'Champ requis'
     if (!formData.lastName.trim()) newErrors.lastName = 'Champ requis'
     if (!formData.email.trim()) newErrors.email = 'Email requis'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email))
-      newErrors.email = 'Email invalide'
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) newErrors.email = 'Email invalide'
     if (!formData.subject.trim()) newErrors.subject = 'Sujet requis'
     if (!formData.message.trim()) newErrors.message = 'Message requis'
     setErrors(newErrors)
@@ -159,288 +103,218 @@ const ContactSection = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-
-    // Honeypot — si le champ caché est rempli, c'est un bot
     if (formData.website.trim() !== '') return
-
-    const dailyCount = getDailyCount()
-    if (dailyCount >= getLimit()) {
-      setStatus('limit')
-      return
-    }
-
+    if (getDailyCount() >= getLimit()) { setStatus('limit'); return }
     if (!validateForm()) return
-
     setIsLoading(true)
     setStatus(null)
-
     try {
       await emailjs.send(
         process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
         process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        {
-          firstName: formData.firstName,
-          lastName: formData.lastName,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        },
+        { firstName: formData.firstName, lastName: formData.lastName, email: formData.email, subject: formData.subject, message: formData.message },
         process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
       )
       incrementDailyCount()
       setStatus('success')
       setFormData((prev) => ({
-        ...prev,
-        subject: '',
-        message: '',
-        // On vide aussi prénom/nom/email si l'utilisateur n'est pas connecté
+        ...prev, subject: '', message: '',
         ...(!userIsSignedIn && { firstName: '', lastName: '', email: '' }),
       }))
       setErrors({})
-    } catch (error) {
-      setStatus('error')
-    } finally {
-      setIsLoading(false)
-    }
+    } catch { setStatus('error') }
+    finally { setIsLoading(false) }
   }
 
-  /* ===================== RENDER ===================== */
   return (
-    <section
-      id="contact"
-      className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-950 dark:to-gray-900 overflow-hidden"
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="relative py-24 bg-white dark:bg-gray-950 overflow-hidden">
+
+      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-300/30 dark:via-blue-700/20 to-transparent" />
+
+      <div className="relative max-w-6xl mx-auto px-4">
+
+        {/* ── Header ── */}
         <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
+          className="text-center mb-14"
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p className="text-blue-600 font-semibold text-lg mb-2">
+          <span className="inline-block text-blue-600 dark:text-blue-400 font-semibold text-sm tracking-widest uppercase mb-3">
             {t.contact.badge}
-          </p>
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-gray-200 mb-6">
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-gray-100 mb-4">
             {t.contact.title}
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-gray-500 dark:text-gray-400 max-w-xl mx-auto text-sm leading-relaxed">
             {t.contact.description}
           </p>
+          <div className="mt-8 h-px bg-gradient-to-r from-transparent via-blue-500/30 dark:via-blue-700/20 to-transparent" />
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* ── Colonne gauche : infos de contact ── */}
+        <div className="grid lg:grid-cols-[1fr_1.6fr] gap-10">
+
+          {/* ── Colonne gauche ── */}
           <motion.div
-            className="space-y-8 order-2 lg:order-1"
-            initial={{ opacity: 0, x: -50 }}
+            className="space-y-6 order-2 lg:order-1"
+            initial={{ opacity: 0, x: -24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-gray-200 mb-6">
+              <h3 className="text-xl font-bold text-gray-900 dark:text-gray-100 mb-2">
                 {t.contact.stayInTouch.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed mb-8">
+              <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
                 {t.contact.stayInTouch.description}
               </p>
             </div>
 
-            <div className="space-y-6">
+            {/* Infos contact */}
+            <div className="space-y-3">
               {contactInfo.map((info, index) => (
-                <motion.div
+                <motion.a
                   key={info.title}
-                  initial={{ opacity: 0, x: -20 }}
+                  href={info.href}
+                  target={info.href.startsWith('http') ? '_blank' : undefined}
+                  rel="noopener noreferrer"
+                  initial={{ opacity: 0, x: -16 }}
                   whileInView={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1, duration: 0.6 }}
+                  transition={{ delay: index * 0.08, duration: 0.45 }}
                   viewport={{ once: true }}
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-gray-200/80 dark:border-white/[0.06] bg-white dark:bg-gray-900 shadow-sm hover:border-blue-200/60 dark:hover:border-blue-700/30 hover:shadow-md transition-all duration-200 group"
                 >
-                  <Card className="border-0 shadow-md hover:shadow-lg transition-shadow dark:bg-gray-900">
-                    <CardContent className="p-6">
-                      <div className="flex items-center space-x-4">
-                        <div className="w-12 h-12 bg-gradient-to-r from-blue-700 to-blue-600 rounded-full flex items-center justify-center">
-                          <info.icon className="h-6 w-6 text-white" />
-                        </div>
-                        <div className="max-w-full">
-                          <h4 className="font-semibold text-gray-900 dark:text-gray-200">
-                            {info.title}
-                          </h4>
-                          <a
-                            href={info.href}
-                            className="text-gray-600 dark:text-gray-400 hover:text-blue-600 transition-colors break-words"
-                          >
-                            {info.value}
-                          </a>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </motion.div>
+                  <div className="w-10 h-10 rounded-xl bg-blue-600/10 dark:bg-blue-500/10 border border-blue-200/50 dark:border-blue-500/20 flex items-center justify-center flex-shrink-0 group-hover:bg-blue-600 group-hover:border-blue-600 transition-all duration-200">
+                    <info.icon className="h-4 w-4 text-blue-600 dark:text-blue-400 group-hover:text-white transition-colors duration-200" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-[11px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wide">
+                      {info.title}
+                    </p>
+                    <p className="text-sm font-medium text-gray-700 dark:text-gray-300 truncate">
+                      {info.value}
+                    </p>
+                  </div>
+                  <ExternalLink className="w-3.5 h-3.5 text-gray-300 dark:text-gray-600 ml-auto flex-shrink-0 group-hover:text-blue-500 transition-colors duration-200" />
+                </motion.a>
               ))}
+            </div>
+
+            {/* Socials */}
+            <div className="pt-2">
+              <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
+                Retrouvez-moi
+              </p>
+              <div className="flex gap-2">
+                {socials.map((s) => (
+                  <a
+                    key={s.label}
+                    href={s.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title={s.label}
+                    className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200/80 dark:border-white/[0.06] bg-white dark:bg-gray-900 text-sm text-gray-500 dark:text-gray-400 transition-all duration-200 ${s.color} dark:hover:border-blue-500/40`}
+                  >
+                    {s.icon}
+                    <span className="hidden sm:inline text-xs font-medium">{s.label}</span>
+                  </a>
+                ))}
+              </div>
             </div>
           </motion.div>
 
-          {/* ── Colonne droite : formulaire ── */}
+          {/* ── Formulaire ── */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 24 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6 }}
             viewport={{ once: true }}
             className="order-1 lg:order-2"
           >
-            <Card className="border-0 shadow-xl bg-white dark:bg-gray-900 dark:shadow-black/40">
-              <CardContent className="p-8">
-                <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="rounded-2xl border border-gray-200/80 dark:border-white/[0.07] bg-white dark:bg-gray-900 shadow-sm dark:shadow-black/30 overflow-hidden">
+              <div className="h-1 bg-blue-600 w-full" />
+              <div className="p-7">
+                <form className="space-y-4" onSubmit={handleSubmit}>
 
-                  {/* ── Honeypot (invisible pour les humains) ── */}
-                  <div style={{ position: 'absolute', left: '-9999px', top: 'auto', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
-                    <input
-                      type="text"
-                      name="website"
-                      value={formData.website}
-                      onChange={handleChange}
-                      tabIndex={-1}
-                      autoComplete="off"
-                    />
+                  {/* Honeypot */}
+                  <div style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }} aria-hidden="true">
+                    <input type="text" name="website" value={formData.website} onChange={handleChange} tabIndex={-1} autoComplete="off" />
                   </div>
 
-                  {/* ── Prénom / Nom ── */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                        {t.contact.form.firstName}
-                      </label>
-                      <Input
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder={t.contact.form.firstNamePlaceholder}
-                        // Pré-rempli et verrouillé si connecté
-                        disabled={userIsSignedIn}
-                      />
-                      {errors.firstName && <ErrorMessage message={errors.firstName} />}
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                        {t.contact.form.lastName}
-                      </label>
-                      <Input
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder={t.contact.form.lastNamePlaceholder}
-                        disabled={userIsSignedIn}
-                      />
-                      {errors.lastName && <ErrorMessage message={errors.lastName} />}
-                    </div>
+                  {/* Prénom / Nom */}
+                  <div className="grid grid-cols-2 gap-3">
+                    <Field label={t.contact.form.firstName} error={errors.firstName}>
+                      <Input name="firstName" value={formData.firstName} onChange={handleChange} placeholder={t.contact.form.firstNamePlaceholder} disabled={userIsSignedIn} className="rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800/50 focus:border-blue-400" />
+                    </Field>
+                    <Field label={t.contact.form.lastName} error={errors.lastName}>
+                      <Input name="lastName" value={formData.lastName} onChange={handleChange} placeholder={t.contact.form.lastNamePlaceholder} disabled={userIsSignedIn} className="rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800/50 focus:border-blue-400" />
+                    </Field>
                   </div>
 
-                  {/* ── Email ── */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                      {t.contact.form.email}
-                    </label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      placeholder={t.contact.form.emailPlaceholder}
-                      disabled={userIsSignedIn}
-                    />
-                    {errors.email && <ErrorMessage message={errors.email} />}
-                  </div>
+                  {/* Email */}
+                  <Field label={t.contact.form.email} error={errors.email}>
+                    <Input name="email" type="email" value={formData.email} onChange={handleChange} placeholder={t.contact.form.emailPlaceholder} disabled={userIsSignedIn} className="rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800/50 focus:border-blue-400" />
+                  </Field>
 
-                  {/* ── Sujet ── */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                      {t.contact.form.subject}
-                    </label>
-                    <Input
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      placeholder={t.contact.form.subjectPlaceholder}
-                    />
-                    {errors.subject && <ErrorMessage message={errors.subject} />}
-                  </div>
+                  {/* Sujet */}
+                  <Field label={t.contact.form.subject} error={errors.subject}>
+                    <Input name="subject" value={formData.subject} onChange={handleChange} placeholder={t.contact.form.subjectPlaceholder} className="rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800/50 focus:border-blue-400" />
+                  </Field>
 
-                  {/* ── Message ── */}
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-gray-900 dark:text-gray-200">
-                      {t.contact.form.message}
-                    </label>
-                    <Textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      rows={6}
-                      placeholder={t.contact.form.messagePlaceholder}
-                      className="resize-none"
-                    />
-                    {errors.message && <ErrorMessage message={errors.message} />}
-                  </div>
+                  {/* Message */}
+                  <Field label={t.contact.form.message} error={errors.message}>
+                    <Textarea name="message" value={formData.message} onChange={handleChange} rows={5} placeholder={t.contact.form.messagePlaceholder} className="resize-none rounded-xl border-gray-200 dark:border-gray-700 dark:bg-gray-800/50 focus:border-blue-400" />
+                  </Field>
 
-                  {/* ── Bandeau connecté ── */}
+                  {/* Connecté */}
                   {userIsSignedIn && (
-                    <div className="flex items-center justify-between rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/50 px-4 py-3">
-                      <div className="flex items-center gap-3">
-                        <User className="h-5 w-5 text-blue-600" />
-                        <div className="text-sm">
-                          <p className="font-medium text-gray-900 dark:text-gray-200">
-                            Connecté en tant que
-                          </p>
-                          <p className="text-gray-600 dark:text-gray-400">
+                    <div className="flex items-center justify-between rounded-xl border border-gray-200 dark:border-gray-700/60 bg-gray-50 dark:bg-gray-800/40 px-4 py-2.5">
+                      <div className="flex items-center gap-2.5">
+                        <div className="w-7 h-7 rounded-lg bg-blue-600/10 dark:bg-blue-500/10 flex items-center justify-center">
+                          <User className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400" />
+                        </div>
+                        <div>
+                          <p className="text-xs font-medium text-gray-700 dark:text-gray-300">Connecté</p>
+                          <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate max-w-[180px]">
                             {user?.primaryEmailAddress?.emailAddress}
                           </p>
                         </div>
                       </div>
                       <SignOutButton>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="text-red-600 border-red-200 hover:bg-red-50 hover:text-red-700 dark:border-red-800 dark:hover:bg-red-900/30"
-                        >
+                        <button type="button" className="text-[11px] font-medium text-red-500 hover:text-red-600 dark:text-red-400 transition-colors">
                           {t.contact.form.logOut}
-                        </Button>
+                        </button>
                       </SignOutButton>
                     </div>
                   )}
 
-                  {/* ── Connexion optionnelle ── */}
+                  {/* Connexion optionnelle */}
                   {!userIsSignedIn && (
-                    <div className="rounded-xl border border-blue-100 dark:border-blue-900 bg-blue-50 dark:bg-blue-950/30 px-4 py-3 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                      <p className="text-sm text-blue-700 dark:text-blue-300">
-                        Connectez-vous pour envoyer jusqu'à{' '}
-                        <span className="font-semibold">{MAX_DAILY_SUBMISSIONS_SIGNED} messages/jour</span>
-                        {' '}(sinon 1/jour en anonyme).
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 rounded-xl border border-blue-100 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-950/20 px-4 py-3">
+                      <p className="text-xs text-blue-700 dark:text-blue-300">
+                        Connectez-vous pour <span className="font-semibold">{MAX_DAILY_SUBMISSIONS_SIGNED} messages/jour</span>{' '}
+                        <span className="text-blue-500/70 dark:text-blue-400/60">(anonyme : 1/jour)</span>
                       </p>
                       <SignInButton mode="modal">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          className="flex items-center gap-2 shrink-0 border-blue-200 dark:border-blue-800"
-                        >
-                          <img src="/icons/google.png" alt="Google" className="h-4 w-4" />
+                        <button type="button" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-blue-200 dark:border-blue-800 bg-white dark:bg-gray-900 text-xs font-medium text-gray-700 dark:text-gray-300 hover:border-blue-400 transition-colors flex-shrink-0">
+                          <img src="/icons/google.png" alt="Google" className="h-3.5 w-3.5" />
                           {t.contact.form.logIn}
-                        </Button>
+                        </button>
                       </SignInButton>
                     </div>
                   )}
 
-                  {/* ── Bouton envoyer ── */}
+                  {/* Submit */}
                   <Button
                     type="submit"
-                    size="lg"
                     disabled={isLoading}
-                    className="w-full bg-blue-700 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full rounded-xl bg-blue-600 hover:bg-blue-700 text-white shadow-sm shadow-blue-600/20 disabled:opacity-60 disabled:cursor-not-allowed gap-2 transition-all"
                   >
                     {isLoading ? (
                       <>
-                        <svg className="mr-2 h-5 w-5 animate-spin" viewBox="0 0 24 24" fill="none">
+                        <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
                         </svg>
@@ -448,69 +322,52 @@ const ContactSection = () => {
                       </>
                     ) : (
                       <>
-                        <Send className="mr-2 h-5 w-5" />
+                        <Send className="h-4 w-4" />
                         {t.contact.form.send}
                       </>
                     )}
                   </Button>
                 </form>
 
-                {/* ── Statut envoi ── */}
-                {status && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className={`mt-6 rounded-xl border px-4 py-3 flex items-start gap-3
-                      ${status === 'success'
-                        ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/30 dark:border-green-700 dark:text-green-300'
-                        : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/30 dark:border-red-700 dark:text-red-300'
-                      }`}
-                  >
-                    <div className="mt-0.5">{status === 'success' ? '✅' : '⚠️'}</div>
-                    <div>
-                      {status === 'success' && (
-                        <>
-                          <p className="font-semibold">Message envoyé avec succès</p>
-                          <p className="text-sm opacity-90">Merci pour votre message. Je vous répondrai très prochainement.</p>
-                        </>
-                      )}
-                      {status === 'limit' && (
-                        <>
-                          <p className="font-semibold">Limite atteinte</p>
-                          <p className="text-sm opacity-90">
-                            {userIsSignedIn
-                              ? `Vous avez déjà envoyé ${MAX_DAILY_SUBMISSIONS_SIGNED} messages aujourd'hui. Revenez demain.`
-                              : `En tant que visiteur, vous pouvez envoyer 1 message par jour. Connectez-vous avec Google pour en envoyer ${MAX_DAILY_SUBMISSIONS_SIGNED}.`
-                            }
-                          </p>
-                        </>
-                      )}
-                      {status === 'error' && (
-                        <>
-                          <p className="font-semibold">Erreur lors de l'envoi</p>
-                          <p className="text-sm opacity-90">Une erreur est survenue. Veuillez réessayer plus tard.</p>
-                        </>
-                      )}
-                    </div>
-                  </motion.div>
-                )}
+                {/* Status */}
+                <AnimatePresence>
+                  {status && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -8, height: 0 }}
+                      animate={{ opacity: 1, y: 0, height: 'auto' }}
+                      exit={{ opacity: 0, y: -8, height: 0 }}
+                      transition={{ duration: 0.22 }}
+                      className={`mt-4 rounded-xl border px-4 py-3 flex items-start gap-3 overflow-hidden
+                        ${status === 'success'
+                          ? 'bg-green-50 border-green-200 text-green-800 dark:bg-green-900/20 dark:border-green-700/40 dark:text-green-300'
+                          : 'bg-red-50 border-red-200 text-red-800 dark:bg-red-900/20 dark:border-red-700/40 dark:text-red-300'
+                        }`}
+                    >
+                      <span className="mt-0.5 text-base">{status === 'success' ? '✅' : '⚠️'}</span>
+                      <div>
+                        {status === 'success' && <><p className="text-sm font-semibold">Message envoyé !</p><p className="text-xs opacity-80 mt-0.5">Je vous répondrai très prochainement.</p></>}
+                        {status === 'limit' && <><p className="text-sm font-semibold">Limite atteinte</p><p className="text-xs opacity-80 mt-0.5">{userIsSignedIn ? `${MAX_DAILY_SUBMISSIONS_SIGNED} messages max aujourd'hui.` : `1 message/jour en anonyme. Connectez-vous pour plus.`}</p></>}
+                        {status === 'error' && <><p className="text-sm font-semibold">Erreur d'envoi</p><p className="text-xs opacity-80 mt-0.5">Veuillez réessayer plus tard.</p></>}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                {/* ── Séparateur + email direct ── */}
-                <div className="mt-6 flex items-center gap-3">
-                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
-                  <span className="text-xs text-gray-400 dark:text-gray-500">ou</span>
-                  <div className="flex-1 h-px bg-gray-200 dark:bg-gray-700" />
+                {/* Email direct */}
+                <div className="mt-5 flex items-center gap-3">
+                  <div className="flex-1 h-px bg-gray-100 dark:bg-white/[0.05]" />
+                  <span className="text-[11px] text-gray-400 dark:text-gray-500">ou directement</span>
+                  <div className="flex-1 h-px bg-gray-100 dark:bg-white/[0.05]" />
                 </div>
                 <a
                   href="mailto:juninho.ramefison@gmail.com"
-                  className="mt-4 flex items-center justify-center gap-2 text-sm text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 transition-colors"
+                  className="mt-3 flex items-center justify-center gap-2 text-sm font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 transition-colors"
                 >
-                  <Mail className="h-4 w-4" />
+                  <Mail className="h-3.5 w-3.5" />
                   juninho.ramefison@gmail.com
                 </a>
-
-              </CardContent>
-            </Card>
+              </div>
+            </div>
           </motion.div>
         </div>
       </div>
@@ -518,19 +375,28 @@ const ContactSection = () => {
   )
 }
 
-/* ── Composant utilitaire message d'erreur ── */
-const ErrorMessage = ({ message }: { message: string }) => (
-  <motion.p
-    initial={{ opacity: 0, y: -4 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.2 }}
-    className="mt-1 flex items-center gap-2 rounded-lg bg-gray-100 px-3 py-2 text-sm text-gray-700 dark:bg-gray-800/80 dark:text-gray-300"
-  >
-    <span className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-gray-300 text-xs font-bold text-gray-800 dark:bg-gray-700 dark:text-gray-200">
-      !
-    </span>
-    {message}
-  </motion.p>
+/* ── Field wrapper ── */
+const Field = ({ label, error, children }: { label: string; error?: string; children: React.ReactNode }) => (
+  <div className="space-y-1.5">
+    <label className="text-xs font-semibold text-gray-600 dark:text-gray-400 uppercase tracking-wide">
+      {label}
+    </label>
+    {children}
+    <AnimatePresence>
+      {error && (
+        <motion.p
+          initial={{ opacity: 0, y: -4, height: 0 }}
+          animate={{ opacity: 1, y: 0, height: 'auto' }}
+          exit={{ opacity: 0, y: -4, height: 0 }}
+          transition={{ duration: 0.18 }}
+          className="flex items-center gap-1.5 text-xs text-red-600 dark:text-red-400 overflow-hidden"
+        >
+          <span className="w-4 h-4 rounded-full bg-red-100 dark:bg-red-900/40 flex items-center justify-center flex-shrink-0 text-[10px] font-bold">!</span>
+          {error}
+        </motion.p>
+      )}
+    </AnimatePresence>
+  </div>
 )
 
 export default ContactSection
