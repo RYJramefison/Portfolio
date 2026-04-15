@@ -349,10 +349,10 @@ export const translations = {
           description:
             "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
           images: [
-            "/projects/kanto-feo/kanto-feo_1.png",
-            "/projects/kanto-feo/kanto-feo_2.png",
-            "/projects/kanto-feo/kanto-feo_3.png",
-            "/projects/kanto-feo/kanto-feo_4.png",
+            "/projects/kanto-feo/Kanto-feo_1.png",
+            "/projects/kanto-feo/Kanto-feo_2.png",
+            "/projects/kanto-feo/Kanto-feo_3.png",
+            "/projects/kanto-feo/Kanto-feo_4.png",
           ],
           tags: [
             {
@@ -835,10 +835,10 @@ export const translations = {
           description:
             "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
           images: [
-            "/projects/kanto-feo/kanto-feo_1.png",
-            "/projects/kanto-feo/kanto-feo_2.png",
-            "/projects/kanto-feo/kanto-feo_3.png",
-            "/projects/kanto-feo/kanto-feo_4.png",
+            "/projects/kanto-feo/Kanto-feo_1.png",
+            "/projects/kanto-feo/Kanto-feo_2.png",
+            "/projects/kanto-feo/Kanto-feo_3.png",
+            "/projects/kanto-feo/Kanto-feo_4.png",
           ],
           tags: [
             {
