@@ -262,9 +262,9 @@ export const translations = {
           description:
             "Analyse de données climatiques afin de recommander les meilleures périodes de voyage, à travers un pipeline ETL et une visualisation des résultats avec Power BI.",
           images: [
-            "climat et tourisme.png",
-            "climat et tourisme.png",
-            "climat et tourisme.png",
+            "/projects/climat_tourisme/climat_tourisme_2.png",
+            "/projects/climat_tourisme/climat_tourisme_3.png",
+            "/projects/climat_tourisme/climat_tourisme_1.png",
           ],
           tags: [
             {
@@ -294,9 +294,9 @@ export const translations = {
           description:
             "Système CRUD de gestion de patrimoine personnel intégrant le calcul des amortissements et la visualisation graphique de l’évolution dans le temps.",
           images: [
-            "Patrimoine economique.png",
-            "Patrimoine economique.png",
-            "Patrimoine economique.png",
+            "/projects/patrimoine/patrimoine_1.png",
+            "/projects/patrimoine/patrimoine_2.png",
+            "/projects/patrimoine/patrimoine_3.png",
           ],
           tags: [
             {
@@ -321,7 +321,11 @@ export const translations = {
           title: "Volako",
           description:
             "Application mobile de gestion d’argent permettant de suivre les dettes, transactions et soldes en temps réel avec une interface moderne et fluide.",
-          images: ["volako-1.png", "volako-2.png", "volako-3.png"],
+          images: [
+            "/projects/volako/volako_1.png",
+            "/projects/volako/volako_2.png",
+            "/projects/volako/volako_3.png",
+          ],
           tags: [
             {
               key: "reactnative",
@@ -344,19 +348,36 @@ export const translations = {
           title: "Kanto-Feo",
           description:
             "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
-          images: ["kanto-feo-1.png", "kanto-feo-2.png", "kanto-feo-3.png"],
+          images: [
+            "/projects/kanto-feo/kanto-feo_1.png",
+            "/projects/kanto-feo/kanto-feo_2.png",
+            "/projects/kanto-feo/kanto-feo_3.png",
+            "/projects/kanto-feo/kanto-feo_4.png",
+          ],
           tags: [
             {
               key: "vite",
               color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
             },
             {
-              key: "react",
-              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+              key: "typescript",
+              color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
             },
             {
               key: "tailwind",
               color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+            {
+              key: "nest js",
+              color: "bg-red-500/20 text-red-400 border-red-500/30",
+            },
+            {
+              key: "prisma",
+              color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+            },
+            {
+              key: "postgresQL",
+              color: "bg-green-500/20 text-green-400 border-green-500/30",
             },
           ],
           category: "Web Application",
@@ -727,9 +748,9 @@ export const translations = {
           description:
             "Climate data analysis to recommend the best travel periods, using an ETL pipeline and data visualization with Power BI.",
           images: [
-            "climat et tourisme.png",
-            "climat et tourisme.png",
-            "climat et tourisme.png",
+            "/projects/climat_tourisme/climat_tourisme_2.png",
+            "/projects/climat_tourisme/climat_tourisme_3.png",
+            "/projects/climat_tourisme/climat_tourisme_1.png",
           ],
           tags: [
             {
@@ -759,9 +780,9 @@ export const translations = {
           description:
             "CRUD-based personal asset management system including depreciation calculations and graphical visualization of asset evolution over time.",
           images: [
-            "Patrimoine economique.png",
-            "Patrimoine economique.png",
-            "Patrimoine economique.png",
+            "/projects/patrimoine/patrimoine_1.png",
+            "/projects/patrimoine/patrimoine_2.png",
+            "/projects/patrimoine/patrimoine_3.png",
           ],
           tags: [
             {
@@ -786,7 +807,11 @@ export const translations = {
           title: "Volako",
           description:
             "Application mobile de gestion d’argent permettant de suivre les dettes, transactions et soldes en temps réel avec une interface moderne et fluide.",
-          images: ["volako-1.png", "volako-2.png", "volako-3.png"],
+          images: [
+            "/projects/volako/volako_1.png",
+            "/projects/volako/volako_2.png",
+            "/projects/volako/volako_3.png",
+          ],
           tags: [
             {
               key: "reactnative",
@@ -809,19 +834,36 @@ export const translations = {
           title: "Kanto-Feo",
           description:
             "Plateforme web dédiée à l’apprentissage musical en ligne permettant aux enseignants de publier des cours et aux élèves de suivre des leçons interactives.",
-          images: ["kanto-feo-1.png", "kanto-feo-2.png", "kanto-feo-3.png"],
+          images: [
+            "/projects/kanto-feo/kanto-feo_1.png",
+            "/projects/kanto-feo/kanto-feo_2.png",
+            "/projects/kanto-feo/kanto-feo_3.png",
+            "/projects/kanto-feo/kanto-feo_4.png",
+          ],
           tags: [
             {
               key: "vite",
               color: "bg-purple-500/20 text-purple-400 border-purple-500/30",
             },
             {
-              key: "react",
-              color: "bg-cyan-500/20 text-cyan-400 border-cyan-500/30",
+              key: "typescript",
+              color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
             },
             {
               key: "tailwind",
               color: "bg-sky-500/20 text-sky-400 border-sky-500/30",
+            },
+            {
+              key: "nest js",
+              color: "bg-red-500/20 text-red-400 border-red-500/30",
+            },
+            {
+              key: "prisma",
+              color: "bg-blue-500/20 text-blue-400 border-blue-500/30",
+            },
+            {
+              key: "postgresQL",
+              color: "bg-green-500/20 text-green-400 border-green-500/30",
             },
           ],
           category: "Web Application",
