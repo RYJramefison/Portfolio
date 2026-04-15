@@ -409,6 +409,14 @@ export const translations = {
           link: "https://hei.school/",
         },
         {
+          title: "Communauté Kodata",
+          establishment: "Madagascar · Data & IA",
+          description:
+            "Membre de Kodata — espace d'apprentissage et de partage dédié aux passionnés de data analyse et data science à Madagascar.",
+          image: "logo_kodata.png",
+          link: null,
+        },
+        {
           title: "Baccalauréat scientifique",
           establishment: "Lycée MIRVA Alarobia Amboniloha",
           description:
@@ -417,19 +425,11 @@ export const translations = {
           link: "https://lyceemirva35.com/",
         },
         {
-          title: "Communauté Kodata",
-          establishment: "Madagascar · Data & IA",
-          description:
-            "Membre de Kodata — espace d'apprentissage et de partage dédié aux passionnés de data analyse et data science à Madagascar.",
-          image: "Hobbies.jpeg",
-          link: "kodata.jpeg",
-        },
-        {
           title: "Centres d’intérêt",
           establishment: "Loisirs personnels",
           description:
             "Pratique de la musique et du beatbox pour stimuler la créativité, et des échecs pour renforcer l’esprit stratégique.",
-          image: "kodata.png",
+          image: "Hobbies.jpeg",
           link: null,
         },
       ],
@@ -894,20 +894,20 @@ export const translations = {
           link: "https://hei.school/",
         },
         {
+          title: "Kodata Community",
+          establishment: "Madagascar · Data & AI",
+          description:
+            "Member of Kodata — a learning and sharing space dedicated to data analysis and data science enthusiasts in Madagascar.",
+          image: "logo_kodata.png",
+          link: null,
+        },
+        {
           title: "Scientific Baccalaureate",
           establishment: "Lycée MIRVA Alarobia Amboniloha",
           description:
             "Obtained a Scientific Baccalaureate (Series D) in 2023.",
           image: "mirva.jpg",
           link: "https://lyceemirva35.com/",
-        },
-        {
-          title: "Kodata Community",
-          establishment: "Madagascar · Data & AI",
-          description:
-            "Member of Kodata — a learning and sharing space dedicated to data analysis and data science enthusiasts in Madagascar.",
-          image: "kodata.jpeg",
-          link: null,
         },
         {
           title: "Interests",
