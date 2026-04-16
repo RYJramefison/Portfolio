@@ -87,7 +87,79 @@ const fullName = [
   return (
     <section id="home" className="relative pt-16 pb-20 overflow-hidden">
       <div className="absolute inset-0 z-0 bg-white dark:bg-gray-950" />
-      <ParticlesBackground />
+      <motion.div
+  className="absolute inset-0"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 1 }}
+>
+  {/* Grille hexagonale statique */}
+  <svg
+    className="absolute inset-0 w-full h-full"
+    xmlns="http://www.w3.org/2000/svg"
+    style={{
+      maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
+      WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+    }}
+  >
+    <defs>
+      <pattern id="hex-static" x="0" y="0" width="46" height="53" patternUnits="userSpaceOnUse">
+        <polygon
+          points="23,2 44,14 44,39 23,51 2,39 2,14"
+          fill="none"
+          stroke="#80808018"
+          strokeWidth="1"
+        />
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#hex-static)" />
+  </svg>
+
+  {/* Grille hexagonale bleue — allumage droite → gauche */}
+  <motion.div
+    className="absolute inset-0"
+    animate={{ opacity: [0, 1, 1, 0] }}
+    transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+    style={{
+      maskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)',
+      WebkitMaskImage: 'radial-gradient(ellipse 60% 50% at 50% 0%, #000 70%, transparent 100%)'
+    }}
+  >
+    <motion.div
+      className="absolute inset-0"
+      style={{ background: 'none' }}
+    >
+      <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="hex-blue" x="0" y="0" width="46" height="53" patternUnits="userSpaceOnUse">
+            <polygon
+              points="23,2 44,14 44,39 23,51 2,39 2,14"
+              fill="none"
+              stroke="#3b82f6"
+              strokeWidth="1.5"
+            />
+          </pattern>
+          <motion.mask id="sweep-mask">
+            <motion.rect
+              x="100%"
+              y="0"
+              width="0"
+              height="100%"
+              fill="white"
+              animate={{
+                x: ['100%', '0%', '0%', '-100%'],
+                width: ['0%', '100%', '100%', '100%']
+              }}
+              transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
+            />
+          </motion.mask>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#hex-blue)" mask="url(#sweep-mask)" />
+      </svg>
+    </motion.div>
+  </motion.div>
+</motion.div>
+      {/* <ParticlesBackground /> */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-4rem)]">
         <motion.div
