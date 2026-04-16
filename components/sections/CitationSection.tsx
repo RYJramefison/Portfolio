@@ -129,7 +129,7 @@ export default function CitationSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          {t.citation.footer}
+          {t.citation.quoteFooter}
         </motion.p>
       </div>
     </section>
