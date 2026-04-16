@@ -55,26 +55,25 @@ export default function Footer() {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[400px] h-px bg-gradient-to-r from-transparent via-blue-400/40 dark:via-blue-600/50 to-transparent" />
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-12 bg-blue-600/[0.04] dark:bg-blue-700/10 blur-[40px] rounded-full" />
 
-      <div className="relative max-w-6xl mx-auto px-6 pt-12 pb-8">
+      <div className="relative max-w-6xl mx-auto px-6 pt-8 pb-6">
         {/* ── Grille 3 colonnes ── */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
         >
           {/* Col 1 — Identité */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <div className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-blue-600 flex-shrink-0" />
               <span className="font-bold text-sm text-gray-900 dark:text-gray-100 tracking-tight">
-                Juninho Ramefison
+                {t.footer.name}
               </span>
             </div>
             <p className="text-xs text-gray-500 leading-relaxed">
-              Développeur Web Full Stack en formation (L3). Applications
-              modernes, accent sur la qualité et l'expérience utilisateur.
+              {t.footer.description}
             </p>
             <div
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs
@@ -83,49 +82,29 @@ export default function Footer() {
               text-blue-700 dark:text-blue-400"
             >
               <span className="w-1.5 h-1.5 rounded-full bg-blue-500 animate-pulse flex-shrink-0" />
-              Disponible — stage / alternance
+              {t.footer.available}
             </div>
-            <div className="space-y-1.5">
+            <div className="space-y-1">
               <div className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500">
                 <MapPin size={11} />
-                Madagascar, Antananarivo
+                {t.footer.location}
               </div>
               <a
                 href="mailto:juninho.ramefison@gmail.com"
                 className="flex items-center gap-2 text-xs text-gray-400 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
               >
                 <Mail size={11} />
-                juninho.ramefison@gmail.com
+                {t.footer.email}
               </a>
             </div>
           </div>
 
-          {/* Col 2 — Navigation */}
-          <div className="space-y-4">
-            <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-              Navigation
-            </h4>
-            <ul className="space-y-2">
-              {navLinks.map((link: { label: string; href: string }) => (
-                <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="group flex items-center gap-2 text-sm text-gray-500 dark:text-gray-500 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
-                  >
-                    <span className="w-0 group-hover:w-3 h-px bg-blue-500 transition-all duration-300 overflow-hidden flex-shrink-0" />
-                    {link.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-
           {/* Col 3 — Socials + CV */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             <h4 className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest">
-              Retrouvez-moi
+              {t.footer.findMe}
             </h4>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-1.5">
               {socials.map((s) => (
                 <Link
                   key={s.label}
@@ -154,7 +133,7 @@ export default function Footer() {
                 transition-all duration-200"
             >
               <Download size={13} />
-              Télécharger mon CV
+              {t.footer.downloadCv}
             </a>
           </div>
         </motion.div>
@@ -165,10 +144,10 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
           viewport={{ once: true }}
-          className="flex flex-wrap justify-center items-center gap-3 mb-8"
+          className="flex flex-wrap justify-center items-center gap-2 mb-6"
         >
           <span className="text-[11px] text-gray-400 dark:text-gray-500 uppercase tracking-widest mr-1">
-            Construit avec
+            {t.footer.builtWith}
           </span>
           {stack.map((tech, i) => (
             <div key={tech.label} className="flex items-center gap-1.5">
@@ -187,9 +166,9 @@ export default function Footer() {
         <div className="border-t border-gray-200/80 dark:border-white/[0.07]" />
 
         {/* ── Bas ── */}
-        <div className="pt-5 flex flex-col sm:flex-row items-center justify-between gap-3">
+        <div className="pt-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-[11px] text-gray-400 dark:text-gray-600 text-center sm:text-left">
-            © 2026 Juninho Ramefison. Tous droits réservés.
+            {t.footer.copyright}
           </p>
           <motion.button
             whileHover={{ y: -2 }}
@@ -197,7 +176,7 @@ export default function Footer() {
             onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
             className="group flex items-center gap-2 text-[11px] text-gray-400 dark:text-gray-600 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
           >
-            Retour en haut
+            {t.footer.backToTop}
             <span className="w-6 h-6 rounded-full border border-gray-300 dark:border-white/10 flex items-center justify-center group-hover:border-blue-400/60 dark:group-hover:border-blue-500/40 transition-colors">
               <ArrowUp size={10} />
             </span>

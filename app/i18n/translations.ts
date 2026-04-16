@@ -451,7 +451,7 @@ export const translations = {
         role: "Inspiré par Antoine de Saint‑Exupéry, Le Petit Prince",
       },
       tag: "Philosophie personnelle",
-      footer:
+      quoteFooter:
         "Cette citation guide mon approche de chaque défi, transformant chaque obstacle en opportunité d’ascension vers des objectifs plus élevés.",
     },
 
@@ -495,6 +495,20 @@ export const translations = {
         logIn: "Se connecter avec Google",
         logOut: "Se déconnecter",
       },
+    },
+    footer: {
+      name: "Juninho Ramefison",
+      description:
+        "Développeur Web Full Stack en formation (L3). Applications modernes, accent sur la qualité et l'expérience utilisateur.",
+      available: "Disponible - stage / alternance",
+      location: "Madagascar, Antananarivo",
+      email: "juninho.ramefison@gmail.com",
+      findMe: "Retrouvez-moi",
+      downloadCv: "Télécharger mon CV",
+      builtWith: "Construit avec",
+      technologies: "Technologies",
+      copyright: "© 2026 Juninho Ramefison. Tous droits réservés.",
+      backToTop: "Retour en haut",
     },
   },
 
@@ -936,7 +950,7 @@ export const translations = {
         role: "Inspired by Antoine de Saint-Exupéry, The Little Prince",
       },
       tag: "Personal philosophy",
-      footer:
+      quoteFooter:
         "This quote guides my approach to every challenge, turning obstacles into opportunities for higher achievement.",
     },
 
@@ -980,6 +994,20 @@ export const translations = {
         logIn: "Log in with Google",
         logOut: "Log out",
       },
+    },
+    footer: {
+      name: "Juninho Ramefison",
+      description:
+        "Full Stack Web Developer in training (L3). Modern applications, focus on quality and user experience.",
+      available: "Available - internship / work-study",
+      location: "Madagascar, Antananarivo",
+      email: "juninho.ramefison@gmail.com",
+      findMe: "Find me",
+      downloadCv: "Download my CV",
+      builtWith: "Built with",
+      technologies: "Technologies",
+      copyright: "© 2026 Juninho Ramefison. All rights reserved.",
+      backToTop: "Back to top",
     },
   },
 } as const;

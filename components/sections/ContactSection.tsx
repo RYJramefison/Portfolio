@@ -9,7 +9,6 @@ import { useLang } from '@/app/providers/lang-provider'
 import { useState, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import { useUser, SignInButton, SignOutButton } from "@clerk/nextjs"
-import { SiLinkedin, SiGithub, SiFacebook } from 'react-icons/si'
 
 const MAX_DAILY_SUBMISSIONS_SIGNED = 3
 const MAX_DAILY_SUBMISSIONS_GUEST = 1
@@ -53,12 +52,6 @@ const ContactSection = () => {
     { icon: Mail, title: t.contact.infos.email, value: 'juninho.ramefison@gmail.com', href: 'mailto:juninho.ramefison@gmail.com' },
     { icon: Phone, title: t.contact.infos.phone, value: '+261 32 89 522 79', href: 'tel:+261328952279' },
     { icon: MapPin, title: t.contact.infos.location, value: 'Madagascar, Antananarivo', href: 'https://www.google.com/maps/place/Madagascar,+Antananarivo' },
-  ]
-
-  const socials = [
-    { icon: <SiLinkedin size={15} />, href: 'https://www.linkedin.com/in/yarinaly-juninho-ramefison-1270432a1/', label: 'LinkedIn', color: 'hover:text-blue-600 hover:border-blue-300/60' },
-    { icon: <SiGithub size={15} />, href: 'https://github.com/RYJramefison/', label: 'GitHub', color: 'hover:text-gray-900 dark:hover:text-white hover:border-gray-400/60' },
-    { icon: <SiFacebook size={15} />, href: 'https://www.facebook.com/ryj.rafson', label: 'Facebook', color: 'hover:text-blue-500 hover:border-blue-300/60' },
   ]
 
   useEffect(() => {
@@ -201,28 +194,6 @@ const ContactSection = () => {
                 </motion.a>
               ))}
             </div>
-
-            {/* Socials */}
-            <div className="pt-2">
-              <p className="text-[11px] font-bold text-gray-400 dark:text-gray-500 uppercase tracking-widest mb-3">
-                Retrouvez-moi
-              </p>
-              <div className="flex gap-2">
-                {socials.map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    title={s.label}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-xl border border-gray-200/80 dark:border-white/[0.06] bg-white dark:bg-gray-900 text-sm text-gray-500 dark:text-gray-400 transition-all duration-200 ${s.color} dark:hover:border-blue-500/40`}
-                  >
-                    {s.icon}
-                    <span className="hidden sm:inline text-xs font-medium">{s.label}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
           </motion.div>
 
           {/* ── Formulaire ── */}
@@ -290,20 +261,14 @@ const ContactSection = () => {
                     </div>
                   )}
 
-                  {/* Connexion optionnelle */}
+                  {/* Connexion optionnelle avec infos contact */}
                   {!userIsSignedIn && (
-                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2.5 rounded-xl border border-blue-100 dark:border-blue-900/50 bg-blue-50/50 dark:bg-blue-950/20 px-4 py-3">
-                      <p className="text-xs text-blue-700 dark:text-blue-300">
-                        Connectez-vous pour <span className="font-semibold">{MAX_DAILY_SUBMISSIONS_SIGNED} messages/jour</span>{' '}
-                        <span className="text-blue-500/70 dark:text-blue-400/60">(anonyme : 1/jour)</span>
-                      </p>
-                      <SignInButton mode="modal">
-                        <button type="button" className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-blue-200 dark:border-blue-800 bg-white dark:bg-gray-900 text-xs font-medium text-gray-700 dark:text-gray-300 hover:border-blue-400 transition-colors flex-shrink-0">
-                          <img src="/icons/google.png" alt="Google" className="h-3.5 w-3.5" />
-                          {t.contact.form.logIn}
-                        </button>
-                      </SignInButton>
-                    </div>
+                    <SignInButton mode="modal">
+                      <button type="button" className="w-full flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-blue-200 dark:border-blue-800 bg-white dark:bg-gray-900 text-sm font-medium text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-900/50 hover:border-blue-400 transition-all duration-200 shadow-sm hover:shadow-md">
+                        <img src="/icons/google.png" alt="Google" className="h-4 w-4" />
+                        {t.contact.form.logIn}
+                      </button>
+                    </SignInButton>
                   )}
 
                   {/* Submit */}
