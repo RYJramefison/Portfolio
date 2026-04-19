@@ -1,10 +1,11 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
 import AcademyStudentSection from "@/components/sections/AcademyStudentSection";
+import AchievementsPage from "@/components/sections/AchievementsPage";
 import CitationSection from "@/components/sections/CitationSection";
 import ContactSection from "@/components/sections/ContactSection";
 import HeroSection from "@/components/sections/HeroSection";
-import ProjectSection from "@/components/sections/PojectSection";
+import ProjectSection from "@/components/sections/ProjectSection";
 import SkillsSection from "@/components/sections/SkillsSection";
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <SkillsSection/>
       <ProjectSection/>
       <AcademyStudentSection/>
+      {/* <AchievementsPage/> */}
       <CitationSection/>
       <ContactSection/>
       <Footer/>
