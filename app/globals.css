@@ -149,11 +149,49 @@
   backface-visibility: hidden;
 }
 
+/* Variables pour la scrollbar - Couleurs SkillsSection avec transparence */
+:root {
+  --scrollbar-width: 8px;
+  --scrollbar-thumb: #3b82f6;
+  --scrollbar-thumb-hover: #2563eb;
+}
+
+.dark {
+  --scrollbar-thumb: #3b82f680;
+  --scrollbar-thumb-hover: #2563eb;
+  --scrollbar-track: #111827;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+
+  /* Personnalisation de la scrollbar avec variables */
+  ::-webkit-scrollbar {
+    width: var(--scrollbar-width);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--scrollbar-track, transparent);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+  }
+
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track, transparent);
   }
 }
