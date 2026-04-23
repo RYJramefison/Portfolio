@@ -1,5 +1,6 @@
 import Footer from "@/components/layout/Footer";
 import Header from "@/components/layout/Header";
+import AboutSection from "@/components/sections/AboutSection";
 import AcademyStudentSection from "@/components/sections/AcademyStudentSection";
 import AchievementsPage from "@/components/sections/AchievementsPage";
 import CitationSection from "@/components/sections/CitationSection";
@@ -12,11 +13,12 @@ export default function Home() {
     <div>
       <Header/>
       <HeroSection/>
+      <AboutSection/>
       <SkillsSection/>
       <ProjectSection/>
       <AcademyStudentSection/>
       {/* <AchievementsPage/> */}
-      <CitationSection/>
+      {/* <CitationSection/> */}
       <ContactSection/>
       <Footer/>
     </div>

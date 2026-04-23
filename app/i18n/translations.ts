@@ -6,6 +6,7 @@ export const translations = {
   fr: {
     nav: [
       "Accueil",
+      "À Propos",
       "Compétences",
       "Projets",
       "Parcours",
@@ -20,12 +21,27 @@ export const translations = {
       code: "Code",
     },
 
+    about: {
+      title: "À Propos",
+      subtitle: "Bonjour, je suis",
+      description1:
+        "Développeur web en formation (L3), je conçois et développe des applications web modernes et performantes. J'interviens sur l'ensemble du cycle de développement avec un fort accent sur la qualité, la simplicité et l'expérience utilisateur.",
+      description2:
+        "Étudiant en informatique (L3), avec de solides bases en développement web, algorithmique et systèmes informatiques. Développeur en formation, orienté vers la conception de solutions modernes, performantes et fiables.",
+      backendFocus: "Backend Focus",
+      frontendPassion: "Frontend Passion",
+      openToWork:
+        "Ouvert aux missions freelance et aux stages — N'hésitez pas à me contacter !",
+      contactMe: "Me contacter",
+      github: "GitHub",
+    },
+
     home: {
       greeting: "Bonjour, je suis",
       job: "Développeur Web Full Stack",
       technologies: ["React", "Next.js", "Spring Boot", "PostgreSQL"],
       description:
-        "Développeur web en formation (L3), je conçois et développe des applications web modernes et performantes. J’interviens sur l’ensemble du cycle de développement avec un fort accent sur la qualité, la simplicité et l’expérience utilisateur.",
+        "Développeur web en formation (L3), je conçois et développe des applications web modernes et performantes. J'interviens sur l'ensemble du cycle de développement avec un fort accent sur la qualité, la simplicité et l'expérience utilisateur.",
       projectsBtn: "Voir mes projets",
       downloadCv: "Télécharger mon CV",
     },
@@ -520,7 +536,20 @@ export const translations = {
       demo: "Demo",
       code: "Code",
     },
-
+    about: {
+      title: "About",
+      subtitle: "Hello, I am",
+      description1:
+        "Web development student (3rd year), I design and build modern, high-performance web applications. I work across the full development lifecycle with a strong focus on quality, simplicity, and user experience.",
+      description2:
+        "Computer Science student (Bachelor's level), with strong foundations in web development, algorithms, and computer systems. Developer in training, focused on designing modern, high-performance, and reliable solutions.",
+      backendFocus: "Backend Focus",
+      frontendPassion: "Frontend Passion",
+      openToWork:
+        "Open to freelance missions and internships — Don't hesitate to contact me!",
+      contactMe: "Contact me",
+      github: "GitHub",
+    },
     home: {
       greeting: "Hello, I am",
       job: "Full Stack Web Developer",
