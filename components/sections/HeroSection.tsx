@@ -1,5 +1,6 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Download, Mail, MapPin } from 'lucide-react'
 import { easeOut, motion } from 'framer-motion'
@@ -16,6 +17,18 @@ const museoModerno = Montserrat({
 });
 const HeroSection = () => {
   const { t } = useLang()
+  const [isHovered, setIsHovered] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+
+  useEffect(() => {
+    if (!isHovered) {
+      const interval = setInterval(() => {
+        setActiveIndex((prev) => (prev + 1) % 3)
+      }, 1200)
+      return () => clearInterval(interval)
+    }
+  }, [isHovered])
 
   const greetingContainer = {
     hidden: {},
@@ -292,13 +305,7 @@ const fullName = [
   <div className="relative w-[240px] sm:w-[320px] md:w-[350px] max-w-sm mx-auto aspect-square flex justify-center items-center">
 
     {/* bulles décoratives */}
-    <div className="absolute -top-4 -left-4 w-20 h-20
-      bg-gradient-to-r from-blue-400 to-purple-400
-      rounded-full opacity-20 animate-pulse" />
-
-    <div className="absolute -bottom-4 -right-4 w-24 h-24
-      bg-gradient-to-r from-orange-400 to-pink-400
-      rounded-full opacity-20 animate-pulse delay-1000" />
+   
 
     {/* image */}
     <div className="relative w-full aspect-square rounded-full flex items-center justify-center">
@@ -320,25 +327,40 @@ const fullName = [
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7, duration: 0.5 }}
               >
-                {socials.map((s) => (
-                  <a
+                {socials.map((s, index) => (
+                  <motion.a
                     key={s.label}
                     href={s.href}
                     target={s.href.startsWith('mailto') ? undefined : '_blank'}
                     rel="noopener noreferrer"
                     title={s.label}
-                    className="w-10 h-10 rounded-full flex items-center justify-center
+                    onMouseEnter={() => {
+                      setIsHovered(true)
+                      setHoveredIndex(index)
+                    }}
+                    onMouseLeave={() => {
+                      setIsHovered(false)
+                      setHoveredIndex(null)
+                    }}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center
                       bg-white dark:bg-gray-900
-                      border border-gray-200/80 dark:border-white/[0.08]
-                      text-gray-500 dark:text-gray-400
                       shadow-sm hover:shadow-md
-                      hover:border-blue-400/60 dark:hover:border-blue-500/40
-                      hover:text-blue-600 dark:hover:text-blue-400
                       hover:scale-110
-                      transition-all duration-200"
-                  >
-                    {s.icon}
-                  </a>
+                      transition-all duration-200
+                      ${hoveredIndex === index
+                        ? 'border-1 border-blue-500 text-blue-600 dark:text-blue-400 shadow-lg shadow-blue-500/30'
+                        : !isHovered && activeIndex === index
+                        ? 'border-1 border-blue-500 text-gray-500 dark:text-gray-400 shadow-lg shadow-blue-500/30'
+                        : 'border-[0.5px] border-gray-200/60 dark:border-white/[0.05] text-gray-500 dark:text-gray-400'
+                      }
+                    `}
+                                      >
+                    <motion.span
+                      className={hoveredIndex === index || (!isHovered && activeIndex === index) ? 'text-blue-600 dark:text-blue-400' : 'text-gray-500 dark:text-gray-400'}
+                    >
+                      {s.icon}
+                    </motion.span>
+                  </motion.a>
                 ))}
               </motion.div>
 
