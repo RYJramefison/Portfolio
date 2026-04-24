@@ -6,7 +6,7 @@ import { useLang } from '@/app/providers/lang-provider'
 import { translations } from '@/app/i18n/translations'
 import { useState } from 'react'
 
-const icons = [School, GraduationCap, Users, Heart]
+const icons = [School, Users, GraduationCap, Heart]
 
 export default function AcademyStudentSection() {
   const { lang } = useLang()
@@ -53,48 +53,6 @@ export default function AcademyStudentSection() {
 
         {/* ── Layout ── */}
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-14 items-start">
-
-          {/* ── Profil gauche ── */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.55 }}
-            viewport={{ once: true }}
-            className="w-full lg:w-56 flex-shrink-0"
-          >
-            <div className="rounded-2xl border border-gray-200/80 dark:border-white/[0.07] bg-white dark:bg-gray-900 overflow-hidden shadow-sm dark:shadow-black/20">
-              <div className="h-1 bg-blue-600 w-full" />
-
-              <div className="p-6 flex flex-col items-center text-center gap-4">
-                <div className="w-12 h-12 rounded-xl bg-blue-600/10 dark:bg-blue-500/10 border border-blue-200/50 dark:border-blue-500/20 flex items-center justify-center">
-                  <GraduationCap className="w-6 h-6 text-blue-600 dark:text-blue-400" />
-                </div>
-                <div className="space-y-1.5">
-                  <h3 className="text-sm font-bold text-gray-900 dark:text-gray-100">
-                    {t.background.profile.title}
-                  </h3>
-                  <span className="inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full bg-blue-600/10 dark:bg-blue-500/10 text-blue-700 dark:text-blue-400 border border-blue-200/40 dark:border-blue-500/20">
-                    {t.background.profile.badge}
-                  </span>
-                </div>
-                <p className="text-[11px] text-gray-500 dark:text-gray-400 leading-relaxed">
-                  {t.background.profile.description}
-                </p>
-                <div className="flex gap-1.5">
-                  {[0, 1, 2].map((i) => (
-                    <span
-                      key={i}
-                      className="w-1.5 h-1.5 rounded-full bg-blue-600/60 dark:bg-blue-500/60 animate-pulse"
-                      style={{ animationDelay: `${i * 0.35}s` }}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              {/* Mini nav */}
-              
-            </div>
-          </motion.div>
 
           {/* ── Timeline ── */}
           <div className="relative flex-1 w-full">
